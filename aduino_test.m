@@ -15,8 +15,6 @@ disp('servo')
  pause(1)
  writePosition(s, 0);
  pause(1)
-%   stepperMotor = stepper(shield, 2, 200);
-
 
 % Control stepper motor on the shield
 % disp('stepper')
@@ -27,13 +25,4 @@ disp('servo')
 %    pause(2);
 %    move(sm, -160);
 %    release(sm);
-%  disp('starting')
-%  for count = 1:5
-%         stepperMotor.RPM = 20;
-%            move(stepperMotor, 50);
-%            pause(1);
-%          move(stepperMotor, -50);
-%          pause(1);
-%          disp('continuing')
-%  end           
-% disp('complete')
+disp('complete')
