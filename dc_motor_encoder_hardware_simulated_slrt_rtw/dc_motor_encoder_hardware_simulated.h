@@ -10,7 +10,7 @@
  *
  * Model version              : 1.100
  * Simulink Coder version : 8.12 (R2017a) 16-Feb-2017
- * C source code generated on : Wed Apr 11 14:55:53 2018
+ * C source code generated on : Wed Apr 11 15:51:00 2018
  *
  * Target selection: slrt.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -856,8 +856,10 @@ typedef struct {
   real_T ResistanceR1;                 /* '<S3>/Resistance R1' */
   real_T Sum1;                         /* '<S3>/Sum1' */
   real_T Inductance;                   /* '<S3>/Inductance' */
+  real_T Q4AD;                         /* '<Root>/Q4 AD' */
   boolean_T complementtheinput1;       /* '<S8>/complement the input1' */
   boolean_T complementtheinput;        /* '<S5>/complement the input' */
+  boolean_T RelationalOperator1;       /* '<Root>/Relational Operator1' */
 } B_dc_motor_encoder_hardware_simulated_T;
 
 /* Block states (auto storage) for system '<Root>' */
@@ -885,6 +887,7 @@ typedef struct {
   } SFunction_IWORK_n;                 /* '<S7>/S-Function' */
 
   int_T Channel0Controlsignaltomotort_l;/* '<S2>/Channel 0 -Control signal to  motor through amplifier ' */
+  int_T Q4AD_IWORK[2];                 /* '<Root>/Q4 AD' */
 } DW_dc_motor_encoder_hardware_simulated_T;
 
 /* Continuous states (auto storage) */
@@ -947,7 +950,7 @@ typedef struct {
 
 /* Parameters (auto storage) */
 struct P_dc_motor_encoder_hardware_simulated_T_ {
-  real_T Matlab_Input_Value;           /* Expression: 0
+  real_T Matlab_Input_Value;           /* Expression: 3275
                                         * Referenced by: '<Root>/Matlab_Input'
                                         */
   real_T Desiredpositionindegrees_Value;/* Expression: 337.5
@@ -1136,6 +1139,48 @@ struct P_dc_motor_encoder_hardware_simulated_T_ {
   real_T Inductance_Gain;              /* Expression: 1/(1E-2)
                                         * Referenced by: '<S3>/Inductance'
                                         */
+  real_T Q4AD_P1_Size[2];              /* Computed Parameter: Q4AD_P1_Size
+                                        * Referenced by: '<Root>/Q4 AD'
+                                        */
+  real_T Q4AD_P1;                      /* Expression: boardtype
+                                        * Referenced by: '<Root>/Q4 AD'
+                                        */
+  real_T Q4AD_P2_Size[2];              /* Computed Parameter: Q4AD_P2_Size
+                                        * Referenced by: '<Root>/Q4 AD'
+                                        */
+  real_T Q4AD_P2;                      /* Expression: channel
+                                        * Referenced by: '<Root>/Q4 AD'
+                                        */
+  real_T Q4AD_P3_Size[2];              /* Computed Parameter: Q4AD_P3_Size
+                                        * Referenced by: '<Root>/Q4 AD'
+                                        */
+  real_T Q4AD_P3;                      /* Expression: index03
+                                        * Referenced by: '<Root>/Q4 AD'
+                                        */
+  real_T Q4AD_P4_Size[2];              /* Computed Parameter: Q4AD_P4_Size
+                                        * Referenced by: '<Root>/Q4 AD'
+                                        */
+  real_T Q4AD_P5_Size[2];              /* Computed Parameter: Q4AD_P5_Size
+                                        * Referenced by: '<Root>/Q4 AD'
+                                        */
+  real_T Q4AD_P5;                      /* Expression: sampleTime
+                                        * Referenced by: '<Root>/Q4 AD'
+                                        */
+  real_T Q4AD_P6_Size[2];              /* Computed Parameter: Q4AD_P6_Size
+                                        * Referenced by: '<Root>/Q4 AD'
+                                        */
+  real_T Q4AD_P6;                      /* Expression: pciBus
+                                        * Referenced by: '<Root>/Q4 AD'
+                                        */
+  real_T Q4AD_P7_Size[2];              /* Computed Parameter: Q4AD_P7_Size
+                                        * Referenced by: '<Root>/Q4 AD'
+                                        */
+  real_T Q4AD_P7;                      /* Expression: pciSlot
+                                        * Referenced by: '<Root>/Q4 AD'
+                                        */
+  real_T Constant_Value;               /* Expression: 0
+                                        * Referenced by: '<Root>/Constant'
+                                        */
   uint8_T ManualSwitch_CurrentSetting; /* Computed Parameter: ManualSwitch_CurrentSetting
                                         * Referenced by: '<Root>/Manual Switch'
                                         */
@@ -1162,14 +1207,14 @@ struct tag_RTM_dc_motor_encoder_hardware_simulated_T {
   struct {
     RTWSfcnInfo sfcnInfo;
     time_T *taskTimePtrs[2];
-    SimStruct childSFunctions[2];
-    SimStruct *childSFunctionPtrs[2];
-    struct _ssBlkInfo2 blkInfo2[2];
-    struct _ssSFcnModelMethods2 methods2[2];
-    struct _ssSFcnModelMethods3 methods3[2];
-    struct _ssSFcnModelMethods4 methods4[2];
-    struct _ssStatesInfo2 statesInfo2[2];
-    ssPeriodicStatesInfo periodicStatesInfo[2];
+    SimStruct childSFunctions[3];
+    SimStruct *childSFunctionPtrs[3];
+    struct _ssBlkInfo2 blkInfo2[3];
+    struct _ssSFcnModelMethods2 methods2[3];
+    struct _ssSFcnModelMethods3 methods3[3];
+    struct _ssSFcnModelMethods4 methods4[3];
+    struct _ssStatesInfo2 statesInfo2[3];
+    ssPeriodicStatesInfo periodicStatesInfo[3];
     struct {
       time_T sfcnPeriod[1];
       time_T sfcnOffset[1];
@@ -1192,6 +1237,17 @@ struct tag_RTM_dc_motor_encoder_hardware_simulated_T {
       struct _ssDWorkRecord dWork[2];
       struct _ssDWorkAuxRecord dWorkAux[2];
     } Sfcn1;
+
+    struct {
+      time_T sfcnPeriod[1];
+      time_T sfcnOffset[1];
+      int_T sfcnTsMap[1];
+      struct _ssPortOutputs outputPortInfo[1];
+      uint_T attribs[7];
+      mxArray *params[7];
+      struct _ssDWorkRecord dWork[1];
+      struct _ssDWorkAuxRecord dWorkAux[1];
+    } Sfcn2;
   } NonInlinedSFcns;
 
   void *blockIO;

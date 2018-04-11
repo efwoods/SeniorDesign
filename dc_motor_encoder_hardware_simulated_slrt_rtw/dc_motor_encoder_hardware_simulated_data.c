@@ -10,7 +10,7 @@
  *
  * Model version              : 1.100
  * Simulink Coder version : 8.12 (R2017a) 16-Feb-2017
- * C source code generated on : Wed Apr 11 14:55:53 2018
+ * C source code generated on : Wed Apr 11 15:51:00 2018
  *
  * Target selection: slrt.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -25,7 +25,7 @@
 /* Block parameters (auto storage) */
 P_dc_motor_encoder_hardware_simulated_T dc_motor_encoder_hardware_simulated_P =
   {
-  0.0,                                 /* Expression: 0
+  3275.0,                              /* Expression: 3275
                                         * Referenced by: '<Root>/Matlab_Input'
                                         */
   337.5,                               /* Expression: 337.5
@@ -255,6 +255,62 @@ P_dc_motor_encoder_hardware_simulated_T dc_motor_encoder_hardware_simulated_P =
                                         */
   100.0,                               /* Expression: 1/(1E-2)
                                         * Referenced by: '<S3>/Inductance'
+                                        */
+
+  /*  Computed Parameter: Q4AD_P1_Size
+   * Referenced by: '<Root>/Q4 AD'
+   */
+  { 1.0, 1.0 },
+  2.0,                                 /* Expression: boardtype
+                                        * Referenced by: '<Root>/Q4 AD'
+                                        */
+
+  /*  Computed Parameter: Q4AD_P2_Size
+   * Referenced by: '<Root>/Q4 AD'
+   */
+  { 1.0, 1.0 },
+  4.0,                                 /* Expression: channel
+                                        * Referenced by: '<Root>/Q4 AD'
+                                        */
+
+  /*  Computed Parameter: Q4AD_P3_Size
+   * Referenced by: '<Root>/Q4 AD'
+   */
+  { 1.0, 1.0 },
+  0.0,                                 /* Expression: index03
+                                        * Referenced by: '<Root>/Q4 AD'
+                                        */
+
+  /*  Computed Parameter: Q4AD_P4_Size
+   * Referenced by: '<Root>/Q4 AD'
+   */
+  { 0.0, 0.0 },
+
+  /*  Computed Parameter: Q4AD_P5_Size
+   * Referenced by: '<Root>/Q4 AD'
+   */
+  { 1.0, 1.0 },
+  0.001,                               /* Expression: sampleTime
+                                        * Referenced by: '<Root>/Q4 AD'
+                                        */
+
+  /*  Computed Parameter: Q4AD_P6_Size
+   * Referenced by: '<Root>/Q4 AD'
+   */
+  { 1.0, 1.0 },
+  0.0,                                 /* Expression: pciBus
+                                        * Referenced by: '<Root>/Q4 AD'
+                                        */
+
+  /*  Computed Parameter: Q4AD_P7_Size
+   * Referenced by: '<Root>/Q4 AD'
+   */
+  { 1.0, 1.0 },
+  -1.0,                                /* Expression: pciSlot
+                                        * Referenced by: '<Root>/Q4 AD'
+                                        */
+  0.0,                                 /* Expression: 0
+                                        * Referenced by: '<Root>/Constant'
                                         */
   0U                                   /* Computed Parameter: ManualSwitch_CurrentSetting
                                         * Referenced by: '<Root>/Manual Switch'
