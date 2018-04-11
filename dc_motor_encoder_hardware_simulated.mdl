@@ -27,7 +27,7 @@ Model {
       UnitExpr		      "inherit"
     }
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.104"
+    ComputedModelVersion    "1.106"
     NumModelReferences	    0
     NumTestPointedSignals   0
     NumProvidedFunctions    0
@@ -64,7 +64,7 @@ Model {
       $ObjectID		      2
       $ClassName	      "Simulink.WindowInfo"
       IsActive		      [1]
-      Location		      [22.0, 74.0, 1550.0, 848.0]
+      Location		      [-7.0, -7.0, 1550.0, 848.0]
       Object {
 	$PropName		"ModelBrowserInfo"
 	$ObjectID		3
@@ -89,8 +89,8 @@ Model {
 	ViewObjType		"SimulinkTopLevel"
 	LoadSaveID		"0"
 	Extents			[1875.0, 845.0]
-	ZoomFactor		[0.79999999999999982]
-	Offset			[-144.94758620689606, -195.74666666666644]
+	ZoomFactor		[0.5]
+	Offset			[0.0, 0.0]
       }
       Object {
 	$PropName		"DockComponentsInfo"
@@ -124,9 +124,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "student"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Wed Apr 11 16:57:11 2018"
-  RTWModifiedTimeStamp	  445366615
-  ModelVersionFormat	  "1.%<AutoIncrement:104>"
+  LastModifiedDate	  "Wed Apr 11 18:55:39 2018"
+  RTWModifiedTimeStamp	  445367519
+  ModelVersionFormat	  "1.%<AutoIncrement:106>"
   ConfigurationManager	  "none"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
@@ -759,7 +759,7 @@ Model {
 	      Version		      "1.17.0"
 	      Array {
 		Type			"Cell"
-		Dimension		17
+		Dimension		18
 		Cell			"GeneratePreprocessorConditionals"
 		Cell			"IncludeMdlTerminateFcn"
 		Cell			"RemoveResetFunc"
@@ -777,6 +777,7 @@ Model {
 		Cell			"ExistingSharedCode"
 		Cell			"RemoveDisableFunc"
 		Cell			"GRTInterface"
+		Cell			"CombineOutputUpdateFcns"
 		PropName		"DisabledProps"
 	      }
 	      Description	      ""
@@ -1112,15 +1113,6 @@ Model {
       SampleTime	      "-1"
     }
     Block {
-      BlockType		      RelationalOperator
-      Operator		      ">="
-      InputSameDT	      on
-      OutDataTypeStr	      "Inherit: Logical (see Configuration Parameters: Optimization)"
-      ZeroCross		      on
-      SampleTime	      "-1"
-      RndMeth		      "Nearest"
-    }
-    Block {
       BlockType		      Saturate
       UpperLimitSource	      "Dialog"
       UpperLimit	      "0.5"
@@ -1134,9 +1126,6 @@ Model {
       OutDataTypeStr	      "Inherit: Same as input"
       LockScale		      off
       RndMeth		      "Floor"
-    }
-    Block {
-      BlockType		      Stop
     }
     Block {
       BlockType		      SubSystem
@@ -1189,7 +1178,7 @@ Model {
   }
   System {
     Name		    "dc_motor_encoder_hardware_simulated"
-    Location		    [22, 74, 1572, 922]
+    Location		    [-7, -7, 1543, 841]
     Open		    on
     PortBlocksUseCompactNotation off
     ModelBrowserVisibility  off
@@ -1202,7 +1191,7 @@ Model {
     TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
     TiledPageScale	    1
     ShowPageBoundaries	    off
-    ZoomFactor		    "80"
+    ZoomFactor		    "50"
     ReportName		    "simulink-default.rpt"
     SIDHighWatermark	    "93"
     Block {
@@ -1215,14 +1204,6 @@ Model {
       BlockMirror	      on
       BackgroundColor	      "orange"
       NamePlacement	      "alternate"
-      Value		      "0"
-    }
-    Block {
-      BlockType		      Constant
-      Name		      "Constant"
-      SID		      "88"
-      Position		      [265, -110, 295, -80]
-      ZOrder		      5
       Value		      "0"
     }
     Block {
@@ -1276,14 +1257,6 @@ Model {
       Position		      [-120, 182, -65, 228]
       ZOrder		      -4
       BackgroundColor	      "red"
-      Value		      "0"
-    }
-    Block {
-      BlockType		      Constant
-      Name		      "Electromagnet"
-      SID		      "93"
-      Position		      [615, 530, 645, 560]
-      ZOrder		      9
       Value		      "0"
     }
     Block {
@@ -1368,27 +1341,11 @@ Model {
       DisplayOption	      "bar"
     }
     Block {
-      BlockType		      Reference
-      Name		      "Q4 AD"
-      SID		      "89"
-      Ports		      [0, 1]
-      Position		      [155, -148, 255, -92]
-      ZOrder		      6
-      LibraryVersion	      "1.52"
-      SourceBlock	      "xpcquanserlib/A//D/Q4 AD"
-      SourceType	      "quanser_q4_ad"
-      SourceProductName	      "Simulink Real-Time"
-      SourceProductBaseCode   "XP"
-      channel		      "[4]"
-      sampleTime	      "0.001"
-      slot		      "-1"
-    }
-    Block {
       BlockType		      SubSystem
       Name		      "Real motor"
       SID		      "8"
-      Ports		      [2, 1]
-      Position		      [740, 486, 950, 559]
+      Ports		      [1, 1]
+      Position		      [740, 488, 950, 562]
       ZOrder		      -11
       BackgroundColor	      "[0.501961, 0.501961, 0.250980]"
       RequestExecContextInheritance off
@@ -1418,19 +1375,10 @@ Model {
 	  IconDisplay		  "Port number"
 	}
 	Block {
-	  BlockType		  Inport
-	  Name			  "Electromagnet Control"
-	  SID			  "92"
-	  Position		  [20, 133, 50, 147]
-	  ZOrder		  1
-	  Port			  "2"
-	  IconDisplay		  "Port number"
-	}
-	Block {
 	  BlockType		  Reference
 	  Name			  "Channel 0 -Control signal to \nmotor through amplifier "
 	  SID			  "10"
-	  Ports			  [2]
+	  Ports			  [1]
 	  Position		  [325, 41, 430, 99]
 	  ZOrder		  -2
 	  BackgroundColor	  "cyan"
@@ -1439,7 +1387,7 @@ Model {
 	  SourceType		  "quanser_q4_da"
 	  SourceProductName	  "Simulink Real-Time"
 	  SourceProductBaseCode	  "XP"
-	  channel		  "[1 2]"
+	  channel		  "[1]"
 	  range			  "[-10]"
 	  simul			  off
 	  reset			  "[1]"
@@ -1508,7 +1456,6 @@ Model {
 	  ZOrder		  1
 	  SrcBlock		  "Saturation"
 	  SrcPort		  1
-	  Points		  [80, 0]
 	  DstBlock		  "Channel 0 -Control signal to \nmotor through amplifier "
 	  DstPort		  1
 	}
@@ -1532,14 +1479,6 @@ Model {
 	  SrcPort		  1
 	  DstBlock		  "Saturation"
 	  DstPort		  1
-	}
-	Line {
-	  ZOrder		  5
-	  SrcBlock		  "Electromagnet Control"
-	  SrcPort		  1
-	  Points		  [219, 0; 0, -55]
-	  DstBlock		  "Channel 0 -Control signal to \nmotor through amplifier "
-	  DstPort		  2
 	}
 	Annotation {
 	  SID			  "80"
@@ -1566,18 +1505,6 @@ Model {
 	  ZOrder		  -2
 	}
       }
-    }
-    Block {
-      BlockType		      RelationalOperator
-      Name		      "Relational\nOperator"
-      SID		      "90"
-      Ports		      [2, 1]
-      Position		      [365, -128, 395, -97]
-      ZOrder		      7
-      Operator		      "<="
-      InputSameDT	      off
-      OutDataTypeStr	      "boolean"
-      RndMeth		      "Simplest"
     }
     Block {
       BlockType		      SubSystem
@@ -1870,13 +1797,6 @@ Model {
 	  DstPort		  1
 	}
       }
-    }
-    Block {
-      BlockType		      Stop
-      Name		      "Stop Simulation"
-      SID		      "91"
-      Position		      [500, -128, 535, -92]
-      ZOrder		      8
     }
     Block {
       BlockType		      Sum
@@ -2483,7 +2403,7 @@ Model {
       ZOrder		      15
       SrcBlock		      "input side switching logic"
       SrcPort		      2
-      Points		      [20, 0; 0, 220]
+      Points		      [20, 0; 0, 240]
       DstBlock		      "Real motor"
       DstPort		      1
     }
@@ -2657,36 +2577,6 @@ Model {
       SrcPort		      1
       Points		      [40, 0; 0, -40]
       DstBlock		      "Manual Switch"
-      DstPort		      2
-    }
-    Line {
-      ZOrder		      49
-      SrcBlock		      "Q4 AD"
-      SrcPort		      1
-      DstBlock		      "Relational\nOperator"
-      DstPort		      1
-    }
-    Line {
-      ZOrder		      50
-      SrcBlock		      "Relational\nOperator"
-      SrcPort		      1
-      DstBlock		      "Stop Simulation"
-      DstPort		      1
-    }
-    Line {
-      ZOrder		      51
-      SrcBlock		      "Constant"
-      SrcPort		      1
-      Points		      [25, 0; 0, -10]
-      DstBlock		      "Relational\nOperator"
-      DstPort		      2
-    }
-    Line {
-      ZOrder		      52
-      SrcBlock		      "Electromagnet"
-      SrcPort		      1
-      Points		      [38, 0; 0, -5]
-      DstBlock		      "Real motor"
       DstPort		      2
     }
     Annotation {
