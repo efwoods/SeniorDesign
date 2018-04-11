@@ -8,9 +8,9 @@
  *
  * Code generation for model "dc_motor_encoder_hardware_simulated".
  *
- * Model version              : 1.100
+ * Model version              : 1.102
  * Simulink Coder version : 8.12 (R2017a) 16-Feb-2017
- * C source code generated on : Wed Apr 11 15:51:00 2018
+ * C source code generated on : Wed Apr 11 16:39:43 2018
  *
  * Target selection: slrt.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -67,7 +67,7 @@ static const rtwCAPI_Signals rtBlockSignals[] = {
   { 6, 0, TARGET_STRING("Integrator1"),
     TARGET_STRING(""), 0, 0, 0, 0, 0 },
 
-  { 7, 0, TARGET_STRING("Relational Operator1"),
+  { 7, 0, TARGET_STRING("Relational Operator"),
     TARGET_STRING(""), 0, 1, 0, 0, 1 },
 
   { 8, 0, TARGET_STRING("Q4 AD"),
@@ -327,7 +327,7 @@ static void* rtDataAddrMap[] = {
   &dc_motor_encoder_hardware_simulated_B.Kp,/* 4: Signal */
   &dc_motor_encoder_hardware_simulated_B.Setpoint,/* 5: Signal */
   &dc_motor_encoder_hardware_simulated_B.Integrator1,/* 6: Signal */
-  &dc_motor_encoder_hardware_simulated_B.RelationalOperator1,/* 7: Signal */
+  &dc_motor_encoder_hardware_simulated_B.RelationalOperator,/* 7: Signal */
   &dc_motor_encoder_hardware_simulated_B.Q4AD,/* 8: Signal */
   &dc_motor_encoder_hardware_simulated_B.ErrorSignal,/* 9: Signal */
   &dc_motor_encoder_hardware_simulated_B.Sum4,/* 10: Signal */
@@ -500,10 +500,10 @@ static rtwCAPI_ModelMappingStaticInfo mmiStatic = {
     rtElementMap, rtSampleTimeMap, rtDimensionArray },
   "float",
 
-  { 1362233429U,
-    1468036248U,
-    1591180135U,
-    3117836776U },
+  { 1917512715U,
+    2989730657U,
+    2358003508U,
+    1296756525U },
   (NULL), 0,
   0
 };

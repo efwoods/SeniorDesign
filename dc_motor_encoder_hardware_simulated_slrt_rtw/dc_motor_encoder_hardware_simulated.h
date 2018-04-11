@@ -8,9 +8,9 @@
  *
  * Code generation for model "dc_motor_encoder_hardware_simulated".
  *
- * Model version              : 1.100
+ * Model version              : 1.102
  * Simulink Coder version : 8.12 (R2017a) 16-Feb-2017
- * C source code generated on : Wed Apr 11 15:51:00 2018
+ * C source code generated on : Wed Apr 11 16:39:43 2018
  *
  * Target selection: slrt.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -859,7 +859,7 @@ typedef struct {
   real_T Q4AD;                         /* '<Root>/Q4 AD' */
   boolean_T complementtheinput1;       /* '<S8>/complement the input1' */
   boolean_T complementtheinput;        /* '<S5>/complement the input' */
-  boolean_T RelationalOperator1;       /* '<Root>/Relational Operator1' */
+  boolean_T RelationalOperator;        /* '<Root>/Relational Operator' */
 } B_dc_motor_encoder_hardware_simulated_T;
 
 /* Block states (auto storage) for system '<Root>' */
@@ -950,10 +950,10 @@ typedef struct {
 
 /* Parameters (auto storage) */
 struct P_dc_motor_encoder_hardware_simulated_T_ {
-  real_T Matlab_Input_Value;           /* Expression: 3275
+  real_T Matlab_Input_Value;           /* Expression: 0
                                         * Referenced by: '<Root>/Matlab_Input'
                                         */
-  real_T Desiredpositionindegrees_Value;/* Expression: 337.5
+  real_T Desiredpositionindegrees_Value;/* Expression: 0
                                          * Referenced by: '<Root>/Desired position  in degrees'
                                          */
   real_T gain_Gain;                    /* Expression: 1

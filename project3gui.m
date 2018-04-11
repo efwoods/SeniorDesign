@@ -116,19 +116,9 @@ function pb_red_Callback(hObject, eventdata, handles)
     disp('point_to_colors')   
     point_to_color(1,handles.gameState) % Red
 
-    % temporary testing of e_stop
-       x = 0;
-while(1)
-    x = x + 1
-    if(x > 360)
-            x = 0;
-    end
-    set_param('dc_motor_encoder_hardware_simulated/Matlab_Input','Value', num2str(x));    
-    pause(1)
-end
-   %     x = 0; original 
-%     set_param('dc_motor_encoder_hardware_simulated/Matlab_Input','Value',
-%     num2str(x)); original
+   % test_e_stop()
+        x = 0; 
+        set_param('dc_motor_encoder_hardware_simulated/Matlab_Input','Value', num2str(x)); 
 
 
 % redImage = imread('test_red.png');

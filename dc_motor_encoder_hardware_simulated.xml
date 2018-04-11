@@ -751,8 +751,8 @@ in degrees</blkName>
 			  
               <signal>
               <sigName>Relational
-Operator1</sigName>
-              <xpcsigName>Relational Operator1</xpcsigName>
+Operator</sigName>
+              <xpcsigName>Relational Operator</xpcsigName>
               <sigWidth>1</sigWidth>
               <sigDim>[1, 1]</sigDim>
 			  <SubSystemName>dc_motor_encoder_hardware_simulated</SubSystemName>

@@ -71,12 +71,12 @@ bio(7).ndims=2;
 bio(7).size=[];
 bio(7).isStruct=false;
 
-bio(8).blkName='Relational Operator1';
+bio(8).blkName='Relational Operator';
 bio(8).sigName='';
 bio(8).portIdx=0;
 bio(8).dim=[1,1];
 bio(8).sigWidth=1;
-bio(8).sigAddress='&dc_motor_encoder_hardware_simulated_B.RelationalOperator1';
+bio(8).sigAddress='&dc_motor_encoder_hardware_simulated_B.RelationalOperator';
 bio(8).ndims=2;
 bio(8).size=[];
 bio(8).isStruct=false;
