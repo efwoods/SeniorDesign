@@ -1,9 +1,7 @@
 function rotate_from_loadcell_to_innerwell(stepperMoter)
-x = 47
 disp('Moving to Inner Well')
 tic
-
-for i = 1:x
+for i = 1:49
     move(stepperMoter, -1);
 end
 toc
