@@ -1,0 +1,13 @@
+function weigh_washers(stepper, servo)
+disp('WEIGHING WASHERS BEGIN')
+tic
+% stepper rotates arm to load cell position 
+rotate_from_loadcell_to_innerwell(stepper)
+move_magnet_down(servo)
+% magnet turns on 
+move_magnet_up(servo)
+rotate_to_loadcell(stepper)
+move_magnet_
+
+toc
+disp('WEIGHING WASHERS COMPLETE')
