@@ -23,6 +23,6 @@ disp('servo')
     sm.RPM = 50;
     move(sm, 50);
     pause(1);
-    move(sm, -50);
+    move(sm, -49);
 %    release(sm);
 disp('complete')
