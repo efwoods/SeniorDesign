@@ -8,9 +8,9 @@
  *
  * Code generation for model "dc_motor_encoder_hardware_simulated".
  *
- * Model version              : 1.105
+ * Model version              : 1.107
  * Simulink Coder version : 8.12 (R2017a) 16-Feb-2017
- * C source code generated on : Wed Apr 11 17:09:34 2018
+ * C source code generated on : Thu Apr 12 20:17:46 2018
  *
  * Target selection: slrt.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -153,11 +153,11 @@ void dc_motor_encoder_hardware_simulated_output(void)
       (&dc_motor_encoder_hardware_simulated_M->solverInfo);
   }
 
-  /* Integrator: '<S3>/Integrator6' */
+  /* Integrator: '<S4>/Integrator6' */
   dc_motor_encoder_hardware_simulated_B.Integrator6 =
     dc_motor_encoder_hardware_simulated_X.Integrator6_CSTATE;
 
-  /* Product: '<S8>/Product2' incorporates:
+  /* Product: '<S9>/Product2' incorporates:
    *  Constant: '<Root>/1 - Use simulated motor 0 - Use real motor'
    */
   dc_motor_encoder_hardware_simulated_B.Product2 =
@@ -188,33 +188,33 @@ void dc_motor_encoder_hardware_simulated_output(void)
     dc_motor_encoder_hardware_simulated_Y.setpoint_Out =
       dc_motor_encoder_hardware_simulated_B.Setpoint;
 
-    /* Logic: '<S8>/complement the input1' incorporates:
+    /* Logic: '<S9>/complement the input1' incorporates:
      *  Constant: '<Root>/1 - Use simulated motor 0 - Use real motor'
      */
     dc_motor_encoder_hardware_simulated_B.complementtheinput1 =
       !(dc_motor_encoder_hardware_simulated_P.uUsesimulatedmotor0Userealmotor !=
         0.0);
 
-    /* S-Function (encquanserq8): '<S2>/Channel 0 of  Encoder Inputs ' */
+    /* S-Function (encquanserq8): '<S3>/Channel 0 of  Encoder Inputs ' */
 
-    /* Level2 S-Function Block: '<S2>/Channel 0 of  Encoder Inputs ' (encquanserq8) */
+    /* Level2 S-Function Block: '<S3>/Channel 0 of  Encoder Inputs ' (encquanserq8) */
     {
       SimStruct *rts = dc_motor_encoder_hardware_simulated_M->childSfunctions[0];
       sfcnOutputs(rts,1);
     }
 
-    /* Gain: '<S2>/angular_position =  [relative_count//COUNTS_PER_REV] *360 degrees' */
+    /* Gain: '<S3>/angular_position =  [relative_count//COUNTS_PER_REV] *360 degrees' */
     dc_motor_encoder_hardware_simulated_B.angular_positionrelative_countC =
       dc_motor_encoder_hardware_simulated_P.angular_positionrelative_countC *
       dc_motor_encoder_hardware_simulated_B.Channel0ofEncoderInputs;
 
-    /* Product: '<S8>/Product3' */
+    /* Product: '<S9>/Product3' */
     dc_motor_encoder_hardware_simulated_B.Product3 = (real_T)
       dc_motor_encoder_hardware_simulated_B.complementtheinput1 *
       dc_motor_encoder_hardware_simulated_B.angular_positionrelative_countC;
   }
 
-  /* Sum: '<S8>/Sum2' */
+  /* Sum: '<S9>/Sum2' */
   dc_motor_encoder_hardware_simulated_B.Sum2 =
     dc_motor_encoder_hardware_simulated_B.Product2 +
     dc_motor_encoder_hardware_simulated_B.Product3;
@@ -235,17 +235,22 @@ void dc_motor_encoder_hardware_simulated_output(void)
   /* S-Function (scblock): '<S1>/S-Function' */
   /* ok to acquire for <S1>/S-Function */
   dc_motor_encoder_hardware_simulated_DW.SFunction_IWORK.AcquireOK = 1;
+  if (rtmIsMajorTimeStep(dc_motor_encoder_hardware_simulated_M)) {
+    /* S-Function (scblock): '<S2>/S-Function' */
+    /* ok to acquire for <S2>/S-Function */
+    dc_motor_encoder_hardware_simulated_DW.SFunction_IWORK_p.AcquireOK = 1;
+  }
 
-  /* S-Function (scblock): '<S4>/S-Function' */
-  /* ok to acquire for <S4>/S-Function */
+  /* S-Function (scblock): '<S5>/S-Function' */
+  /* ok to acquire for <S5>/S-Function */
   dc_motor_encoder_hardware_simulated_DW.SFunction_IWORK_i.AcquireOK = 1;
 
-  /* S-Function (scblock): '<S6>/S-Function' */
-  /* ok to acquire for <S6>/S-Function */
+  /* S-Function (scblock): '<S7>/S-Function' */
+  /* ok to acquire for <S7>/S-Function */
   dc_motor_encoder_hardware_simulated_DW.SFunction_IWORK_it.AcquireOK = 1;
   if (rtmIsMajorTimeStep(dc_motor_encoder_hardware_simulated_M)) {
-    /* S-Function (scblock): '<S7>/S-Function' */
-    /* ok to acquire for <S7>/S-Function */
+    /* S-Function (scblock): '<S8>/S-Function' */
+    /* ok to acquire for <S8>/S-Function */
     dc_motor_encoder_hardware_simulated_DW.SFunction_IWORK_n.AcquireOK = 1;
   }
 
@@ -310,7 +315,11 @@ void dc_motor_encoder_hardware_simulated_output(void)
     dc_motor_encoder_hardware_simulated_P.Kp_Gain *
     dc_motor_encoder_hardware_simulated_B.ErrorSignal;
   if (rtmIsMajorTimeStep(dc_motor_encoder_hardware_simulated_M)) {
-    /* Logic: '<S5>/complement the input' incorporates:
+    /* Constant: '<Root>/Magnet_Control' */
+    dc_motor_encoder_hardware_simulated_B.Magnet_Control =
+      dc_motor_encoder_hardware_simulated_P.Magnet_Control_Value;
+
+    /* Logic: '<S6>/complement the input' incorporates:
      *  Constant: '<Root>/1 - Use simulated motor 0 - Use real motor'
      */
     dc_motor_encoder_hardware_simulated_B.complementtheinput =
@@ -324,12 +333,12 @@ void dc_motor_encoder_hardware_simulated_output(void)
      dc_motor_encoder_hardware_simulated_B.Kd) +
     dc_motor_encoder_hardware_simulated_B.Ki;
 
-  /* Product: '<S5>/Product1' */
+  /* Product: '<S6>/Product1' */
   dc_motor_encoder_hardware_simulated_B.Product1 = (real_T)
     dc_motor_encoder_hardware_simulated_B.complementtheinput *
     dc_motor_encoder_hardware_simulated_B.Sum4;
 
-  /* Saturate: '<S2>/Saturation' */
+  /* Saturate: '<S3>/Saturation' */
   lastTime = dc_motor_encoder_hardware_simulated_B.Product1;
   u1 = dc_motor_encoder_hardware_simulated_P.Saturation_LowerSat;
   u2 = dc_motor_encoder_hardware_simulated_P.Saturation_UpperSat;
@@ -341,69 +350,69 @@ void dc_motor_encoder_hardware_simulated_output(void)
     dc_motor_encoder_hardware_simulated_B.Saturation = lastTime;
   }
 
-  /* End of Saturate: '<S2>/Saturation' */
+  /* End of Saturate: '<S3>/Saturation' */
   if (rtmIsMajorTimeStep(dc_motor_encoder_hardware_simulated_M)) {
-    /* S-Function (daquanserq8): '<S2>/Channel 0 -Control signal to  motor through amplifier ' */
+    /* S-Function (daquanserq8): '<S3>/Channel 0 -Control signal to  motor through amplifier ' */
 
-    /* Level2 S-Function Block: '<S2>/Channel 0 -Control signal to  motor through amplifier ' (daquanserq8) */
+    /* Level2 S-Function Block: '<S3>/Channel 0 -Control signal to  motor through amplifier ' (daquanserq8) */
     {
       SimStruct *rts = dc_motor_encoder_hardware_simulated_M->childSfunctions[1];
       sfcnOutputs(rts,1);
     }
   }
 
-  /* Integrator: '<S3>/Integrator5' */
+  /* Integrator: '<S4>/Integrator5' */
   dc_motor_encoder_hardware_simulated_B.Integrator5 =
     dc_motor_encoder_hardware_simulated_X.Integrator5_CSTATE;
 
-  /* Gain: '<S3>/Back emf Ke1' */
+  /* Gain: '<S4>/Back emf Ke1' */
   dc_motor_encoder_hardware_simulated_B.BackemfKe1 =
     dc_motor_encoder_hardware_simulated_P.BackemfKe1_Gain *
     dc_motor_encoder_hardware_simulated_B.Integrator5;
 
-  /* Gain: '<S3>/Damping b1' */
+  /* Gain: '<S4>/Damping b1' */
   dc_motor_encoder_hardware_simulated_B.Dampingb1 =
     dc_motor_encoder_hardware_simulated_P.Dampingb1_Gain *
     dc_motor_encoder_hardware_simulated_B.Integrator5;
 
-  /* Integrator: '<S3>/Integrator1' */
+  /* Integrator: '<S4>/Integrator1' */
   dc_motor_encoder_hardware_simulated_B.Integrator1_h =
     dc_motor_encoder_hardware_simulated_X.Integrator1_CSTATE_i;
 
-  /* Gain: '<S3>/Gain Kt2' */
+  /* Gain: '<S4>/Gain Kt2' */
   dc_motor_encoder_hardware_simulated_B.GainKt2 =
     dc_motor_encoder_hardware_simulated_P.GainKt2_Gain *
     dc_motor_encoder_hardware_simulated_B.Integrator1_h;
 
-  /* Sum: '<S3>/Sum2' */
+  /* Sum: '<S4>/Sum2' */
   dc_motor_encoder_hardware_simulated_B.Sum2_e =
     dc_motor_encoder_hardware_simulated_B.GainKt2 -
     dc_motor_encoder_hardware_simulated_B.Dampingb1;
 
-  /* Gain: '<S3>/Gain Kt3' */
+  /* Gain: '<S4>/Gain Kt3' */
   dc_motor_encoder_hardware_simulated_B.GainKt3 =
     dc_motor_encoder_hardware_simulated_P.GainKt3_Gain *
     dc_motor_encoder_hardware_simulated_B.Sum2_e;
 
-  /* Product: '<S5>/Product' incorporates:
+  /* Product: '<S6>/Product' incorporates:
    *  Constant: '<Root>/1 - Use simulated motor 0 - Use real motor'
    */
   dc_motor_encoder_hardware_simulated_B.Product =
     dc_motor_encoder_hardware_simulated_B.Sum4 *
     dc_motor_encoder_hardware_simulated_P.uUsesimulatedmotor0Userealmotor;
 
-  /* Gain: '<S3>/Resistance R1' */
+  /* Gain: '<S4>/Resistance R1' */
   dc_motor_encoder_hardware_simulated_B.ResistanceR1 =
     dc_motor_encoder_hardware_simulated_P.ResistanceR1_Gain *
     dc_motor_encoder_hardware_simulated_B.Integrator1_h;
 
-  /* Sum: '<S3>/Sum1' */
+  /* Sum: '<S4>/Sum1' */
   dc_motor_encoder_hardware_simulated_B.Sum1 =
     (dc_motor_encoder_hardware_simulated_B.Product -
      dc_motor_encoder_hardware_simulated_B.BackemfKe1) -
     dc_motor_encoder_hardware_simulated_B.ResistanceR1;
 
-  /* Gain: '<S3>/Inductance' */
+  /* Gain: '<S4>/Inductance' */
   dc_motor_encoder_hardware_simulated_B.Inductance =
     dc_motor_encoder_hardware_simulated_P.Inductance_Gain *
     dc_motor_encoder_hardware_simulated_B.Sum1;
@@ -487,7 +496,7 @@ void dc_motor_encoder_hardware_simulated_derivatives(void)
   _rtXdot = ((XDot_dc_motor_encoder_hardware_simulated_T *)
              dc_motor_encoder_hardware_simulated_M->derivs);
 
-  /* Derivatives for Integrator: '<S3>/Integrator6' */
+  /* Derivatives for Integrator: '<S4>/Integrator6' */
   _rtXdot->Integrator6_CSTATE =
     dc_motor_encoder_hardware_simulated_B.Integrator5;
 
@@ -495,10 +504,10 @@ void dc_motor_encoder_hardware_simulated_derivatives(void)
   _rtXdot->Integrator1_CSTATE =
     dc_motor_encoder_hardware_simulated_B.ErrorSignal;
 
-  /* Derivatives for Integrator: '<S3>/Integrator5' */
+  /* Derivatives for Integrator: '<S4>/Integrator5' */
   _rtXdot->Integrator5_CSTATE = dc_motor_encoder_hardware_simulated_B.GainKt3;
 
-  /* Derivatives for Integrator: '<S3>/Integrator1' */
+  /* Derivatives for Integrator: '<S4>/Integrator1' */
   _rtXdot->Integrator1_CSTATE_i =
     dc_motor_encoder_hardware_simulated_B.Inductance;
 }
@@ -506,8 +515,8 @@ void dc_motor_encoder_hardware_simulated_derivatives(void)
 /* Model initialize function */
 void dc_motor_encoder_hardware_simulated_initialize(void)
 {
-  /* Start for S-Function (encquanserq8): '<S2>/Channel 0 of  Encoder Inputs ' */
-  /* Level2 S-Function Block: '<S2>/Channel 0 of  Encoder Inputs ' (encquanserq8) */
+  /* Start for S-Function (encquanserq8): '<S3>/Channel 0 of  Encoder Inputs ' */
+  /* Level2 S-Function Block: '<S3>/Channel 0 of  Encoder Inputs ' (encquanserq8) */
   {
     SimStruct *rts = dc_motor_encoder_hardware_simulated_M->childSfunctions[0];
     sfcnStart(rts);
@@ -554,9 +563,39 @@ void dc_motor_encoder_hardware_simulated_initialize(void)
     }
   }
 
-  /* Start for S-Function (scblock): '<S4>/S-Function' */
+  /* Start for S-Function (scblock): '<S2>/S-Function' */
 
-  /* S-Function Block: <S4>/S-Function (scblock) */
+  /* S-Function Block: <S2>/S-Function (scblock) */
+  {
+    int i;
+    if ((i = rl32eScopeExists(4)) == 0) {
+      if ((i = rl32eDefScope(4,2)) != 0) {
+        printf("Error creating scope 4\n");
+      } else {
+        rl32eAddSignal(4, rl32eGetSignalNo("Magnet_Control"));
+        rl32eSetScope(4, 4, 200);
+        rl32eSetScope(4, 5, 0);
+        rl32eSetScope(4, 6, 1);
+        rl32eSetScope(4, 0, 0);
+        rl32eSetScope(4, 3, rl32eGetSignalNo("Magnet_Control"));
+        rl32eSetScope(4, 1, 0.0);
+        rl32eSetScope(4, 2, 0);
+        rl32eSetScope(4, 9, 0);
+        rl32eSetTargetScope(4, 11, 0.0);
+        rl32eSetTargetScope(4, 10, 2.0);
+        xpceScopeAcqOK(4,
+                       &dc_motor_encoder_hardware_simulated_DW.SFunction_IWORK_p.AcquireOK);
+      }
+    }
+
+    if (i) {
+      rl32eRestartAcquisition(4);
+    }
+  }
+
+  /* Start for S-Function (scblock): '<S5>/S-Function' */
+
+  /* S-Function Block: <S5>/S-Function (scblock) */
   {
     int i;
     if ((i = rl32eScopeExists(2)) == 0) {
@@ -585,9 +624,9 @@ void dc_motor_encoder_hardware_simulated_initialize(void)
     }
   }
 
-  /* Start for S-Function (scblock): '<S6>/S-Function' */
+  /* Start for S-Function (scblock): '<S7>/S-Function' */
 
-  /* S-Function Block: <S6>/S-Function (scblock) */
+  /* S-Function Block: <S7>/S-Function (scblock) */
   {
     int i;
     if ((i = rl32eScopeExists(7)) == 0) {
@@ -616,9 +655,9 @@ void dc_motor_encoder_hardware_simulated_initialize(void)
     }
   }
 
-  /* Start for S-Function (scblock): '<S7>/S-Function' */
+  /* Start for S-Function (scblock): '<S8>/S-Function' */
 
-  /* S-Function Block: <S7>/S-Function (scblock) */
+  /* S-Function Block: <S8>/S-Function (scblock) */
   {
     int i;
     if ((i = rl32eScopeExists(1)) == 0) {
@@ -647,8 +686,12 @@ void dc_motor_encoder_hardware_simulated_initialize(void)
     }
   }
 
-  /* Start for S-Function (daquanserq8): '<S2>/Channel 0 -Control signal to  motor through amplifier ' */
-  /* Level2 S-Function Block: '<S2>/Channel 0 -Control signal to  motor through amplifier ' (daquanserq8) */
+  /* Start for Constant: '<Root>/Magnet_Control' */
+  dc_motor_encoder_hardware_simulated_B.Magnet_Control =
+    dc_motor_encoder_hardware_simulated_P.Magnet_Control_Value;
+
+  /* Start for S-Function (daquanserq8): '<S3>/Channel 0 -Control signal to  motor through amplifier ' */
+  /* Level2 S-Function Block: '<S3>/Channel 0 -Control signal to  motor through amplifier ' (daquanserq8) */
   {
     SimStruct *rts = dc_motor_encoder_hardware_simulated_M->childSfunctions[1];
     sfcnStart(rts);
@@ -656,7 +699,7 @@ void dc_motor_encoder_hardware_simulated_initialize(void)
       return;
   }
 
-  /* InitializeConditions for Integrator: '<S3>/Integrator6' */
+  /* InitializeConditions for Integrator: '<S4>/Integrator6' */
   dc_motor_encoder_hardware_simulated_X.Integrator6_CSTATE =
     dc_motor_encoder_hardware_simulated_P.Integrator6_IC;
 
@@ -668,11 +711,11 @@ void dc_motor_encoder_hardware_simulated_initialize(void)
   dc_motor_encoder_hardware_simulated_X.Integrator1_CSTATE =
     dc_motor_encoder_hardware_simulated_P.Integrator1_IC;
 
-  /* InitializeConditions for Integrator: '<S3>/Integrator5' */
+  /* InitializeConditions for Integrator: '<S4>/Integrator5' */
   dc_motor_encoder_hardware_simulated_X.Integrator5_CSTATE =
     dc_motor_encoder_hardware_simulated_P.Integrator5_IC;
 
-  /* InitializeConditions for Integrator: '<S3>/Integrator1' */
+  /* InitializeConditions for Integrator: '<S4>/Integrator1' */
   dc_motor_encoder_hardware_simulated_X.Integrator1_CSTATE_i =
     dc_motor_encoder_hardware_simulated_P.Integrator1_IC_j;
 }
@@ -680,15 +723,15 @@ void dc_motor_encoder_hardware_simulated_initialize(void)
 /* Model terminate function */
 void dc_motor_encoder_hardware_simulated_terminate(void)
 {
-  /* Terminate for S-Function (encquanserq8): '<S2>/Channel 0 of  Encoder Inputs ' */
-  /* Level2 S-Function Block: '<S2>/Channel 0 of  Encoder Inputs ' (encquanserq8) */
+  /* Terminate for S-Function (encquanserq8): '<S3>/Channel 0 of  Encoder Inputs ' */
+  /* Level2 S-Function Block: '<S3>/Channel 0 of  Encoder Inputs ' (encquanserq8) */
   {
     SimStruct *rts = dc_motor_encoder_hardware_simulated_M->childSfunctions[0];
     sfcnTerminate(rts);
   }
 
-  /* Terminate for S-Function (daquanserq8): '<S2>/Channel 0 -Control signal to  motor through amplifier ' */
-  /* Level2 S-Function Block: '<S2>/Channel 0 -Control signal to  motor through amplifier ' (daquanserq8) */
+  /* Terminate for S-Function (daquanserq8): '<S3>/Channel 0 -Control signal to  motor through amplifier ' */
+  /* Level2 S-Function Block: '<S3>/Channel 0 -Control signal to  motor through amplifier ' (daquanserq8) */
   {
     SimStruct *rts = dc_motor_encoder_hardware_simulated_M->childSfunctions[1];
     sfcnTerminate(rts);
@@ -1093,7 +1136,7 @@ RT_MODEL_dc_motor_encoder_hardware_simulated_T
     dc_motor_encoder_hardware_simulated_M->childSfunctions[1] =
       (&dc_motor_encoder_hardware_simulated_M->NonInlinedSFcns.childSFunctions[1]);
 
-    /* Level2 S-Function Block: dc_motor_encoder_hardware_simulated/<S2>/Channel 0 of  Encoder Inputs  (encquanserq8) */
+    /* Level2 S-Function Block: dc_motor_encoder_hardware_simulated/<S3>/Channel 0 of  Encoder Inputs  (encquanserq8) */
     {
       SimStruct *rts = dc_motor_encoder_hardware_simulated_M->childSfunctions[0];
 
@@ -1252,7 +1295,7 @@ RT_MODEL_dc_motor_encoder_hardware_simulated_T
       /* Update the BufferDstPort flags for each input port */
     }
 
-    /* Level2 S-Function Block: dc_motor_encoder_hardware_simulated/<S2>/Channel 0 -Control signal to  motor through amplifier  (daquanserq8) */
+    /* Level2 S-Function Block: dc_motor_encoder_hardware_simulated/<S3>/Channel 0 -Control signal to  motor through amplifier  (daquanserq8) */
     {
       SimStruct *rts = dc_motor_encoder_hardware_simulated_M->childSfunctions[1];
 
@@ -1313,7 +1356,7 @@ RT_MODEL_dc_motor_encoder_hardware_simulated_T
 
       /* inputs */
       {
-        _ssSetNumInputPorts(rts, 1);
+        _ssSetNumInputPorts(rts, 2);
         ssSetPortInfoForInputs(rts,
           &dc_motor_encoder_hardware_simulated_M->NonInlinedSFcns.Sfcn1.inputPortInfo
           [0]);
@@ -1326,6 +1369,16 @@ RT_MODEL_dc_motor_encoder_hardware_simulated_T
           ssSetInputPortSignalPtrs(rts, 0, (InputPtrsType)&sfcnUPtrs[0]);
           _ssSetInputPortNumDimensions(rts, 0, 1);
           ssSetInputPortWidth(rts, 0, 1);
+        }
+
+        /* port 1 */
+        {
+          real_T const **sfcnUPtrs = (real_T const **)
+            &dc_motor_encoder_hardware_simulated_M->NonInlinedSFcns.Sfcn1.UPtrs1;
+          sfcnUPtrs[0] = &dc_motor_encoder_hardware_simulated_B.Magnet_Control;
+          ssSetInputPortSignalPtrs(rts, 1, (InputPtrsType)&sfcnUPtrs[0]);
+          _ssSetInputPortNumDimensions(rts, 1, 1);
+          ssSetInputPortWidth(rts, 1, 1);
         }
       }
 
@@ -1412,9 +1465,11 @@ RT_MODEL_dc_motor_encoder_hardware_simulated_T
 
       /* Update connectivity flags for each port */
       _ssSetInputPortConnected(rts, 0, 1);
+      _ssSetInputPortConnected(rts, 1, 1);
 
       /* Update the BufferDstPort flags for each input port */
       ssSetInputPortBufferDstPort(rts, 0, -1);
+      ssSetInputPortBufferDstPort(rts, 1, -1);
     }
   }
 
@@ -1425,9 +1480,9 @@ RT_MODEL_dc_motor_encoder_hardware_simulated_T
   dc_motor_encoder_hardware_simulated_M->Sizes.numU = (0);/* Number of model inputs */
   dc_motor_encoder_hardware_simulated_M->Sizes.sysDirFeedThru = (0);/* The model is not direct feedthrough */
   dc_motor_encoder_hardware_simulated_M->Sizes.numSampTimes = (2);/* Number of sample times */
-  dc_motor_encoder_hardware_simulated_M->Sizes.numBlocks = (44);/* Number of blocks */
-  dc_motor_encoder_hardware_simulated_M->Sizes.numBlockIO = (31);/* Number of block outputs */
-  dc_motor_encoder_hardware_simulated_M->Sizes.numBlockPrms = (85);/* Sum of parameter "widths" */
+  dc_motor_encoder_hardware_simulated_M->Sizes.numBlocks = (46);/* Number of blocks */
+  dc_motor_encoder_hardware_simulated_M->Sizes.numBlockIO = (32);/* Number of block outputs */
+  dc_motor_encoder_hardware_simulated_M->Sizes.numBlockPrms = (90);/* Sum of parameter "widths" */
   return dc_motor_encoder_hardware_simulated_M;
 }
 

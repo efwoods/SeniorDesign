@@ -7,6 +7,13 @@
 
 		</SubSystem>
 		<SubSystem>
+		<Name>Magnet Control Scope</Name>
+		<xPCName>dc_motor_encoder_hardware_simulated/Magnet Control Scope</xPCName>
+		
+		
+
+		</SubSystem>
+		<SubSystem>
 		<Name>Real motor</Name>
 		<xPCName>dc_motor_encoder_hardware_simulated/Real motor</xPCName>
 		
@@ -44,7 +51,7 @@
 motor through amplifier </blkName>
             <xpcblkName>Real motor/Channel 0 -Control signal to  motor through amplifier </xpcblkName>
             <SLblockPath>dc_motor_encoder_hardware_simulated/Real motor/Channel 0 -Control signal to  motor through amplifier </SLblockPath>
-            <isSrc>[0 1 0]</isSrc>
+            <isSrc>[0 2 0]</isSrc>
           <parameter>
           <paramName>P1</paramName>
           <dim>[1, 1]</dim>  
@@ -52,12 +59,12 @@ motor through amplifier </blkName>
           </parameter>
           <parameter>
           <paramName>P2</paramName>
-          <dim>[1, 1]</dim>  
+          <dim>[1, 2]</dim>  
 		  <SubSystemName>dc_motor_encoder_hardware_simulated/Real motor</SubSystemName>
           </parameter>
           <parameter>
           <paramName>P3</paramName>
-          <dim>[1, 1]</dim>  
+          <dim>[1, 2]</dim>  
 		  <SubSystemName>dc_motor_encoder_hardware_simulated/Real motor</SubSystemName>
           </parameter>
           <parameter>
@@ -67,12 +74,12 @@ motor through amplifier </blkName>
           </parameter>
           <parameter>
           <paramName>P5</paramName>
-          <dim>[1, 1]</dim>  
+          <dim>[1, 2]</dim>  
 		  <SubSystemName>dc_motor_encoder_hardware_simulated/Real motor</SubSystemName>
           </parameter>
           <parameter>
           <paramName>P6</paramName>
-          <dim>[1, 1]</dim>  
+          <dim>[1, 2]</dim>  
 		  <SubSystemName>dc_motor_encoder_hardware_simulated/Real motor</SubSystemName>
           </parameter>
           <parameter>
@@ -542,6 +549,17 @@ in degrees</blkName>
           </parameter>
           </block>
             <block>
+            <blkName>Magnet_Control</blkName>
+            <xpcblkName>Magnet_Control</xpcblkName>
+            <SLblockPath>dc_motor_encoder_hardware_simulated/Magnet_Control</SLblockPath>
+            <isSrc>[1 0 1]</isSrc>
+          <parameter>
+          <paramName>Value</paramName>
+          <dim>[1, 1]</dim>  
+		  <SubSystemName>dc_motor_encoder_hardware_simulated</SubSystemName>
+          </parameter>
+          </block>
+            <block>
             <blkName>Matlab_Input</blkName>
             <xpcblkName>Matlab_Input</xpcblkName>
             <SLblockPath>dc_motor_encoder_hardware_simulated/Matlab_Input</SLblockPath>
@@ -629,6 +647,16 @@ in degrees</blkName>
 		  <SubSystemName>dc_motor_encoder_hardware_simulated</SubSystemName>
           </parameter>
           </block>
+			  
+			  
+              <signal>
+              <sigName>Magnet_Control</sigName>
+              <xpcsigName>Magnet_Control</xpcsigName>
+              <sigWidth>1</sigWidth>
+              <sigDim>[1, 1]</sigDim>
+			  <SubSystemName>dc_motor_encoder_hardware_simulated</SubSystemName>
+			  <sigTestPoint>false</sigTestPoint>
+            </signal>
 			  
 			  
               <signal>

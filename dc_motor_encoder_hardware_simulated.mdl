@@ -27,7 +27,7 @@ Model {
       UnitExpr		      "inherit"
     }
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.106"
+    ComputedModelVersion    "1.107"
     NumModelReferences	    0
     NumTestPointedSignals   0
     NumProvidedFunctions    0
@@ -124,9 +124,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "student"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Wed Apr 11 18:55:39 2018"
-  RTWModifiedTimeStamp	  445367519
-  ModelVersionFormat	  "1.%<AutoIncrement:106>"
+  LastModifiedDate	  "Thu Apr 12 20:17:20 2018"
+  RTWModifiedTimeStamp	  445465026
+  ModelVersionFormat	  "1.%<AutoIncrement:107>"
   ConfigurationManager	  "none"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
@@ -759,7 +759,7 @@ Model {
 	      Version		      "1.17.0"
 	      Array {
 		Type			"Cell"
-		Dimension		18
+		Dimension		17
 		Cell			"GeneratePreprocessorConditionals"
 		Cell			"IncludeMdlTerminateFcn"
 		Cell			"RemoveResetFunc"
@@ -777,7 +777,6 @@ Model {
 		Cell			"ExistingSharedCode"
 		Cell			"RemoveDisableFunc"
 		Cell			"GRTInterface"
-		Cell			"CombineOutputUpdateFcns"
 		PropName		"DisabledProps"
 	      }
 	      Description	      ""
@@ -1193,7 +1192,7 @@ Model {
     ShowPageBoundaries	    off
     ZoomFactor		    "50"
     ReportName		    "simulink-default.rpt"
-    SIDHighWatermark	    "93"
+    SIDHighWatermark	    "97"
     Block {
       BlockType		      Constant
       Name		      "1 - Use simulated motor\n0 - Use real motor"
@@ -1314,6 +1313,51 @@ Model {
       SaturateOnIntegerOverflow	off
     }
     Block {
+      BlockType		      Reference
+      Name		      "Magnet Control Scope"
+      SID		      "94"
+      Ports		      [1]
+      Position		      [755, 758, 850, 822]
+      ZOrder		      50
+      LibraryVersion	      "1.1871"
+      SourceBlock	      "slrtlib/Displays and\nLogging/Scope "
+      SourceType	      "xpcscopeblock"
+      SourceProductName	      "Simulink Real-Time"
+      SourceProductBaseCode   "XP"
+      ContentPreviewEnabled   off
+      scopeno		      "4"
+      scopetype		      "Target"
+      autostart		      on
+      viewmode		      "Graphical redraw"
+      formatstr		      "'%15.6f'"
+      grid		      on
+      ylimits		      "[0,2]"
+      nosamples		      "200"
+      noprepostsamples	      "0"
+      interleave	      "1"
+      triggermode	      "FreeRun"
+      triggersignal	      "1"
+      trigsignalfromport      off
+      triggerlevel	      "0.0"
+      triggerslope	      "Either"
+      triggerscope	      "1"
+      triggersample	      "0"
+      filename		      "data.dat"
+      mode		      "Lazy"
+      writesize		      "512"
+      autorestart	      off
+      dynamicfilemode	      off
+      maxwritefilesize	      "512*1024^2"
+    }
+    Block {
+      BlockType		      Constant
+      Name		      "Magnet_Control"
+      SID		      "95"
+      Position		      [545, 740, 575, 770]
+      ZOrder		      49
+      Value		      "10"
+    }
+    Block {
       BlockType		      ManualSwitch
       Name		      "Manual Switch"
       SID		      "85"
@@ -1344,8 +1388,8 @@ Model {
       BlockType		      SubSystem
       Name		      "Real motor"
       SID		      "8"
-      Ports		      [1, 1]
-      Position		      [740, 488, 950, 562]
+      Ports		      [2, 1]
+      Position		      [740, 490, 950, 565]
       ZOrder		      -11
       BackgroundColor	      "[0.501961, 0.501961, 0.250980]"
       RequestExecContextInheritance off
@@ -1375,10 +1419,19 @@ Model {
 	  IconDisplay		  "Port number"
 	}
 	Block {
+	  BlockType		  Inport
+	  Name			  "Electromagnet input\n"
+	  SID			  "97"
+	  Position		  [65, 173, 95, 187]
+	  ZOrder		  49
+	  Port			  "2"
+	  IconDisplay		  "Port number"
+	}
+	Block {
 	  BlockType		  Reference
 	  Name			  "Channel 0 -Control signal to \nmotor through amplifier "
 	  SID			  "10"
-	  Ports			  [1]
+	  Ports			  [2]
 	  Position		  [325, 41, 430, 99]
 	  ZOrder		  -2
 	  BackgroundColor	  "cyan"
@@ -1387,7 +1440,7 @@ Model {
 	  SourceType		  "quanser_q4_da"
 	  SourceProductName	  "Simulink Real-Time"
 	  SourceProductBaseCode	  "XP"
-	  channel		  "[1]"
+	  channel		  "[1 2]"
 	  range			  "[-10]"
 	  simul			  off
 	  reset			  "[1]"
@@ -1456,6 +1509,7 @@ Model {
 	  ZOrder		  1
 	  SrcBlock		  "Saturation"
 	  SrcPort		  1
+	  Points		  [80, 0]
 	  DstBlock		  "Channel 0 -Control signal to \nmotor through amplifier "
 	  DstPort		  1
 	}
@@ -1480,6 +1534,14 @@ Model {
 	  DstBlock		  "Saturation"
 	  DstPort		  1
 	}
+	Line {
+	  ZOrder		  13
+	  SrcBlock		  "Electromagnet input\n"
+	  SrcPort		  1
+	  Points		  [174, 0; 0, -95]
+	  DstBlock		  "Channel 0 -Control signal to \nmotor through amplifier "
+	  DstPort		  2
+	}
 	Annotation {
 	  SID			  "80"
 	  Name			  "Saturation"
@@ -1496,7 +1558,7 @@ Model {
 	  " and Gain blocks to\nmatch the range of the Desired Trajectory input.\n\nIn this example need to convert the encode"
 	  "r counts to a value between 0 and COUNTS_PER_REV. \nFurther, the count obtained for that revolution needs to be sca"
 	  "led to an angle feedback (between\n0 and 360 degrees), which is the purpose of the Gain block."
-	  Position		  [209, 176, 653, 274]
+	  Position		  [328, 307, 772, 405]
 	  InternalMargins	  [0, 0, 0, 0]
 	  FixedHeight		  off
 	  FixedWidth		  off
@@ -2403,7 +2465,7 @@ Model {
       ZOrder		      15
       SrcBlock		      "input side switching logic"
       SrcPort		      2
-      Points		      [20, 0; 0, 240]
+      Points		      [20, 0; 0, 225]
       DstBlock		      "Real motor"
       DstPort		      1
     }
@@ -2419,7 +2481,7 @@ Model {
       ZOrder		      17
       SrcBlock		      "Real motor"
       SrcPort		      1
-      Points		      [50, 0; 0, -45]
+      Points		      [50, 0; 0, -50]
       DstBlock		      "switching logic"
       DstPort		      3
     }
@@ -2578,6 +2640,24 @@ Model {
       Points		      [40, 0; 0, -40]
       DstBlock		      "Manual Switch"
       DstPort		      2
+    }
+    Line {
+      ZOrder		      51
+      SrcBlock		      "Magnet_Control"
+      SrcPort		      1
+      Points		      [89, 0]
+      Branch {
+	ZOrder			53
+	Points			[0, -210]
+	DstBlock		"Real motor"
+	DstPort			2
+      }
+      Branch {
+	ZOrder			52
+	Points			[55, 0; 0, 35]
+	DstBlock		"Magnet Control Scope"
+	DstPort			1
+      }
     }
     Annotation {
       SID		      "82"

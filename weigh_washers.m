@@ -6,25 +6,29 @@ rotate_from_loadcell_to_innerwell(stepper)
 pause(1)
 move_magnet_down(servo)
 pause(1)
-% magnet turns on 
+emag_on
+pause(1)
 move_magnet_up(servo)
 pause(1)
 rotate_to_loadcell(stepper)
 pause(1)
 move_magnet_down(servo)
 pause(1)
-% magnet turns off
+emag_off
 % load cell weighs washer
-% magnet turns on
+pause(1)
+emag_on
+pause(1)
 move_magnet_up(servo)
 pause(1)
 rotate_from_loadcell_to_innerwell(stepper)
 pause(1)
 move_magnet_down(servo)
 pause(1)
+emag_off
+pause(1)
 move_magnet_up(servo)
 pause(1)
-% magnet turns off
 % for testing the arm resets to the load cell
 rotate_to_loadcell(stepper)
 toc
