@@ -8,9 +8,9 @@
  *
  * Code generation for model "dc_motor_encoder_hardware_simulated".
  *
- * Model version              : 1.108
+ * Model version              : 1.110
  * Simulink Coder version : 8.12 (R2017a) 16-Feb-2017
- * C source code generated on : Fri Apr 13 11:35:22 2018
+ * C source code generated on : Fri Apr 13 15:16:06 2018
  *
  * Target selection: slrt.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -420,29 +420,6 @@ void dc_motor_encoder_hardware_simulated_output(void)
   dc_motor_encoder_hardware_simulated_B.Inductance =
     dc_motor_encoder_hardware_simulated_P.Inductance_Gain *
     dc_motor_encoder_hardware_simulated_B.Sum1;
-  if (rtmIsMajorTimeStep(dc_motor_encoder_hardware_simulated_M)) {
-    /* S-Function (adquanserq8): '<Root>/Q4 AD' */
-
-    /* Level2 S-Function Block: '<Root>/Q4 AD' (adquanserq8) */
-    {
-      SimStruct *rts = dc_motor_encoder_hardware_simulated_M->childSfunctions[2];
-      sfcnOutputs(rts,1);
-    }
-
-    /* RelationalOperator: '<Root>/Relational Operator' incorporates:
-     *  Constant: '<Root>/Constant'
-     */
-    dc_motor_encoder_hardware_simulated_B.RelationalOperator =
-      (dc_motor_encoder_hardware_simulated_B.Q4AD <=
-       dc_motor_encoder_hardware_simulated_P.Constant_Value);
-
-    /* Stop: '<Root>/Stop Simulation' */
-    if (dc_motor_encoder_hardware_simulated_B.RelationalOperator) {
-      rtmSetStopRequested(dc_motor_encoder_hardware_simulated_M, 1);
-    }
-
-    /* End of Stop: '<Root>/Stop Simulation' */
-  }
 }
 
 /* Model update function */
@@ -730,15 +707,6 @@ void dc_motor_encoder_hardware_simulated_initialize(void)
       return;
   }
 
-  /* Start for S-Function (adquanserq8): '<Root>/Q4 AD' */
-  /* Level2 S-Function Block: '<Root>/Q4 AD' (adquanserq8) */
-  {
-    SimStruct *rts = dc_motor_encoder_hardware_simulated_M->childSfunctions[2];
-    sfcnStart(rts);
-    if (ssGetErrorStatus(rts) != (NULL))
-      return;
-  }
-
   /* InitializeConditions for Integrator: '<S4>/Integrator6' */
   dc_motor_encoder_hardware_simulated_X.Integrator6_CSTATE =
     dc_motor_encoder_hardware_simulated_P.Integrator6_IC;
@@ -774,13 +742,6 @@ void dc_motor_encoder_hardware_simulated_terminate(void)
   /* Level2 S-Function Block: '<S3>/Channel 0 -Control signal to  motor through amplifier ' (daquanserq8) */
   {
     SimStruct *rts = dc_motor_encoder_hardware_simulated_M->childSfunctions[1];
-    sfcnTerminate(rts);
-  }
-
-  /* Terminate for S-Function (adquanserq8): '<Root>/Q4 AD' */
-  /* Level2 S-Function Block: '<Root>/Q4 AD' (adquanserq8) */
-  {
-    SimStruct *rts = dc_motor_encoder_hardware_simulated_M->childSfunctions[2];
     sfcnTerminate(rts);
   }
 }
@@ -1167,14 +1128,14 @@ RT_MODEL_dc_motor_encoder_hardware_simulated_T
                          &dc_motor_encoder_hardware_simulated_M->solverInfoPtr);
   }
 
-  dc_motor_encoder_hardware_simulated_M->Sizes.numSFcns = (3);
+  dc_motor_encoder_hardware_simulated_M->Sizes.numSFcns = (2);
 
   /* register each child */
   {
     (void) memset((void *)
                   &dc_motor_encoder_hardware_simulated_M->NonInlinedSFcns.childSFunctions
                   [0], 0,
-                  3*sizeof(SimStruct));
+                  2*sizeof(SimStruct));
     dc_motor_encoder_hardware_simulated_M->childSfunctions =
       (&dc_motor_encoder_hardware_simulated_M->NonInlinedSFcns.childSFunctionPtrs
        [0]);
@@ -1182,8 +1143,6 @@ RT_MODEL_dc_motor_encoder_hardware_simulated_T
       (&dc_motor_encoder_hardware_simulated_M->NonInlinedSFcns.childSFunctions[0]);
     dc_motor_encoder_hardware_simulated_M->childSfunctions[1] =
       (&dc_motor_encoder_hardware_simulated_M->NonInlinedSFcns.childSFunctions[1]);
-    dc_motor_encoder_hardware_simulated_M->childSfunctions[2] =
-      (&dc_motor_encoder_hardware_simulated_M->NonInlinedSFcns.childSFunctions[2]);
 
     /* Level2 S-Function Block: dc_motor_encoder_hardware_simulated/<S3>/Channel 0 of  Encoder Inputs  (encquanserq8) */
     {
@@ -1532,151 +1491,6 @@ RT_MODEL_dc_motor_encoder_hardware_simulated_T
       ssSetInputPortBufferDstPort(rts, 1, -1);
       ssSetInputPortBufferDstPort(rts, 2, -1);
     }
-
-    /* Level2 S-Function Block: dc_motor_encoder_hardware_simulated/<Root>/Q4 AD (adquanserq8) */
-    {
-      SimStruct *rts = dc_motor_encoder_hardware_simulated_M->childSfunctions[2];
-
-      /* timing info */
-      time_T *sfcnPeriod =
-        dc_motor_encoder_hardware_simulated_M->NonInlinedSFcns.Sfcn2.sfcnPeriod;
-      time_T *sfcnOffset =
-        dc_motor_encoder_hardware_simulated_M->NonInlinedSFcns.Sfcn2.sfcnOffset;
-      int_T *sfcnTsMap =
-        dc_motor_encoder_hardware_simulated_M->NonInlinedSFcns.Sfcn2.sfcnTsMap;
-      (void) memset((void*)sfcnPeriod, 0,
-                    sizeof(time_T)*1);
-      (void) memset((void*)sfcnOffset, 0,
-                    sizeof(time_T)*1);
-      ssSetSampleTimePtr(rts, &sfcnPeriod[0]);
-      ssSetOffsetTimePtr(rts, &sfcnOffset[0]);
-      ssSetSampleTimeTaskIDPtr(rts, sfcnTsMap);
-
-      /* Set up the mdlInfo pointer */
-      {
-        ssSetBlkInfo2Ptr(rts,
-                         &dc_motor_encoder_hardware_simulated_M->NonInlinedSFcns.blkInfo2
-                         [2]);
-      }
-
-      ssSetRTWSfcnInfo(rts, dc_motor_encoder_hardware_simulated_M->sfcnInfo);
-
-      /* Allocate memory of model methods 2 */
-      {
-        ssSetModelMethods2(rts,
-                           &dc_motor_encoder_hardware_simulated_M->NonInlinedSFcns.methods2
-                           [2]);
-      }
-
-      /* Allocate memory of model methods 3 */
-      {
-        ssSetModelMethods3(rts,
-                           &dc_motor_encoder_hardware_simulated_M->NonInlinedSFcns.methods3
-                           [2]);
-      }
-
-      /* Allocate memory of model methods 4 */
-      {
-        ssSetModelMethods4(rts,
-                           &dc_motor_encoder_hardware_simulated_M->NonInlinedSFcns.methods4
-                           [2]);
-      }
-
-      /* Allocate memory for states auxilliary information */
-      {
-        ssSetStatesInfo2(rts,
-                         &dc_motor_encoder_hardware_simulated_M->NonInlinedSFcns.statesInfo2
-                         [2]);
-        ssSetPeriodicStatesInfo(rts,
-          &dc_motor_encoder_hardware_simulated_M->NonInlinedSFcns.periodicStatesInfo
-          [2]);
-      }
-
-      /* outputs */
-      {
-        ssSetPortInfoForOutputs(rts,
-          &dc_motor_encoder_hardware_simulated_M->NonInlinedSFcns.Sfcn2.outputPortInfo
-          [0]);
-        _ssSetNumOutputPorts(rts, 1);
-
-        /* port 0 */
-        {
-          _ssSetOutputPortNumDimensions(rts, 0, 1);
-          ssSetOutputPortWidth(rts, 0, 1);
-          ssSetOutputPortSignal(rts, 0, ((real_T *)
-            &dc_motor_encoder_hardware_simulated_B.Q4AD));
-        }
-      }
-
-      /* path info */
-      ssSetModelName(rts, "Q4 AD");
-      ssSetPath(rts, "dc_motor_encoder_hardware_simulated/Q4 AD");
-      ssSetRTModel(rts,dc_motor_encoder_hardware_simulated_M);
-      ssSetParentSS(rts, (NULL));
-      ssSetRootSS(rts, rts);
-      ssSetVersion(rts, SIMSTRUCT_VERSION_LEVEL2);
-
-      /* parameters */
-      {
-        mxArray **sfcnParams = (mxArray **)
-          &dc_motor_encoder_hardware_simulated_M->NonInlinedSFcns.Sfcn2.params;
-        ssSetSFcnParamsCount(rts, 7);
-        ssSetSFcnParamsPtr(rts, &sfcnParams[0]);
-        ssSetSFcnParam(rts, 0, (mxArray*)
-                       dc_motor_encoder_hardware_simulated_P.Q4AD_P1_Size);
-        ssSetSFcnParam(rts, 1, (mxArray*)
-                       dc_motor_encoder_hardware_simulated_P.Q4AD_P2_Size);
-        ssSetSFcnParam(rts, 2, (mxArray*)
-                       dc_motor_encoder_hardware_simulated_P.Q4AD_P3_Size);
-        ssSetSFcnParam(rts, 3, (mxArray*)
-                       dc_motor_encoder_hardware_simulated_P.Q4AD_P4_Size);
-        ssSetSFcnParam(rts, 4, (mxArray*)
-                       dc_motor_encoder_hardware_simulated_P.Q4AD_P5_Size);
-        ssSetSFcnParam(rts, 5, (mxArray*)
-                       dc_motor_encoder_hardware_simulated_P.Q4AD_P6_Size);
-        ssSetSFcnParam(rts, 6, (mxArray*)
-                       dc_motor_encoder_hardware_simulated_P.Q4AD_P7_Size);
-      }
-
-      /* work vectors */
-      ssSetIWork(rts, (int_T *)
-                 &dc_motor_encoder_hardware_simulated_DW.Q4AD_IWORK[0]);
-
-      {
-        struct _ssDWorkRecord *dWorkRecord = (struct _ssDWorkRecord *)
-          &dc_motor_encoder_hardware_simulated_M->NonInlinedSFcns.Sfcn2.dWork;
-        struct _ssDWorkAuxRecord *dWorkAuxRecord = (struct _ssDWorkAuxRecord *)
-          &dc_motor_encoder_hardware_simulated_M->NonInlinedSFcns.Sfcn2.dWorkAux;
-        ssSetSFcnDWork(rts, dWorkRecord);
-        ssSetSFcnDWorkAux(rts, dWorkAuxRecord);
-        _ssSetNumDWork(rts, 1);
-
-        /* IWORK */
-        ssSetDWorkWidth(rts, 0, 2);
-        ssSetDWorkDataType(rts, 0,SS_INTEGER);
-        ssSetDWorkComplexSignal(rts, 0, 0);
-        ssSetDWork(rts, 0, &dc_motor_encoder_hardware_simulated_DW.Q4AD_IWORK[0]);
-      }
-
-      /* registration */
-      adquanserq8(rts);
-      sfcnInitializeSizes(rts);
-      sfcnInitializeSampleTimes(rts);
-
-      /* adjust sample time */
-      ssSetSampleTime(rts, 0, 0.001);
-      ssSetOffsetTime(rts, 0, 0.0);
-      sfcnTsMap[0] = 1;
-
-      /* set compiled values of dynamic vector attributes */
-      ssSetNumNonsampledZCs(rts, 0);
-
-      /* Update connectivity flags for each port */
-      _ssSetOutputPortConnected(rts, 0, 1);
-      _ssSetOutputPortBeingMerged(rts, 0, 0);
-
-      /* Update the BufferDstPort flags for each input port */
-    }
   }
 
   /* Initialize Sizes */
@@ -1686,9 +1500,9 @@ RT_MODEL_dc_motor_encoder_hardware_simulated_T
   dc_motor_encoder_hardware_simulated_M->Sizes.numU = (0);/* Number of model inputs */
   dc_motor_encoder_hardware_simulated_M->Sizes.sysDirFeedThru = (0);/* The model is not direct feedthrough */
   dc_motor_encoder_hardware_simulated_M->Sizes.numSampTimes = (2);/* Number of sample times */
-  dc_motor_encoder_hardware_simulated_M->Sizes.numBlocks = (51);/* Number of blocks */
-  dc_motor_encoder_hardware_simulated_M->Sizes.numBlockIO = (35);/* Number of block outputs */
-  dc_motor_encoder_hardware_simulated_M->Sizes.numBlockPrms = (116);/* Sum of parameter "widths" */
+  dc_motor_encoder_hardware_simulated_M->Sizes.numBlocks = (47);/* Number of blocks */
+  dc_motor_encoder_hardware_simulated_M->Sizes.numBlockIO = (33);/* Number of block outputs */
+  dc_motor_encoder_hardware_simulated_M->Sizes.numBlockPrms = (95);/* Sum of parameter "widths" */
   return dc_motor_encoder_hardware_simulated_M;
 }
 
