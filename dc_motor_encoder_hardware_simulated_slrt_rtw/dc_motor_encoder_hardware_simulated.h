@@ -8,9 +8,9 @@
  *
  * Code generation for model "dc_motor_encoder_hardware_simulated".
  *
- * Model version              : 1.113
+ * Model version              : 1.114
  * Simulink Coder version : 8.12 (R2017a) 16-Feb-2017
- * C source code generated on : Fri Apr 13 17:05:53 2018
+ * C source code generated on : Fri Apr 13 17:47:46 2018
  *
  * Target selection: slrt.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -847,6 +847,7 @@ typedef struct {
   real_T Sum4;                         /* '<Root>/Sum4' */
   real_T Product1;                     /* '<S7>/Product1' */
   real_T Saturation;                   /* '<S4>/Saturation' */
+  real_T PowerforLoadCell;             /* '<S4>/Power for Load Cell' */
   real_T Integrator5;                  /* '<S5>/Integrator5' */
   real_T BackemfKe1;                   /* '<S5>/Back emf Ke1' */
   real_T Dampingb1;                    /* '<S5>/Damping b1' */
@@ -1076,6 +1077,9 @@ struct P_dc_motor_encoder_hardware_simulated_T_ {
   real_T Saturation_LowerSat;          /* Expression: -10
                                         * Referenced by: '<S4>/Saturation'
                                         */
+  real_T PowerforLoadCell_Value;       /* Expression: 5
+                                        * Referenced by: '<S4>/Power for Load Cell'
+                                        */
   real_T Channel0Controlsignaltomotorthr[2];/* Computed Parameter: Channel0Controlsignaltomotorthr
                                              * Referenced by: '<S4>/Channel 0 -Control signal to  motor through amplifier '
                                              */
@@ -1085,13 +1089,13 @@ struct P_dc_motor_encoder_hardware_simulated_T_ {
   real_T Channel0Controlsignaltomotort_h[2];/* Computed Parameter: Channel0Controlsignaltomotort_h
                                              * Referenced by: '<S4>/Channel 0 -Control signal to  motor through amplifier '
                                              */
-  real_T Channel0Controlsignaltomotort_k[3];/* Expression: channel
+  real_T Channel0Controlsignaltomotort_k[4];/* Expression: channel
                                              * Referenced by: '<S4>/Channel 0 -Control signal to  motor through amplifier '
                                              */
   real_T Channel0Controlsignaltomotort_e[2];/* Computed Parameter: Channel0Controlsignaltomotort_e
                                              * Referenced by: '<S4>/Channel 0 -Control signal to  motor through amplifier '
                                              */
-  real_T Channel0Controlsignaltomotort_c[3];/* Expression: range
+  real_T Channel0Controlsignaltomotort_c[4];/* Expression: range
                                              * Referenced by: '<S4>/Channel 0 -Control signal to  motor through amplifier '
                                              */
   real_T Channel0Controlsignaltomotor_e1[2];/* Computed Parameter: Channel0Controlsignaltomotor_e1
@@ -1103,13 +1107,13 @@ struct P_dc_motor_encoder_hardware_simulated_T_ {
   real_T Channel0Controlsignaltomotor_cz[2];/* Computed Parameter: Channel0Controlsignaltomotor_cz
                                              * Referenced by: '<S4>/Channel 0 -Control signal to  motor through amplifier '
                                              */
-  real_T Channel0Controlsignaltomotort_n[3];/* Expression: reset
+  real_T Channel0Controlsignaltomotort_n[4];/* Expression: reset
                                              * Referenced by: '<S4>/Channel 0 -Control signal to  motor through amplifier '
                                              */
   real_T Channel0Controlsignaltomotort_l[2];/* Computed Parameter: Channel0Controlsignaltomotort_l
                                              * Referenced by: '<S4>/Channel 0 -Control signal to  motor through amplifier '
                                              */
-  real_T Channel0Controlsignaltomotort_g[3];/* Expression: initValue
+  real_T Channel0Controlsignaltomotort_g[4];/* Expression: initValue
                                              * Referenced by: '<S4>/Channel 0 -Control signal to  motor through amplifier '
                                              */
   real_T Channel0Controlsignaltomotort_b[2];/* Computed Parameter: Channel0Controlsignaltomotort_b
@@ -1242,10 +1246,11 @@ struct tag_RTM_dc_motor_encoder_hardware_simulated_T {
       time_T sfcnPeriod[1];
       time_T sfcnOffset[1];
       int_T sfcnTsMap[1];
-      struct _ssPortInputs inputPortInfo[3];
+      struct _ssPortInputs inputPortInfo[4];
       real_T const *UPtrs0[1];
       real_T const *UPtrs1[1];
       real_T const *UPtrs2[1];
+      real_T const *UPtrs3[1];
       uint_T attribs[9];
       mxArray *params[9];
       struct _ssDWorkRecord dWork[2];

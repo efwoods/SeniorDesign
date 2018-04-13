@@ -8,9 +8,9 @@
  *
  * Code generation for model "dc_motor_encoder_hardware_simulated".
  *
- * Model version              : 1.113
+ * Model version              : 1.114
  * Simulink Coder version : 8.12 (R2017a) 16-Feb-2017
- * C source code generated on : Fri Apr 13 17:05:53 2018
+ * C source code generated on : Fri Apr 13 17:47:46 2018
  *
  * Target selection: slrt.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -356,6 +356,10 @@ void dc_motor_encoder_hardware_simulated_output(void)
 
   /* End of Saturate: '<S4>/Saturation' */
   if (rtmIsMajorTimeStep(dc_motor_encoder_hardware_simulated_M)) {
+    /* Constant: '<S4>/Power for Load Cell' */
+    dc_motor_encoder_hardware_simulated_B.PowerforLoadCell =
+      dc_motor_encoder_hardware_simulated_P.PowerforLoadCell_Value;
+
     /* S-Function (daquanserq8): '<S4>/Channel 0 -Control signal to  motor through amplifier ' */
 
     /* Level2 S-Function Block: '<S4>/Channel 0 -Control signal to  motor through amplifier ' (daquanserq8) */
@@ -714,6 +718,10 @@ void dc_motor_encoder_hardware_simulated_initialize(void)
   /* Start for Constant: '<Root>/Magnet_Control' */
   dc_motor_encoder_hardware_simulated_B.Magnet_Control =
     dc_motor_encoder_hardware_simulated_P.Magnet_Control_Value;
+
+  /* Start for Constant: '<S4>/Power for Load Cell' */
+  dc_motor_encoder_hardware_simulated_B.PowerforLoadCell =
+    dc_motor_encoder_hardware_simulated_P.PowerforLoadCell_Value;
 
   /* Start for S-Function (daquanserq8): '<S4>/Channel 0 -Control signal to  motor through amplifier ' */
   /* Level2 S-Function Block: '<S4>/Channel 0 -Control signal to  motor through amplifier ' (daquanserq8) */
@@ -1443,7 +1451,7 @@ RT_MODEL_dc_motor_encoder_hardware_simulated_T
 
       /* inputs */
       {
-        _ssSetNumInputPorts(rts, 3);
+        _ssSetNumInputPorts(rts, 4);
         ssSetPortInfoForInputs(rts,
           &dc_motor_encoder_hardware_simulated_M->NonInlinedSFcns.Sfcn1.inputPortInfo
           [0]);
@@ -1472,10 +1480,20 @@ RT_MODEL_dc_motor_encoder_hardware_simulated_T
         {
           real_T const **sfcnUPtrs = (real_T const **)
             &dc_motor_encoder_hardware_simulated_M->NonInlinedSFcns.Sfcn1.UPtrs2;
-          sfcnUPtrs[0] = &dc_motor_encoder_hardware_simulated_B.Estop;
+          sfcnUPtrs[0] = &dc_motor_encoder_hardware_simulated_B.PowerforLoadCell;
           ssSetInputPortSignalPtrs(rts, 2, (InputPtrsType)&sfcnUPtrs[0]);
           _ssSetInputPortNumDimensions(rts, 2, 1);
           ssSetInputPortWidth(rts, 2, 1);
+        }
+
+        /* port 3 */
+        {
+          real_T const **sfcnUPtrs = (real_T const **)
+            &dc_motor_encoder_hardware_simulated_M->NonInlinedSFcns.Sfcn1.UPtrs3;
+          sfcnUPtrs[0] = &dc_motor_encoder_hardware_simulated_B.Estop;
+          ssSetInputPortSignalPtrs(rts, 3, (InputPtrsType)&sfcnUPtrs[0]);
+          _ssSetInputPortNumDimensions(rts, 3, 1);
+          ssSetInputPortWidth(rts, 3, 1);
         }
       }
 
@@ -1564,11 +1582,13 @@ RT_MODEL_dc_motor_encoder_hardware_simulated_T
       _ssSetInputPortConnected(rts, 0, 1);
       _ssSetInputPortConnected(rts, 1, 1);
       _ssSetInputPortConnected(rts, 2, 1);
+      _ssSetInputPortConnected(rts, 3, 1);
 
       /* Update the BufferDstPort flags for each input port */
       ssSetInputPortBufferDstPort(rts, 0, -1);
       ssSetInputPortBufferDstPort(rts, 1, -1);
       ssSetInputPortBufferDstPort(rts, 2, -1);
+      ssSetInputPortBufferDstPort(rts, 3, -1);
     }
 
     /* Level2 S-Function Block: dc_motor_encoder_hardware_simulated/<Root>/Q4 AD (adquanserq8) */
@@ -1724,9 +1744,9 @@ RT_MODEL_dc_motor_encoder_hardware_simulated_T
   dc_motor_encoder_hardware_simulated_M->Sizes.numU = (0);/* Number of model inputs */
   dc_motor_encoder_hardware_simulated_M->Sizes.sysDirFeedThru = (0);/* The model is not direct feedthrough */
   dc_motor_encoder_hardware_simulated_M->Sizes.numSampTimes = (2);/* Number of sample times */
-  dc_motor_encoder_hardware_simulated_M->Sizes.numBlocks = (50);/* Number of blocks */
-  dc_motor_encoder_hardware_simulated_M->Sizes.numBlockIO = (34);/* Number of block outputs */
-  dc_motor_encoder_hardware_simulated_M->Sizes.numBlockPrms = (115);/* Sum of parameter "widths" */
+  dc_motor_encoder_hardware_simulated_M->Sizes.numBlocks = (51);/* Number of blocks */
+  dc_motor_encoder_hardware_simulated_M->Sizes.numBlockIO = (35);/* Number of block outputs */
+  dc_motor_encoder_hardware_simulated_M->Sizes.numBlockPrms = (120);/* Sum of parameter "widths" */
   return dc_motor_encoder_hardware_simulated_M;
 }
 

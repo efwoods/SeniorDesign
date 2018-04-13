@@ -33,7 +33,7 @@ Model {
       UnitExpr		      "inherit"
     }
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.114"
+    ComputedModelVersion    "1.115"
     NumModelReferences	    0
     NumTestPointedSignals   0
     NumProvidedFunctions    0
@@ -130,9 +130,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "student"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Fri Apr 13 17:06:19 2018"
-  RTWModifiedTimeStamp	  445539932
-  ModelVersionFormat	  "1.%<AutoIncrement:114>"
+  LastModifiedDate	  "Fri Apr 13 19:13:12 2018"
+  RTWModifiedTimeStamp	  445547591
+  ModelVersionFormat	  "1.%<AutoIncrement:115>"
   ConfigurationManager	  "none"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
@@ -1199,7 +1199,7 @@ Model {
     ShowPageBoundaries	    off
     ZoomFactor		    "60"
     ReportName		    "simulink-default.rpt"
-    SIDHighWatermark	    "108"
+    SIDHighWatermark	    "109"
     Block {
       BlockType		      Constant
       Name		      "1 - Use simulated motor\n0 - Use real motor"
@@ -1407,7 +1407,7 @@ Model {
       SID		      "95"
       Position		      [545, 740, 575, 770]
       ZOrder		      49
-      Value		      "0"
+      Value		      "10"
     }
     Block {
       BlockType		      ManualSwitch
@@ -1464,7 +1464,7 @@ Model {
       Variant		      off
       System {
 	Name			"Real motor"
-	Location		[-6, 0, 775, 840]
+	Location		[762, 0, 1543, 840]
 	Open			off
 	PortBlocksUseCompactNotation off
 	ModelBrowserVisibility	off
@@ -1508,8 +1508,8 @@ Model {
 	  BlockType		  Reference
 	  Name			  "Channel 0 -Control signal to \nmotor through amplifier "
 	  SID			  "10"
-	  Ports			  [3]
-	  Position		  [325, 41, 430, 99]
+	  Ports			  [4]
+	  Position		  [325, 43, 430, 102]
 	  ZOrder		  -2
 	  BackgroundColor	  "cyan"
 	  LibraryVersion	  "1.52"
@@ -1517,7 +1517,7 @@ Model {
 	  SourceType		  "quanser_q4_da"
 	  SourceProductName	  "Simulink Real-Time"
 	  SourceProductBaseCode	  "XP"
-	  channel		  "[1 2 4]"
+	  channel		  "[1 2 3 4]"
 	  range			  "[-10]"
 	  simul			  off
 	  reset			  "[1]"
@@ -1548,6 +1548,14 @@ Model {
 	  preserveCounts	  "[0]"
 	  sampleTime		  ".001"
 	  slot			  "-1"
+	}
+	Block {
+	  BlockType		  Constant
+	  Name			  "Power for Load Cell"
+	  SID			  "109"
+	  Position		  [195, 125, 225, 155]
+	  ZOrder		  51
+	  Value			  "5"
 	}
 	Block {
 	  BlockType		  Saturate
@@ -1615,15 +1623,23 @@ Model {
 	  ZOrder		  13
 	  SrcBlock		  "Electromagnet input\n"
 	  SrcPort		  1
-	  Points		  [174, 0; 0, -110]
+	  Points		  [174, 0; 0, -115]
 	  DstBlock		  "Channel 0 -Control signal to \nmotor through amplifier "
 	  DstPort		  2
 	}
 	Line {
-	  ZOrder		  14
+	  ZOrder		  15
 	  SrcBlock		  "E Stop\n"
 	  SrcPort		  1
-	  Points		  [41, 0; 0, -180]
+	  Points		  [41, 0; 0, -46; 154, 0]
+	  DstBlock		  "Channel 0 -Control signal to \nmotor through amplifier "
+	  DstPort		  4
+	}
+	Line {
+	  ZOrder		  16
+	  SrcBlock		  "Power for Load Cell"
+	  SrcPort		  1
+	  Points		  [22, 0; 0, -60]
 	  DstBlock		  "Channel 0 -Control signal to \nmotor through amplifier "
 	  DstPort		  3
 	}

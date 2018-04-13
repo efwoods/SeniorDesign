@@ -8,9 +8,9 @@
  *
  * Code generation for model "dc_motor_encoder_hardware_simulated".
  *
- * Model version              : 1.113
+ * Model version              : 1.114
  * Simulink Coder version : 8.12 (R2017a) 16-Feb-2017
- * C source code generated on : Fri Apr 13 17:05:53 2018
+ * C source code generated on : Fri Apr 13 17:47:46 2018
  *
  * Target selection: slrt.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -166,6 +166,9 @@ P_dc_motor_encoder_hardware_simulated_T dc_motor_encoder_hardware_simulated_P =
   -10.0,                               /* Expression: -10
                                         * Referenced by: '<S4>/Saturation'
                                         */
+  5.0,                                 /* Expression: 5
+                                        * Referenced by: '<S4>/Power for Load Cell'
+                                        */
 
   /*  Computed Parameter: Channel0Controlsignaltomotorthr
    * Referenced by: '<S4>/Channel 0 -Control signal to  motor through amplifier '
@@ -178,22 +181,22 @@ P_dc_motor_encoder_hardware_simulated_T dc_motor_encoder_hardware_simulated_P =
   /*  Computed Parameter: Channel0Controlsignaltomotort_h
    * Referenced by: '<S4>/Channel 0 -Control signal to  motor through amplifier '
    */
-  { 1.0, 3.0 },
+  { 1.0, 4.0 },
 
   /*  Expression: channel
    * Referenced by: '<S4>/Channel 0 -Control signal to  motor through amplifier '
    */
-  { 1.0, 2.0, 4.0 },
+  { 1.0, 2.0, 3.0, 4.0 },
 
   /*  Computed Parameter: Channel0Controlsignaltomotort_e
    * Referenced by: '<S4>/Channel 0 -Control signal to  motor through amplifier '
    */
-  { 1.0, 3.0 },
+  { 1.0, 4.0 },
 
   /*  Expression: range
    * Referenced by: '<S4>/Channel 0 -Control signal to  motor through amplifier '
    */
-  { -10.0, -10.0, -10.0 },
+  { -10.0, -10.0, -10.0, -10.0 },
 
   /*  Computed Parameter: Channel0Controlsignaltomotor_e1
    * Referenced by: '<S4>/Channel 0 -Control signal to  motor through amplifier '
@@ -206,22 +209,22 @@ P_dc_motor_encoder_hardware_simulated_T dc_motor_encoder_hardware_simulated_P =
   /*  Computed Parameter: Channel0Controlsignaltomotor_cz
    * Referenced by: '<S4>/Channel 0 -Control signal to  motor through amplifier '
    */
-  { 1.0, 3.0 },
+  { 1.0, 4.0 },
 
   /*  Expression: reset
    * Referenced by: '<S4>/Channel 0 -Control signal to  motor through amplifier '
    */
-  { 1.0, 1.0, 1.0 },
+  { 1.0, 1.0, 1.0, 1.0 },
 
   /*  Computed Parameter: Channel0Controlsignaltomotort_l
    * Referenced by: '<S4>/Channel 0 -Control signal to  motor through amplifier '
    */
-  { 1.0, 3.0 },
+  { 1.0, 4.0 },
 
   /*  Expression: initValue
    * Referenced by: '<S4>/Channel 0 -Control signal to  motor through amplifier '
    */
-  { 0.0, 0.0, 0.0 },
+  { 0.0, 0.0, 0.0, 0.0 },
 
   /*  Computed Parameter: Channel0Controlsignaltomotort_b
    * Referenced by: '<S4>/Channel 0 -Control signal to  motor through amplifier '

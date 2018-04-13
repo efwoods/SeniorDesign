@@ -1,4 +1,4 @@
-function [sm, s] = arduino_setup
+function [sm, s, a] = arduino_setup
 a = arduino('COM5', 'Uno', 'Libraries', 'Adafruit\MotorShieldV2')
 disp('arduino initialized')
 shield = addon(a, 'Adafruit\MotorShieldV2')
