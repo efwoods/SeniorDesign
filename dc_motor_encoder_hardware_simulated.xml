@@ -7,6 +7,14 @@
 
 		</SubSystem>
 		<SubSystem>
+		<Name>Load Cell Scope
+</Name>
+		<xPCName>dc_motor_encoder_hardware_simulated/Load Cell Scope </xPCName>
+		
+		
+
+		</SubSystem>
+		<SubSystem>
 		<Name>Magnet Control Scope</Name>
 		<xPCName>dc_motor_encoder_hardware_simulated/Magnet Control Scope</xPCName>
 		
@@ -649,6 +657,42 @@ in degrees</blkName>
           </parameter>
           </block>
             <block>
+            <blkName>Q4 AD</blkName>
+            <xpcblkName>Q4 AD</xpcblkName>
+            <SLblockPath>dc_motor_encoder_hardware_simulated/Q4 AD</SLblockPath>
+            <isSrc>[1 0 1]</isSrc>
+          <parameter>
+          <paramName>P1</paramName>
+          <dim>[1, 1]</dim>  
+		  <SubSystemName>dc_motor_encoder_hardware_simulated</SubSystemName>
+          </parameter>
+          <parameter>
+          <paramName>P2</paramName>
+          <dim>[1, 1]</dim>  
+		  <SubSystemName>dc_motor_encoder_hardware_simulated</SubSystemName>
+          </parameter>
+          <parameter>
+          <paramName>P3</paramName>
+          <dim>[1, 1]</dim>  
+		  <SubSystemName>dc_motor_encoder_hardware_simulated</SubSystemName>
+          </parameter>
+          <parameter>
+          <paramName>P5</paramName>
+          <dim>[1, 1]</dim>  
+		  <SubSystemName>dc_motor_encoder_hardware_simulated</SubSystemName>
+          </parameter>
+          <parameter>
+          <paramName>P6</paramName>
+          <dim>[1, 1]</dim>  
+		  <SubSystemName>dc_motor_encoder_hardware_simulated</SubSystemName>
+          </parameter>
+          <parameter>
+          <paramName>P7</paramName>
+          <dim>[1, 1]</dim>  
+		  <SubSystemName>dc_motor_encoder_hardware_simulated</SubSystemName>
+          </parameter>
+          </block>
+            <block>
             <blkName>Manual Switch</blkName>
             <xpcblkName>Manual Switch</xpcblkName>
             <SLblockPath>dc_motor_encoder_hardware_simulated/Manual Switch</SLblockPath>
@@ -746,6 +790,16 @@ in degrees</blkName>
               <signal>
               <sigName>Integrator1</sigName>
               <xpcsigName>Integrator1</xpcsigName>
+              <sigWidth>1</sigWidth>
+              <sigDim>[1, 1]</sigDim>
+			  <SubSystemName>dc_motor_encoder_hardware_simulated</SubSystemName>
+			  <sigTestPoint>false</sigTestPoint>
+            </signal>
+			  
+			  
+              <signal>
+              <sigName>Q4 AD</sigName>
+              <xpcsigName>Q4 AD</xpcsigName>
               <sigWidth>1</sigWidth>
               <sigDim>[1, 1]</sigDim>
 			  <SubSystemName>dc_motor_encoder_hardware_simulated</SubSystemName>

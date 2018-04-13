@@ -4,7 +4,7 @@ Model {
   SavedCharacterEncoding  "windows-1252"
   GraphicalInterface {
     NumRootInports	    0
-    NumRootOutports	    3
+    NumRootOutports	    4
     Outport {
       Name		      "setpoint_Out"
       BusObject		      ""
@@ -26,8 +26,14 @@ Model {
       SignalName	      "name"
       UnitExpr		      "inherit"
     }
+    Outport {
+      Name		      "Load Cell"
+      BusObject		      ""
+      BusOutputAsStruct	      "off"
+      UnitExpr		      "inherit"
+    }
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.110"
+    ComputedModelVersion    "1.114"
     NumModelReferences	    0
     NumTestPointedSignals   0
     NumProvidedFunctions    0
@@ -64,7 +70,7 @@ Model {
       $ObjectID		      2
       $ClassName	      "Simulink.WindowInfo"
       IsActive		      [1]
-      Location		      [-7.0, -7.0, 1550.0, 848.0]
+      Location		      [762.0, 0.0, 781.0, 840.0]
       Object {
 	$PropName		"ModelBrowserInfo"
 	$ObjectID		3
@@ -88,9 +94,9 @@ Model {
 	IsActive		[1]
 	ViewObjType		"SimulinkTopLevel"
 	LoadSaveID		"0"
-	Extents			[1875.0, 845.0]
+	Extents			[913.0, 835.0]
 	ZoomFactor		[0.6]
-	Offset			[-557.18525291915671, 97.444198848258452]
+	Offset			[174.8147470808434, 97.444198848257884]
       }
       Object {
 	$PropName		"DockComponentsInfo"
@@ -110,11 +116,11 @@ Model {
       "AAAAAAA+wAAABYARABvAGMAawBXAGkAZABnAGUAdAA0AAAAAAD/////AAAAAAAAAAD7AAAAUgBHAEwAVQBFADIAIAB0AHIAZQBlACAAYwBvAG0Ac"
       "ABvAG4AZQBuAHQALwBHAEwAVQBFADIAIAB0AHIAZQBlACAAYwBvAG0AcABvAG4AZQBuAHQAAAAAAP////8AAAB4AP///wAAAAEAAAAAAAAAAPwCA"
       "AAAAfsAAABUAEcATABVAEUAMgA6AFAAcgBvAHAAZQByAHQAeQBJAG4AcwBwAGUAYwB0AG8AcgAvAFAAcgBvAHAAZQByAHQAeQAgAEkAbgBzAHAAZ"
-      "QBjAHQAbwByAAAAAAD/////AAAANAD///8AAAeAAAADkgAAAAEAAAACAAAAAQAAAAL8AAAAAQAAAAIAAAAP/////wAAAAAA/////wAAAAAAAAAA/"
+      "QBjAHQAbwByAAAAAAD/////AAAANAD///8AAAO+AAADiAAAAAEAAAACAAAAAQAAAAL8AAAAAQAAAAIAAAAP/////wAAAAAA/////wAAAAAAAAAA/"
       "////wEAAAAA/////wAAAAAAAAAA/////wAAAAAA/////wAAAAAAAAAA/////wAAAAAA/////wAAAAAAAAAA/////wAAAAAA/////wAAAAAAAAAA/"
       "////wEAAACR/////wAAAAAAAAAA/////wEAAAEE/////wAAAAAAAAAA/////wAAAAAA/////wAAAAAAAAAA/////wEAAAGV/////wAAAAAAAAAA/"
-      "////wAAAAAA/////wAAAAAAAAAA/////wAAAAAA/////wAAAAAAAAAA/////wAAAAAA/////wAAAAAAAAAA/////wEAAAN8/////wAAAAAAAAAA/"
-      "////wEAAAO0/////wAAAAAAAAAA/////wAAAAAA/////wAAAAAAAAAA"
+      "////wAAAAAA/////wAAAAAAAAAA/////wAAAAAA/////wAAAAAAAAAA/////wAAAAAA/////wAAAAAAAAAA/////wEAAANO/////wAAAAAAAAAA/"
+      "////wEAAAOG/////wAAAAAAAAAA/////wAAAAAA/////wAAAAAAAAAA"
     }
   }
   HideAutomaticNames	  on
@@ -124,9 +130,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "student"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Fri Apr 13 11:37:43 2018"
-  RTWModifiedTimeStamp	  445520237
-  ModelVersionFormat	  "1.%<AutoIncrement:110>"
+  LastModifiedDate	  "Fri Apr 13 17:06:19 2018"
+  RTWModifiedTimeStamp	  445539932
+  ModelVersionFormat	  "1.%<AutoIncrement:114>"
   ConfigurationManager	  "none"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
@@ -1178,7 +1184,7 @@ Model {
   }
   System {
     Name		    "dc_motor_encoder_hardware_simulated"
-    Location		    [-7, -7, 1543, 841]
+    Location		    [762, 0, 1543, 840]
     Open		    on
     PortBlocksUseCompactNotation off
     ModelBrowserVisibility  off
@@ -1193,7 +1199,7 @@ Model {
     ShowPageBoundaries	    off
     ZoomFactor		    "60"
     ReportName		    "simulink-default.rpt"
-    SIDHighWatermark	    "104"
+    SIDHighWatermark	    "108"
     Block {
       BlockType		      Constant
       Name		      "1 - Use simulated motor\n0 - Use real motor"
@@ -1323,6 +1329,43 @@ Model {
     }
     Block {
       BlockType		      Reference
+      Name		      "Load Cell Scope\n"
+      SID		      "108"
+      Ports		      [1]
+      Position		      [1095, 803, 1190, 867]
+      ZOrder		      54
+      LibraryVersion	      "1.1871"
+      SourceBlock	      "slrtlib/Displays and\nLogging/Scope "
+      SourceType	      "xpcscopeblock"
+      SourceProductName	      "Simulink Real-Time"
+      SourceProductBaseCode   "XP"
+      ContentPreviewEnabled   off
+      scopeno		      "5"
+      scopetype		      "Target"
+      autostart		      on
+      viewmode		      "Graphical redraw"
+      formatstr		      "'%15.6f'"
+      grid		      on
+      ylimits		      "[0,2]"
+      nosamples		      "200"
+      noprepostsamples	      "0"
+      interleave	      "1"
+      triggermode	      "FreeRun"
+      triggersignal	      "1"
+      trigsignalfromport      off
+      triggerlevel	      "0.0"
+      triggerslope	      "Either"
+      triggerscope	      "1"
+      triggersample	      "0"
+      filename		      "data.dat"
+      mode		      "Lazy"
+      writesize		      "512"
+      autorestart	      off
+      dynamicfilemode	      off
+      maxwritefilesize	      "512*1024^2"
+    }
+    Block {
+      BlockType		      Reference
       Name		      "Magnet Control Scope"
       SID		      "94"
       Ports		      [1]
@@ -1394,6 +1437,22 @@ Model {
       DisplayOption	      "bar"
     }
     Block {
+      BlockType		      Reference
+      Name		      "Q4 AD"
+      SID		      "105"
+      Ports		      [0, 1]
+      Position		      [840, 682, 940, 738]
+      ZOrder		      52
+      LibraryVersion	      "1.52"
+      SourceBlock	      "xpcquanserlib/A//D/Q4 AD"
+      SourceType	      "quanser_q4_ad"
+      SourceProductName	      "Simulink Real-Time"
+      SourceProductBaseCode   "XP"
+      channel		      "[2]"
+      sampleTime	      "0.001"
+      slot		      "-1"
+    }
+    Block {
       BlockType		      SubSystem
       Name		      "Real motor"
       SID		      "8"
@@ -1405,7 +1464,7 @@ Model {
       Variant		      off
       System {
 	Name			"Real motor"
-	Location		[-7, -7, 1543, 841]
+	Location		[-6, 0, 775, 840]
 	Open			off
 	PortBlocksUseCompactNotation off
 	ModelBrowserVisibility	off
@@ -2404,6 +2463,15 @@ Model {
       SignalName	      "name"
       IconDisplay	      "Port number"
     }
+    Block {
+      BlockType		      Outport
+      Name		      "Load Cell"
+      SID		      "106"
+      Position		      [1010, 703, 1040, 717]
+      ZOrder		      53
+      Port		      "4"
+      IconDisplay	      "Port number"
+    }
     Line {
       ZOrder		      1
       SrcBlock		      "Kp"
@@ -2691,6 +2759,24 @@ Model {
       SrcPort		      1
       DstBlock		      "Real motor"
       DstPort		      3
+    }
+    Line {
+      ZOrder		      61
+      SrcBlock		      "Q4 AD"
+      SrcPort		      1
+      Points		      [0, 17; 31, 0]
+      Branch {
+	ZOrder			63
+	Points			[0, 108]
+	DstBlock		"Load Cell Scope\n"
+	DstPort			1
+      }
+      Branch {
+	ZOrder			62
+	Points			[19, 0]
+	DstBlock		"Load Cell"
+	DstPort			1
+      }
     }
     Annotation {
       SID		      "82"

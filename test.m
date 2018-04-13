@@ -1,12 +1,9 @@
 % test.m
-function test(stepper, servo)
+function test(stepper, servo, tg)
 reset_arm_to_innerwell(stepper)
 pause(1)
-rotate_to_loadcell(stepper)
+weigh_washers(stepper, servo, tg)
 pause(1)
-weigh_washers(stepper, servo)
-pause(1)
-rotate_from_loadcell_to_innerwell(stepper)
-pause(1)
+% pause(1)
 reset_arm(stepper)
 end
