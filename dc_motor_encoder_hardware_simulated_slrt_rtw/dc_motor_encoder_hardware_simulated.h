@@ -8,9 +8,9 @@
  *
  * Code generation for model "dc_motor_encoder_hardware_simulated".
  *
- * Model version              : 1.107
+ * Model version              : 1.108
  * Simulink Coder version : 8.12 (R2017a) 16-Feb-2017
- * C source code generated on : Thu Apr 12 20:17:46 2018
+ * C source code generated on : Fri Apr 13 11:35:22 2018
  *
  * Target selection: slrt.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -837,6 +837,7 @@ typedef struct {
   real_T Sum2;                         /* '<S9>/Sum2' */
   real_T ErrorSignal;                  /* '<Root>/Sum1' */
   real_T Derivative1;                  /* '<Root>/Derivative1' */
+  real_T Estop;                        /* '<Root>/Estop ' */
   real_T Gain[3];                      /* '<Root>/Gain' */
   real_T Integrator1;                  /* '<Root>/Integrator1' */
   real_T Kd;                           /* '<Root>/Kd' */
@@ -857,8 +858,10 @@ typedef struct {
   real_T ResistanceR1;                 /* '<S4>/Resistance R1' */
   real_T Sum1;                         /* '<S4>/Sum1' */
   real_T Inductance;                   /* '<S4>/Inductance' */
+  real_T Q4AD;                         /* '<Root>/Q4 AD' */
   boolean_T complementtheinput1;       /* '<S9>/complement the input1' */
   boolean_T complementtheinput;        /* '<S6>/complement the input' */
+  boolean_T RelationalOperator;        /* '<Root>/Relational Operator' */
 } B_dc_motor_encoder_hardware_simulated_T;
 
 /* Block states (auto storage) for system '<Root>' */
@@ -890,6 +893,7 @@ typedef struct {
   } SFunction_IWORK_n;                 /* '<S8>/S-Function' */
 
   int_T Channel0Controlsignaltomotort_l;/* '<S3>/Channel 0 -Control signal to  motor through amplifier ' */
+  int_T Q4AD_IWORK[2];                 /* '<Root>/Q4 AD' */
 } DW_dc_motor_encoder_hardware_simulated_T;
 
 /* Continuous states (auto storage) */
@@ -1042,6 +1046,9 @@ struct P_dc_motor_encoder_hardware_simulated_T_ {
   real_T angular_positionrelative_countC;/* Expression: -360/1600
                                           * Referenced by: '<S3>/angular_position =  [relative_count//COUNTS_PER_REV] *360 degrees'
                                           */
+  real_T Estop_Value;                  /* Expression: 5
+                                        * Referenced by: '<Root>/Estop '
+                                        */
   real_T Gain_Gain;                    /* Expression: 1
                                         * Referenced by: '<Root>/Gain'
                                         */
@@ -1057,7 +1064,7 @@ struct P_dc_motor_encoder_hardware_simulated_T_ {
   real_T Kp_Gain;                      /* Expression: .5
                                         * Referenced by: '<Root>/Kp'
                                         */
-  real_T Magnet_Control_Value;         /* Expression: 10
+  real_T Magnet_Control_Value;         /* Expression: 0
                                         * Referenced by: '<Root>/Magnet_Control'
                                         */
   real_T Saturation_UpperSat;          /* Expression: 10
@@ -1075,13 +1082,13 @@ struct P_dc_motor_encoder_hardware_simulated_T_ {
   real_T Channel0Controlsignaltomotort_h[2];/* Computed Parameter: Channel0Controlsignaltomotort_h
                                              * Referenced by: '<S3>/Channel 0 -Control signal to  motor through amplifier '
                                              */
-  real_T Channel0Controlsignaltomotort_k[2];/* Expression: channel
+  real_T Channel0Controlsignaltomotort_k[3];/* Expression: channel
                                              * Referenced by: '<S3>/Channel 0 -Control signal to  motor through amplifier '
                                              */
   real_T Channel0Controlsignaltomotort_e[2];/* Computed Parameter: Channel0Controlsignaltomotort_e
                                              * Referenced by: '<S3>/Channel 0 -Control signal to  motor through amplifier '
                                              */
-  real_T Channel0Controlsignaltomotort_c[2];/* Expression: range
+  real_T Channel0Controlsignaltomotort_c[3];/* Expression: range
                                              * Referenced by: '<S3>/Channel 0 -Control signal to  motor through amplifier '
                                              */
   real_T Channel0Controlsignaltomotor_e1[2];/* Computed Parameter: Channel0Controlsignaltomotor_e1
@@ -1093,13 +1100,13 @@ struct P_dc_motor_encoder_hardware_simulated_T_ {
   real_T Channel0Controlsignaltomotor_cz[2];/* Computed Parameter: Channel0Controlsignaltomotor_cz
                                              * Referenced by: '<S3>/Channel 0 -Control signal to  motor through amplifier '
                                              */
-  real_T Channel0Controlsignaltomotort_n[2];/* Expression: reset
+  real_T Channel0Controlsignaltomotort_n[3];/* Expression: reset
                                              * Referenced by: '<S3>/Channel 0 -Control signal to  motor through amplifier '
                                              */
   real_T Channel0Controlsignaltomotort_l[2];/* Computed Parameter: Channel0Controlsignaltomotort_l
                                              * Referenced by: '<S3>/Channel 0 -Control signal to  motor through amplifier '
                                              */
-  real_T Channel0Controlsignaltomotort_g[2];/* Expression: initValue
+  real_T Channel0Controlsignaltomotort_g[3];/* Expression: initValue
                                              * Referenced by: '<S3>/Channel 0 -Control signal to  motor through amplifier '
                                              */
   real_T Channel0Controlsignaltomotort_b[2];/* Computed Parameter: Channel0Controlsignaltomotort_b
@@ -1144,6 +1151,48 @@ struct P_dc_motor_encoder_hardware_simulated_T_ {
   real_T Inductance_Gain;              /* Expression: 1/(1E-2)
                                         * Referenced by: '<S4>/Inductance'
                                         */
+  real_T Q4AD_P1_Size[2];              /* Computed Parameter: Q4AD_P1_Size
+                                        * Referenced by: '<Root>/Q4 AD'
+                                        */
+  real_T Q4AD_P1;                      /* Expression: boardtype
+                                        * Referenced by: '<Root>/Q4 AD'
+                                        */
+  real_T Q4AD_P2_Size[2];              /* Computed Parameter: Q4AD_P2_Size
+                                        * Referenced by: '<Root>/Q4 AD'
+                                        */
+  real_T Q4AD_P2;                      /* Expression: channel
+                                        * Referenced by: '<Root>/Q4 AD'
+                                        */
+  real_T Q4AD_P3_Size[2];              /* Computed Parameter: Q4AD_P3_Size
+                                        * Referenced by: '<Root>/Q4 AD'
+                                        */
+  real_T Q4AD_P3;                      /* Expression: index03
+                                        * Referenced by: '<Root>/Q4 AD'
+                                        */
+  real_T Q4AD_P4_Size[2];              /* Computed Parameter: Q4AD_P4_Size
+                                        * Referenced by: '<Root>/Q4 AD'
+                                        */
+  real_T Q4AD_P5_Size[2];              /* Computed Parameter: Q4AD_P5_Size
+                                        * Referenced by: '<Root>/Q4 AD'
+                                        */
+  real_T Q4AD_P5;                      /* Expression: sampleTime
+                                        * Referenced by: '<Root>/Q4 AD'
+                                        */
+  real_T Q4AD_P6_Size[2];              /* Computed Parameter: Q4AD_P6_Size
+                                        * Referenced by: '<Root>/Q4 AD'
+                                        */
+  real_T Q4AD_P6;                      /* Expression: pciBus
+                                        * Referenced by: '<Root>/Q4 AD'
+                                        */
+  real_T Q4AD_P7_Size[2];              /* Computed Parameter: Q4AD_P7_Size
+                                        * Referenced by: '<Root>/Q4 AD'
+                                        */
+  real_T Q4AD_P7;                      /* Expression: pciSlot
+                                        * Referenced by: '<Root>/Q4 AD'
+                                        */
+  real_T Constant_Value;               /* Expression: 0
+                                        * Referenced by: '<Root>/Constant'
+                                        */
   uint8_T ManualSwitch_CurrentSetting; /* Computed Parameter: ManualSwitch_CurrentSetting
                                         * Referenced by: '<Root>/Manual Switch'
                                         */
@@ -1170,14 +1219,14 @@ struct tag_RTM_dc_motor_encoder_hardware_simulated_T {
   struct {
     RTWSfcnInfo sfcnInfo;
     time_T *taskTimePtrs[2];
-    SimStruct childSFunctions[2];
-    SimStruct *childSFunctionPtrs[2];
-    struct _ssBlkInfo2 blkInfo2[2];
-    struct _ssSFcnModelMethods2 methods2[2];
-    struct _ssSFcnModelMethods3 methods3[2];
-    struct _ssSFcnModelMethods4 methods4[2];
-    struct _ssStatesInfo2 statesInfo2[2];
-    ssPeriodicStatesInfo periodicStatesInfo[2];
+    SimStruct childSFunctions[3];
+    SimStruct *childSFunctionPtrs[3];
+    struct _ssBlkInfo2 blkInfo2[3];
+    struct _ssSFcnModelMethods2 methods2[3];
+    struct _ssSFcnModelMethods3 methods3[3];
+    struct _ssSFcnModelMethods4 methods4[3];
+    struct _ssStatesInfo2 statesInfo2[3];
+    ssPeriodicStatesInfo periodicStatesInfo[3];
     struct {
       time_T sfcnPeriod[1];
       time_T sfcnOffset[1];
@@ -1193,14 +1242,26 @@ struct tag_RTM_dc_motor_encoder_hardware_simulated_T {
       time_T sfcnPeriod[1];
       time_T sfcnOffset[1];
       int_T sfcnTsMap[1];
-      struct _ssPortInputs inputPortInfo[2];
+      struct _ssPortInputs inputPortInfo[3];
       real_T const *UPtrs0[1];
       real_T const *UPtrs1[1];
+      real_T const *UPtrs2[1];
       uint_T attribs[9];
       mxArray *params[9];
       struct _ssDWorkRecord dWork[2];
       struct _ssDWorkAuxRecord dWorkAux[2];
     } Sfcn1;
+
+    struct {
+      time_T sfcnPeriod[1];
+      time_T sfcnOffset[1];
+      int_T sfcnTsMap[1];
+      struct _ssPortOutputs outputPortInfo[1];
+      uint_T attribs[7];
+      mxArray *params[7];
+      struct _ssDWorkRecord dWork[1];
+      struct _ssDWorkAuxRecord dWorkAux[1];
+    } Sfcn2;
   } NonInlinedSFcns;
 
   void *blockIO;

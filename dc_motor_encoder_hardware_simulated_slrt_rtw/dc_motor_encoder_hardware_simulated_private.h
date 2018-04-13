@@ -8,9 +8,9 @@
  *
  * Code generation for model "dc_motor_encoder_hardware_simulated".
  *
- * Model version              : 1.107
+ * Model version              : 1.108
  * Simulink Coder version : 8.12 (R2017a) 16-Feb-2017
- * C source code generated on : Thu Apr 12 20:17:46 2018
+ * C source code generated on : Fri Apr 13 11:35:22 2018
  *
  * Target selection: slrt.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -34,6 +34,7 @@ extern const char *getRefMdlPath(const char *refMdl);
 extern int getRefMdlSignalNumber(const char *mdlBlock, const char *signalName);
 extern void encquanserq8(SimStruct *rts);
 extern void daquanserq8(SimStruct *rts);
+extern void adquanserq8(SimStruct *rts);
 
 /* private model entry point functions */
 extern void dc_motor_encoder_hardware_simulated_derivatives(void);

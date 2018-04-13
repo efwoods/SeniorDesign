@@ -8,9 +8,9 @@
  *
  * Code generation for model "dc_motor_encoder_hardware_simulated".
  *
- * Model version              : 1.107
+ * Model version              : 1.108
  * Simulink Coder version : 8.12 (R2017a) 16-Feb-2017
- * C source code generated on : Thu Apr 12 20:17:46 2018
+ * C source code generated on : Fri Apr 13 11:35:22 2018
  *
  * Target selection: slrt.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -46,101 +46,110 @@ static const rtwCAPI_Signals rtBlockSignals[] = {
   /* addrMapIndex, sysNum, blockPath,
    * signalName, portNumber, dataTypeIndex, dimIndex, fxpIndex, sTimeIndex
    */
-  { 0, 0, TARGET_STRING("Magnet_Control"),
+  { 0, 0, TARGET_STRING("Estop "),
     TARGET_STRING(""), 0, 0, 0, 0, 0 },
 
-  { 1, 0, TARGET_STRING("Derivative1"),
+  { 1, 0, TARGET_STRING("Magnet_Control"),
+    TARGET_STRING(""), 0, 0, 0, 0, 0 },
+
+  { 2, 0, TARGET_STRING("Derivative1"),
     TARGET_STRING(""), 0, 0, 0, 0, 1 },
 
-  { 2, 0, TARGET_STRING("Gain"),
+  { 3, 0, TARGET_STRING("Gain"),
     TARGET_STRING(""), 0, 0, 1, 0, 1 },
 
-  { 3, 0, TARGET_STRING("Kd"),
+  { 4, 0, TARGET_STRING("Kd"),
     TARGET_STRING(""), 0, 0, 0, 0, 1 },
 
-  { 4, 0, TARGET_STRING("Ki"),
+  { 5, 0, TARGET_STRING("Ki"),
     TARGET_STRING(""), 0, 0, 0, 0, 1 },
 
-  { 5, 0, TARGET_STRING("Kp"),
+  { 6, 0, TARGET_STRING("Kp"),
     TARGET_STRING(""), 0, 0, 0, 0, 1 },
 
-  { 6, 0, TARGET_STRING("gain"),
+  { 7, 0, TARGET_STRING("gain"),
     TARGET_STRING("Setpoint"), 0, 0, 0, 0, 0 },
 
-  { 7, 0, TARGET_STRING("Integrator1"),
+  { 8, 0, TARGET_STRING("Integrator1"),
     TARGET_STRING(""), 0, 0, 0, 0, 1 },
 
-  { 8, 0, TARGET_STRING("Sum1"),
-    TARGET_STRING("Error Signal"), 0, 0, 0, 0, 1 },
+  { 9, 0, TARGET_STRING("Relational Operator"),
+    TARGET_STRING(""), 0, 1, 0, 0, 0 },
 
-  { 9, 0, TARGET_STRING("Sum4"),
-    TARGET_STRING(""), 0, 0, 0, 0, 1 },
-
-  { 10, 0, TARGET_STRING("Manual Switch"),
+  { 10, 0, TARGET_STRING("Q4 AD"),
     TARGET_STRING(""), 0, 0, 0, 0, 0 },
 
-  { 11, 0, TARGET_STRING(
+  { 11, 0, TARGET_STRING("Sum1"),
+    TARGET_STRING("Error Signal"), 0, 0, 0, 0, 1 },
+
+  { 12, 0, TARGET_STRING("Sum4"),
+    TARGET_STRING(""), 0, 0, 0, 0, 1 },
+
+  { 13, 0, TARGET_STRING("Manual Switch"),
+    TARGET_STRING(""), 0, 0, 0, 0, 0 },
+
+  { 14, 0, TARGET_STRING(
     "Real motor/angular_position =  [relative_count//COUNTS_PER_REV] *360 degrees"),
     TARGET_STRING(""), 0, 0, 0, 0, 0 },
 
-  { 12, 0, TARGET_STRING("Real motor/Saturation"),
+  { 15, 0, TARGET_STRING("Real motor/Saturation"),
     TARGET_STRING(""), 0, 0, 0, 0, 1 },
 
-  { 13, 0, TARGET_STRING("Real motor/Channel 0 of  Encoder Inputs "),
+  { 16, 0, TARGET_STRING("Real motor/Channel 0 of  Encoder Inputs "),
     TARGET_STRING(""), 0, 0, 0, 0, 0 },
 
-  { 14, 0, TARGET_STRING("Simulated motor/Back emf Ke1"),
+  { 17, 0, TARGET_STRING("Simulated motor/Back emf Ke1"),
     TARGET_STRING(""), 0, 0, 0, 0, 1 },
 
-  { 15, 0, TARGET_STRING("Simulated motor/Damping b1"),
+  { 18, 0, TARGET_STRING("Simulated motor/Damping b1"),
     TARGET_STRING(""), 0, 0, 0, 0, 1 },
 
-  { 16, 0, TARGET_STRING("Simulated motor/Gain Kt2"),
+  { 19, 0, TARGET_STRING("Simulated motor/Gain Kt2"),
     TARGET_STRING(""), 0, 0, 0, 0, 1 },
 
-  { 17, 0, TARGET_STRING("Simulated motor/Gain Kt3"),
+  { 20, 0, TARGET_STRING("Simulated motor/Gain Kt3"),
     TARGET_STRING(""), 0, 0, 0, 0, 1 },
 
-  { 18, 0, TARGET_STRING("Simulated motor/Inductance"),
+  { 21, 0, TARGET_STRING("Simulated motor/Inductance"),
     TARGET_STRING(""), 0, 0, 0, 0, 1 },
 
-  { 19, 0, TARGET_STRING("Simulated motor/Resistance R1"),
+  { 22, 0, TARGET_STRING("Simulated motor/Resistance R1"),
     TARGET_STRING(""), 0, 0, 0, 0, 1 },
 
-  { 20, 0, TARGET_STRING("Simulated motor/Integrator1"),
+  { 23, 0, TARGET_STRING("Simulated motor/Integrator1"),
     TARGET_STRING(""), 0, 0, 0, 0, 1 },
 
-  { 21, 0, TARGET_STRING("Simulated motor/Integrator5"),
+  { 24, 0, TARGET_STRING("Simulated motor/Integrator5"),
     TARGET_STRING(""), 0, 0, 0, 0, 1 },
 
-  { 22, 0, TARGET_STRING("Simulated motor/Integrator6"),
+  { 25, 0, TARGET_STRING("Simulated motor/Integrator6"),
     TARGET_STRING(""), 0, 0, 0, 0, 1 },
 
-  { 23, 0, TARGET_STRING("Simulated motor/Sum1"),
+  { 26, 0, TARGET_STRING("Simulated motor/Sum1"),
     TARGET_STRING(""), 0, 0, 0, 0, 1 },
 
-  { 24, 0, TARGET_STRING("Simulated motor/Sum2"),
+  { 27, 0, TARGET_STRING("Simulated motor/Sum2"),
     TARGET_STRING(""), 0, 0, 0, 0, 1 },
 
-  { 25, 0, TARGET_STRING("input side switching logic/complement the input"),
+  { 28, 0, TARGET_STRING("input side switching logic/complement the input"),
     TARGET_STRING(""), 0, 1, 0, 0, 0 },
 
-  { 26, 0, TARGET_STRING("input side switching logic/Product"),
+  { 29, 0, TARGET_STRING("input side switching logic/Product"),
     TARGET_STRING(""), 0, 0, 0, 0, 1 },
 
-  { 27, 0, TARGET_STRING("input side switching logic/Product1"),
+  { 30, 0, TARGET_STRING("input side switching logic/Product1"),
     TARGET_STRING(""), 0, 0, 0, 0, 1 },
 
-  { 28, 0, TARGET_STRING("switching logic/complement the input1"),
+  { 31, 0, TARGET_STRING("switching logic/complement the input1"),
     TARGET_STRING(""), 0, 1, 0, 0, 0 },
 
-  { 29, 0, TARGET_STRING("switching logic/Product2"),
+  { 32, 0, TARGET_STRING("switching logic/Product2"),
     TARGET_STRING(""), 0, 0, 0, 0, 1 },
 
-  { 30, 0, TARGET_STRING("switching logic/Product3"),
+  { 33, 0, TARGET_STRING("switching logic/Product3"),
     TARGET_STRING(""), 0, 0, 0, 0, 0 },
 
-  { 31, 0, TARGET_STRING("switching logic/Sum2"),
+  { 34, 0, TARGET_STRING("switching logic/Sum2"),
     TARGET_STRING(""), 0, 0, 0, 0, 1 },
 
   {
@@ -152,136 +161,160 @@ static const rtwCAPI_BlockParameters rtBlockParameters[] = {
   /* addrMapIndex, blockPath,
    * paramName, dataTypeIndex, dimIndex, fixPtIdx
    */
-  { 32, TARGET_STRING("1 - Use simulated motor 0 - Use real motor"),
+  { 35, TARGET_STRING("1 - Use simulated motor 0 - Use real motor"),
     TARGET_STRING("Value"), 0, 0, 0 },
 
-  { 33, TARGET_STRING("Desired position  in degrees"),
+  { 36, TARGET_STRING("Constant"),
     TARGET_STRING("Value"), 0, 0, 0 },
 
-  { 34, TARGET_STRING("Magnet_Control"),
+  { 37, TARGET_STRING("Desired position  in degrees"),
     TARGET_STRING("Value"), 0, 0, 0 },
 
-  { 35, TARGET_STRING("Matlab_Input"),
+  { 38, TARGET_STRING("Estop "),
     TARGET_STRING("Value"), 0, 0, 0 },
 
-  { 36, TARGET_STRING("Gain"),
+  { 39, TARGET_STRING("Magnet_Control"),
+    TARGET_STRING("Value"), 0, 0, 0 },
+
+  { 40, TARGET_STRING("Matlab_Input"),
+    TARGET_STRING("Value"), 0, 0, 0 },
+
+  { 41, TARGET_STRING("Gain"),
     TARGET_STRING("Gain"), 0, 0, 0 },
 
-  { 37, TARGET_STRING("Kd"),
+  { 42, TARGET_STRING("Kd"),
     TARGET_STRING("Gain"), 0, 0, 0 },
 
-  { 38, TARGET_STRING("Ki"),
+  { 43, TARGET_STRING("Ki"),
     TARGET_STRING("Gain"), 0, 0, 0 },
 
-  { 39, TARGET_STRING("Kp"),
+  { 44, TARGET_STRING("Kp"),
     TARGET_STRING("Gain"), 0, 0, 0 },
 
-  { 40, TARGET_STRING("gain"),
+  { 45, TARGET_STRING("gain"),
     TARGET_STRING("Gain"), 0, 0, 0 },
 
-  { 41, TARGET_STRING("Integrator1"),
+  { 46, TARGET_STRING("Integrator1"),
     TARGET_STRING("InitialCondition"), 0, 0, 0 },
 
-  { 42, TARGET_STRING("Manual Switch"),
-    TARGET_STRING("CurrentSetting"), 2, 0, 0 },
-
-  { 43, TARGET_STRING("Real motor/angular_position =  [relative_count//COUNTS_PER_REV] *360 degrees"),
-    TARGET_STRING("Gain"), 0, 0, 0 },
-
-  { 44, TARGET_STRING("Real motor/Saturation"),
-    TARGET_STRING("UpperLimit"), 0, 0, 0 },
-
-  { 45, TARGET_STRING("Real motor/Saturation"),
-    TARGET_STRING("LowerLimit"), 0, 0, 0 },
-
-  { 46, TARGET_STRING("Real motor/Channel 0 -Control signal to  motor through amplifier "),
+  { 47, TARGET_STRING("Q4 AD"),
     TARGET_STRING("P1"), 0, 0, 0 },
 
-  { 47, TARGET_STRING("Real motor/Channel 0 -Control signal to  motor through amplifier "),
-    TARGET_STRING("P2"), 0, 2, 0 },
-
-  { 48, TARGET_STRING("Real motor/Channel 0 -Control signal to  motor through amplifier "),
-    TARGET_STRING("P3"), 0, 2, 0 },
-
-  { 49, TARGET_STRING("Real motor/Channel 0 -Control signal to  motor through amplifier "),
-    TARGET_STRING("P4"), 0, 0, 0 },
-
-  { 50, TARGET_STRING("Real motor/Channel 0 -Control signal to  motor through amplifier "),
-    TARGET_STRING("P5"), 0, 2, 0 },
-
-  { 51, TARGET_STRING("Real motor/Channel 0 -Control signal to  motor through amplifier "),
-    TARGET_STRING("P6"), 0, 2, 0 },
-
-  { 52, TARGET_STRING("Real motor/Channel 0 -Control signal to  motor through amplifier "),
-    TARGET_STRING("P7"), 0, 0, 0 },
-
-  { 53, TARGET_STRING("Real motor/Channel 0 -Control signal to  motor through amplifier "),
-    TARGET_STRING("P8"), 0, 0, 0 },
-
-  { 54, TARGET_STRING("Real motor/Channel 0 -Control signal to  motor through amplifier "),
-    TARGET_STRING("P9"), 0, 0, 0 },
-
-  { 55, TARGET_STRING("Real motor/Channel 0 of  Encoder Inputs "),
-    TARGET_STRING("P1"), 0, 0, 0 },
-
-  { 56, TARGET_STRING("Real motor/Channel 0 of  Encoder Inputs "),
+  { 48, TARGET_STRING("Q4 AD"),
     TARGET_STRING("P2"), 0, 0, 0 },
 
-  { 57, TARGET_STRING("Real motor/Channel 0 of  Encoder Inputs "),
+  { 49, TARGET_STRING("Q4 AD"),
     TARGET_STRING("P3"), 0, 0, 0 },
 
-  { 58, TARGET_STRING("Real motor/Channel 0 of  Encoder Inputs "),
-    TARGET_STRING("P4"), 0, 0, 0 },
-
-  { 59, TARGET_STRING("Real motor/Channel 0 of  Encoder Inputs "),
+  { 50, TARGET_STRING("Q4 AD"),
     TARGET_STRING("P5"), 0, 0, 0 },
 
-  { 60, TARGET_STRING("Real motor/Channel 0 of  Encoder Inputs "),
+  { 51, TARGET_STRING("Q4 AD"),
     TARGET_STRING("P6"), 0, 0, 0 },
 
-  { 61, TARGET_STRING("Real motor/Channel 0 of  Encoder Inputs "),
+  { 52, TARGET_STRING("Q4 AD"),
     TARGET_STRING("P7"), 0, 0, 0 },
 
-  { 62, TARGET_STRING("Real motor/Channel 0 of  Encoder Inputs "),
+  { 53, TARGET_STRING("Manual Switch"),
+    TARGET_STRING("CurrentSetting"), 2, 0, 0 },
+
+  { 54, TARGET_STRING("Real motor/angular_position =  [relative_count//COUNTS_PER_REV] *360 degrees"),
+    TARGET_STRING("Gain"), 0, 0, 0 },
+
+  { 55, TARGET_STRING("Real motor/Saturation"),
+    TARGET_STRING("UpperLimit"), 0, 0, 0 },
+
+  { 56, TARGET_STRING("Real motor/Saturation"),
+    TARGET_STRING("LowerLimit"), 0, 0, 0 },
+
+  { 57, TARGET_STRING("Real motor/Channel 0 -Control signal to  motor through amplifier "),
+    TARGET_STRING("P1"), 0, 0, 0 },
+
+  { 58, TARGET_STRING("Real motor/Channel 0 -Control signal to  motor through amplifier "),
+    TARGET_STRING("P2"), 0, 2, 0 },
+
+  { 59, TARGET_STRING("Real motor/Channel 0 -Control signal to  motor through amplifier "),
+    TARGET_STRING("P3"), 0, 2, 0 },
+
+  { 60, TARGET_STRING("Real motor/Channel 0 -Control signal to  motor through amplifier "),
+    TARGET_STRING("P4"), 0, 0, 0 },
+
+  { 61, TARGET_STRING("Real motor/Channel 0 -Control signal to  motor through amplifier "),
+    TARGET_STRING("P5"), 0, 2, 0 },
+
+  { 62, TARGET_STRING("Real motor/Channel 0 -Control signal to  motor through amplifier "),
+    TARGET_STRING("P6"), 0, 2, 0 },
+
+  { 63, TARGET_STRING("Real motor/Channel 0 -Control signal to  motor through amplifier "),
+    TARGET_STRING("P7"), 0, 0, 0 },
+
+  { 64, TARGET_STRING("Real motor/Channel 0 -Control signal to  motor through amplifier "),
     TARGET_STRING("P8"), 0, 0, 0 },
 
-  { 63, TARGET_STRING("Real motor/Channel 0 of  Encoder Inputs "),
+  { 65, TARGET_STRING("Real motor/Channel 0 -Control signal to  motor through amplifier "),
     TARGET_STRING("P9"), 0, 0, 0 },
 
-  { 64, TARGET_STRING("Real motor/Channel 0 of  Encoder Inputs "),
+  { 66, TARGET_STRING("Real motor/Channel 0 of  Encoder Inputs "),
+    TARGET_STRING("P1"), 0, 0, 0 },
+
+  { 67, TARGET_STRING("Real motor/Channel 0 of  Encoder Inputs "),
+    TARGET_STRING("P2"), 0, 0, 0 },
+
+  { 68, TARGET_STRING("Real motor/Channel 0 of  Encoder Inputs "),
+    TARGET_STRING("P3"), 0, 0, 0 },
+
+  { 69, TARGET_STRING("Real motor/Channel 0 of  Encoder Inputs "),
+    TARGET_STRING("P4"), 0, 0, 0 },
+
+  { 70, TARGET_STRING("Real motor/Channel 0 of  Encoder Inputs "),
+    TARGET_STRING("P5"), 0, 0, 0 },
+
+  { 71, TARGET_STRING("Real motor/Channel 0 of  Encoder Inputs "),
+    TARGET_STRING("P6"), 0, 0, 0 },
+
+  { 72, TARGET_STRING("Real motor/Channel 0 of  Encoder Inputs "),
+    TARGET_STRING("P7"), 0, 0, 0 },
+
+  { 73, TARGET_STRING("Real motor/Channel 0 of  Encoder Inputs "),
+    TARGET_STRING("P8"), 0, 0, 0 },
+
+  { 74, TARGET_STRING("Real motor/Channel 0 of  Encoder Inputs "),
+    TARGET_STRING("P9"), 0, 0, 0 },
+
+  { 75, TARGET_STRING("Real motor/Channel 0 of  Encoder Inputs "),
     TARGET_STRING("P10"), 0, 0, 0 },
 
-  { 65, TARGET_STRING("Real motor/Channel 0 of  Encoder Inputs "),
+  { 76, TARGET_STRING("Real motor/Channel 0 of  Encoder Inputs "),
     TARGET_STRING("P11"), 0, 0, 0 },
 
-  { 66, TARGET_STRING("Real motor/Channel 0 of  Encoder Inputs "),
+  { 77, TARGET_STRING("Real motor/Channel 0 of  Encoder Inputs "),
     TARGET_STRING("P12"), 0, 0, 0 },
 
-  { 67, TARGET_STRING("Simulated motor/Back emf Ke1"),
+  { 78, TARGET_STRING("Simulated motor/Back emf Ke1"),
     TARGET_STRING("Gain"), 0, 0, 0 },
 
-  { 68, TARGET_STRING("Simulated motor/Damping b1"),
+  { 79, TARGET_STRING("Simulated motor/Damping b1"),
     TARGET_STRING("Gain"), 0, 0, 0 },
 
-  { 69, TARGET_STRING("Simulated motor/Gain Kt2"),
+  { 80, TARGET_STRING("Simulated motor/Gain Kt2"),
     TARGET_STRING("Gain"), 0, 0, 0 },
 
-  { 70, TARGET_STRING("Simulated motor/Gain Kt3"),
+  { 81, TARGET_STRING("Simulated motor/Gain Kt3"),
     TARGET_STRING("Gain"), 0, 0, 0 },
 
-  { 71, TARGET_STRING("Simulated motor/Inductance"),
+  { 82, TARGET_STRING("Simulated motor/Inductance"),
     TARGET_STRING("Gain"), 0, 0, 0 },
 
-  { 72, TARGET_STRING("Simulated motor/Resistance R1"),
+  { 83, TARGET_STRING("Simulated motor/Resistance R1"),
     TARGET_STRING("Gain"), 0, 0, 0 },
 
-  { 73, TARGET_STRING("Simulated motor/Integrator1"),
+  { 84, TARGET_STRING("Simulated motor/Integrator1"),
     TARGET_STRING("InitialCondition"), 0, 0, 0 },
 
-  { 74, TARGET_STRING("Simulated motor/Integrator5"),
+  { 85, TARGET_STRING("Simulated motor/Integrator5"),
     TARGET_STRING("InitialCondition"), 0, 0, 0 },
 
-  { 75, TARGET_STRING("Simulated motor/Integrator6"),
+  { 86, TARGET_STRING("Simulated motor/Integrator6"),
     TARGET_STRING("InitialCondition"), 0, 0, 0 },
 
   {
@@ -299,82 +332,93 @@ static const rtwCAPI_ModelParameters rtModelParameters[] = {
 
 /* Declare Data Addresses statically */
 static void* rtDataAddrMap[] = {
-  &dc_motor_encoder_hardware_simulated_B.Magnet_Control,/* 0: Signal */
-  &dc_motor_encoder_hardware_simulated_B.Derivative1,/* 1: Signal */
-  &dc_motor_encoder_hardware_simulated_B.Gain[0],/* 2: Signal */
-  &dc_motor_encoder_hardware_simulated_B.Kd,/* 3: Signal */
-  &dc_motor_encoder_hardware_simulated_B.Ki,/* 4: Signal */
-  &dc_motor_encoder_hardware_simulated_B.Kp,/* 5: Signal */
-  &dc_motor_encoder_hardware_simulated_B.Setpoint,/* 6: Signal */
-  &dc_motor_encoder_hardware_simulated_B.Integrator1,/* 7: Signal */
-  &dc_motor_encoder_hardware_simulated_B.ErrorSignal,/* 8: Signal */
-  &dc_motor_encoder_hardware_simulated_B.Sum4,/* 9: Signal */
-  &dc_motor_encoder_hardware_simulated_B.ManualSwitch,/* 10: Signal */
-  &dc_motor_encoder_hardware_simulated_B.angular_positionrelative_countC,/* 11: Signal */
-  &dc_motor_encoder_hardware_simulated_B.Saturation,/* 12: Signal */
-  &dc_motor_encoder_hardware_simulated_B.Channel0ofEncoderInputs,/* 13: Signal */
-  &dc_motor_encoder_hardware_simulated_B.BackemfKe1,/* 14: Signal */
-  &dc_motor_encoder_hardware_simulated_B.Dampingb1,/* 15: Signal */
-  &dc_motor_encoder_hardware_simulated_B.GainKt2,/* 16: Signal */
-  &dc_motor_encoder_hardware_simulated_B.GainKt3,/* 17: Signal */
-  &dc_motor_encoder_hardware_simulated_B.Inductance,/* 18: Signal */
-  &dc_motor_encoder_hardware_simulated_B.ResistanceR1,/* 19: Signal */
-  &dc_motor_encoder_hardware_simulated_B.Integrator1_h,/* 20: Signal */
-  &dc_motor_encoder_hardware_simulated_B.Integrator5,/* 21: Signal */
-  &dc_motor_encoder_hardware_simulated_B.Integrator6,/* 22: Signal */
-  &dc_motor_encoder_hardware_simulated_B.Sum1,/* 23: Signal */
-  &dc_motor_encoder_hardware_simulated_B.Sum2_e,/* 24: Signal */
-  &dc_motor_encoder_hardware_simulated_B.complementtheinput,/* 25: Signal */
-  &dc_motor_encoder_hardware_simulated_B.Product,/* 26: Signal */
-  &dc_motor_encoder_hardware_simulated_B.Product1,/* 27: Signal */
-  &dc_motor_encoder_hardware_simulated_B.complementtheinput1,/* 28: Signal */
-  &dc_motor_encoder_hardware_simulated_B.Product2,/* 29: Signal */
-  &dc_motor_encoder_hardware_simulated_B.Product3,/* 30: Signal */
-  &dc_motor_encoder_hardware_simulated_B.Sum2,/* 31: Signal */
-  &dc_motor_encoder_hardware_simulated_P.uUsesimulatedmotor0Userealmotor,/* 32: Block Parameter */
-  &dc_motor_encoder_hardware_simulated_P.Desiredpositionindegrees_Value,/* 33: Block Parameter */
-  &dc_motor_encoder_hardware_simulated_P.Magnet_Control_Value,/* 34: Block Parameter */
-  &dc_motor_encoder_hardware_simulated_P.Matlab_Input_Value,/* 35: Block Parameter */
-  &dc_motor_encoder_hardware_simulated_P.Gain_Gain,/* 36: Block Parameter */
-  &dc_motor_encoder_hardware_simulated_P.Kd_Gain,/* 37: Block Parameter */
-  &dc_motor_encoder_hardware_simulated_P.Ki_Gain,/* 38: Block Parameter */
-  &dc_motor_encoder_hardware_simulated_P.Kp_Gain,/* 39: Block Parameter */
-  &dc_motor_encoder_hardware_simulated_P.gain_Gain,/* 40: Block Parameter */
-  &dc_motor_encoder_hardware_simulated_P.Integrator1_IC,/* 41: Block Parameter */
-  &dc_motor_encoder_hardware_simulated_P.ManualSwitch_CurrentSetting,/* 42: Block Parameter */
-  &dc_motor_encoder_hardware_simulated_P.angular_positionrelative_countC,/* 43: Block Parameter */
-  &dc_motor_encoder_hardware_simulated_P.Saturation_UpperSat,/* 44: Block Parameter */
-  &dc_motor_encoder_hardware_simulated_P.Saturation_LowerSat,/* 45: Block Parameter */
-  &dc_motor_encoder_hardware_simulated_P.Channel0Controlsignaltomotort_m,/* 46: Block Parameter */
-  &dc_motor_encoder_hardware_simulated_P.Channel0Controlsignaltomotort_k[0],/* 47: Block Parameter */
-  &dc_motor_encoder_hardware_simulated_P.Channel0Controlsignaltomotort_c[0],/* 48: Block Parameter */
-  &dc_motor_encoder_hardware_simulated_P.Channel0Controlsignaltomotort_d,/* 49: Block Parameter */
-  &dc_motor_encoder_hardware_simulated_P.Channel0Controlsignaltomotort_n[0],/* 50: Block Parameter */
-  &dc_motor_encoder_hardware_simulated_P.Channel0Controlsignaltomotort_g[0],/* 51: Block Parameter */
-  &dc_motor_encoder_hardware_simulated_P.Channel0Controlsignaltomotort_f,/* 52: Block Parameter */
-  &dc_motor_encoder_hardware_simulated_P.Channel0Controlsignaltomotor_gv,/* 53: Block Parameter */
-  &dc_motor_encoder_hardware_simulated_P.Channel0Controlsignaltomotor_gp,/* 54: Block Parameter */
-  &dc_motor_encoder_hardware_simulated_P.Channel0ofEncoderInputs_P1,/* 55: Block Parameter */
-  &dc_motor_encoder_hardware_simulated_P.Channel0ofEncoderInputs_P2,/* 56: Block Parameter */
-  &dc_motor_encoder_hardware_simulated_P.Channel0ofEncoderInputs_P3,/* 57: Block Parameter */
-  &dc_motor_encoder_hardware_simulated_P.Channel0ofEncoderInputs_P4,/* 58: Block Parameter */
-  &dc_motor_encoder_hardware_simulated_P.Channel0ofEncoderInputs_P5,/* 59: Block Parameter */
-  &dc_motor_encoder_hardware_simulated_P.Channel0ofEncoderInputs_P6,/* 60: Block Parameter */
-  &dc_motor_encoder_hardware_simulated_P.Channel0ofEncoderInputs_P7,/* 61: Block Parameter */
-  &dc_motor_encoder_hardware_simulated_P.Channel0ofEncoderInputs_P8,/* 62: Block Parameter */
-  &dc_motor_encoder_hardware_simulated_P.Channel0ofEncoderInputs_P9,/* 63: Block Parameter */
-  &dc_motor_encoder_hardware_simulated_P.Channel0ofEncoderInputs_P10,/* 64: Block Parameter */
-  &dc_motor_encoder_hardware_simulated_P.Channel0ofEncoderInputs_P11,/* 65: Block Parameter */
-  &dc_motor_encoder_hardware_simulated_P.Channel0ofEncoderInputs_P12,/* 66: Block Parameter */
-  &dc_motor_encoder_hardware_simulated_P.BackemfKe1_Gain,/* 67: Block Parameter */
-  &dc_motor_encoder_hardware_simulated_P.Dampingb1_Gain,/* 68: Block Parameter */
-  &dc_motor_encoder_hardware_simulated_P.GainKt2_Gain,/* 69: Block Parameter */
-  &dc_motor_encoder_hardware_simulated_P.GainKt3_Gain,/* 70: Block Parameter */
-  &dc_motor_encoder_hardware_simulated_P.Inductance_Gain,/* 71: Block Parameter */
-  &dc_motor_encoder_hardware_simulated_P.ResistanceR1_Gain,/* 72: Block Parameter */
-  &dc_motor_encoder_hardware_simulated_P.Integrator1_IC_j,/* 73: Block Parameter */
-  &dc_motor_encoder_hardware_simulated_P.Integrator5_IC,/* 74: Block Parameter */
-  &dc_motor_encoder_hardware_simulated_P.Integrator6_IC,/* 75: Block Parameter */
+  &dc_motor_encoder_hardware_simulated_B.Estop,/* 0: Signal */
+  &dc_motor_encoder_hardware_simulated_B.Magnet_Control,/* 1: Signal */
+  &dc_motor_encoder_hardware_simulated_B.Derivative1,/* 2: Signal */
+  &dc_motor_encoder_hardware_simulated_B.Gain[0],/* 3: Signal */
+  &dc_motor_encoder_hardware_simulated_B.Kd,/* 4: Signal */
+  &dc_motor_encoder_hardware_simulated_B.Ki,/* 5: Signal */
+  &dc_motor_encoder_hardware_simulated_B.Kp,/* 6: Signal */
+  &dc_motor_encoder_hardware_simulated_B.Setpoint,/* 7: Signal */
+  &dc_motor_encoder_hardware_simulated_B.Integrator1,/* 8: Signal */
+  &dc_motor_encoder_hardware_simulated_B.RelationalOperator,/* 9: Signal */
+  &dc_motor_encoder_hardware_simulated_B.Q4AD,/* 10: Signal */
+  &dc_motor_encoder_hardware_simulated_B.ErrorSignal,/* 11: Signal */
+  &dc_motor_encoder_hardware_simulated_B.Sum4,/* 12: Signal */
+  &dc_motor_encoder_hardware_simulated_B.ManualSwitch,/* 13: Signal */
+  &dc_motor_encoder_hardware_simulated_B.angular_positionrelative_countC,/* 14: Signal */
+  &dc_motor_encoder_hardware_simulated_B.Saturation,/* 15: Signal */
+  &dc_motor_encoder_hardware_simulated_B.Channel0ofEncoderInputs,/* 16: Signal */
+  &dc_motor_encoder_hardware_simulated_B.BackemfKe1,/* 17: Signal */
+  &dc_motor_encoder_hardware_simulated_B.Dampingb1,/* 18: Signal */
+  &dc_motor_encoder_hardware_simulated_B.GainKt2,/* 19: Signal */
+  &dc_motor_encoder_hardware_simulated_B.GainKt3,/* 20: Signal */
+  &dc_motor_encoder_hardware_simulated_B.Inductance,/* 21: Signal */
+  &dc_motor_encoder_hardware_simulated_B.ResistanceR1,/* 22: Signal */
+  &dc_motor_encoder_hardware_simulated_B.Integrator1_h,/* 23: Signal */
+  &dc_motor_encoder_hardware_simulated_B.Integrator5,/* 24: Signal */
+  &dc_motor_encoder_hardware_simulated_B.Integrator6,/* 25: Signal */
+  &dc_motor_encoder_hardware_simulated_B.Sum1,/* 26: Signal */
+  &dc_motor_encoder_hardware_simulated_B.Sum2_e,/* 27: Signal */
+  &dc_motor_encoder_hardware_simulated_B.complementtheinput,/* 28: Signal */
+  &dc_motor_encoder_hardware_simulated_B.Product,/* 29: Signal */
+  &dc_motor_encoder_hardware_simulated_B.Product1,/* 30: Signal */
+  &dc_motor_encoder_hardware_simulated_B.complementtheinput1,/* 31: Signal */
+  &dc_motor_encoder_hardware_simulated_B.Product2,/* 32: Signal */
+  &dc_motor_encoder_hardware_simulated_B.Product3,/* 33: Signal */
+  &dc_motor_encoder_hardware_simulated_B.Sum2,/* 34: Signal */
+  &dc_motor_encoder_hardware_simulated_P.uUsesimulatedmotor0Userealmotor,/* 35: Block Parameter */
+  &dc_motor_encoder_hardware_simulated_P.Constant_Value,/* 36: Block Parameter */
+  &dc_motor_encoder_hardware_simulated_P.Desiredpositionindegrees_Value,/* 37: Block Parameter */
+  &dc_motor_encoder_hardware_simulated_P.Estop_Value,/* 38: Block Parameter */
+  &dc_motor_encoder_hardware_simulated_P.Magnet_Control_Value,/* 39: Block Parameter */
+  &dc_motor_encoder_hardware_simulated_P.Matlab_Input_Value,/* 40: Block Parameter */
+  &dc_motor_encoder_hardware_simulated_P.Gain_Gain,/* 41: Block Parameter */
+  &dc_motor_encoder_hardware_simulated_P.Kd_Gain,/* 42: Block Parameter */
+  &dc_motor_encoder_hardware_simulated_P.Ki_Gain,/* 43: Block Parameter */
+  &dc_motor_encoder_hardware_simulated_P.Kp_Gain,/* 44: Block Parameter */
+  &dc_motor_encoder_hardware_simulated_P.gain_Gain,/* 45: Block Parameter */
+  &dc_motor_encoder_hardware_simulated_P.Integrator1_IC,/* 46: Block Parameter */
+  &dc_motor_encoder_hardware_simulated_P.Q4AD_P1,/* 47: Block Parameter */
+  &dc_motor_encoder_hardware_simulated_P.Q4AD_P2,/* 48: Block Parameter */
+  &dc_motor_encoder_hardware_simulated_P.Q4AD_P3,/* 49: Block Parameter */
+  &dc_motor_encoder_hardware_simulated_P.Q4AD_P5,/* 50: Block Parameter */
+  &dc_motor_encoder_hardware_simulated_P.Q4AD_P6,/* 51: Block Parameter */
+  &dc_motor_encoder_hardware_simulated_P.Q4AD_P7,/* 52: Block Parameter */
+  &dc_motor_encoder_hardware_simulated_P.ManualSwitch_CurrentSetting,/* 53: Block Parameter */
+  &dc_motor_encoder_hardware_simulated_P.angular_positionrelative_countC,/* 54: Block Parameter */
+  &dc_motor_encoder_hardware_simulated_P.Saturation_UpperSat,/* 55: Block Parameter */
+  &dc_motor_encoder_hardware_simulated_P.Saturation_LowerSat,/* 56: Block Parameter */
+  &dc_motor_encoder_hardware_simulated_P.Channel0Controlsignaltomotort_m,/* 57: Block Parameter */
+  &dc_motor_encoder_hardware_simulated_P.Channel0Controlsignaltomotort_k[0],/* 58: Block Parameter */
+  &dc_motor_encoder_hardware_simulated_P.Channel0Controlsignaltomotort_c[0],/* 59: Block Parameter */
+  &dc_motor_encoder_hardware_simulated_P.Channel0Controlsignaltomotort_d,/* 60: Block Parameter */
+  &dc_motor_encoder_hardware_simulated_P.Channel0Controlsignaltomotort_n[0],/* 61: Block Parameter */
+  &dc_motor_encoder_hardware_simulated_P.Channel0Controlsignaltomotort_g[0],/* 62: Block Parameter */
+  &dc_motor_encoder_hardware_simulated_P.Channel0Controlsignaltomotort_f,/* 63: Block Parameter */
+  &dc_motor_encoder_hardware_simulated_P.Channel0Controlsignaltomotor_gv,/* 64: Block Parameter */
+  &dc_motor_encoder_hardware_simulated_P.Channel0Controlsignaltomotor_gp,/* 65: Block Parameter */
+  &dc_motor_encoder_hardware_simulated_P.Channel0ofEncoderInputs_P1,/* 66: Block Parameter */
+  &dc_motor_encoder_hardware_simulated_P.Channel0ofEncoderInputs_P2,/* 67: Block Parameter */
+  &dc_motor_encoder_hardware_simulated_P.Channel0ofEncoderInputs_P3,/* 68: Block Parameter */
+  &dc_motor_encoder_hardware_simulated_P.Channel0ofEncoderInputs_P4,/* 69: Block Parameter */
+  &dc_motor_encoder_hardware_simulated_P.Channel0ofEncoderInputs_P5,/* 70: Block Parameter */
+  &dc_motor_encoder_hardware_simulated_P.Channel0ofEncoderInputs_P6,/* 71: Block Parameter */
+  &dc_motor_encoder_hardware_simulated_P.Channel0ofEncoderInputs_P7,/* 72: Block Parameter */
+  &dc_motor_encoder_hardware_simulated_P.Channel0ofEncoderInputs_P8,/* 73: Block Parameter */
+  &dc_motor_encoder_hardware_simulated_P.Channel0ofEncoderInputs_P9,/* 74: Block Parameter */
+  &dc_motor_encoder_hardware_simulated_P.Channel0ofEncoderInputs_P10,/* 75: Block Parameter */
+  &dc_motor_encoder_hardware_simulated_P.Channel0ofEncoderInputs_P11,/* 76: Block Parameter */
+  &dc_motor_encoder_hardware_simulated_P.Channel0ofEncoderInputs_P12,/* 77: Block Parameter */
+  &dc_motor_encoder_hardware_simulated_P.BackemfKe1_Gain,/* 78: Block Parameter */
+  &dc_motor_encoder_hardware_simulated_P.Dampingb1_Gain,/* 79: Block Parameter */
+  &dc_motor_encoder_hardware_simulated_P.GainKt2_Gain,/* 80: Block Parameter */
+  &dc_motor_encoder_hardware_simulated_P.GainKt3_Gain,/* 81: Block Parameter */
+  &dc_motor_encoder_hardware_simulated_P.Inductance_Gain,/* 82: Block Parameter */
+  &dc_motor_encoder_hardware_simulated_P.ResistanceR1_Gain,/* 83: Block Parameter */
+  &dc_motor_encoder_hardware_simulated_P.Integrator1_IC_j,/* 84: Block Parameter */
+  &dc_motor_encoder_hardware_simulated_P.Integrator5_IC,/* 85: Block Parameter */
+  &dc_motor_encoder_hardware_simulated_P.Integrator6_IC,/* 86: Block Parameter */
 };
 
 /* Declare Data Run-Time Dimension Buffer Addresses statically */
@@ -422,7 +466,7 @@ static const uint_T rtDimensionArray[] = {
   3,                                   /* 2 */
   1,                                   /* 3 */
   1,                                   /* 4 */
-  2                                    /* 5 */
+  3                                    /* 5 */
 };
 
 /* C-API stores floating point values in an array. The elements of this  *
@@ -463,11 +507,11 @@ static rtwCAPI_ModelMappingStaticInfo mmiStatic = {
    *          elementMap, sampleTimeMap, dimensionArray},
    * TargetType: targetType
    */
-  { rtBlockSignals, 32,
+  { rtBlockSignals, 35,
     (NULL), 0,
     (NULL), 0 },
 
-  { rtBlockParameters, 44,
+  { rtBlockParameters, 52,
     rtModelParameters, 0 },
 
   { (NULL), 0 },
@@ -476,10 +520,10 @@ static rtwCAPI_ModelMappingStaticInfo mmiStatic = {
     rtElementMap, rtSampleTimeMap, rtDimensionArray },
   "float",
 
-  { 1258907135U,
-    2120171051U,
-    1352729256U,
-    2185319281U },
+  { 4028105587U,
+    21940820U,
+    1884348390U,
+    3983126965U },
   (NULL), 0,
   0
 };

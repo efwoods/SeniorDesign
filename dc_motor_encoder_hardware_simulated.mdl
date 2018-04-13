@@ -27,7 +27,7 @@ Model {
       UnitExpr		      "inherit"
     }
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.107"
+    ComputedModelVersion    "1.110"
     NumModelReferences	    0
     NumTestPointedSignals   0
     NumProvidedFunctions    0
@@ -89,8 +89,8 @@ Model {
 	ViewObjType		"SimulinkTopLevel"
 	LoadSaveID		"0"
 	Extents			[1875.0, 845.0]
-	ZoomFactor		[0.5]
-	Offset			[0.0, 0.0]
+	ZoomFactor		[0.6]
+	Offset			[-557.18525291915671, 97.444198848258452]
       }
       Object {
 	$PropName		"DockComponentsInfo"
@@ -124,9 +124,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "student"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Thu Apr 12 20:17:20 2018"
-  RTWModifiedTimeStamp	  445465026
-  ModelVersionFormat	  "1.%<AutoIncrement:107>"
+  LastModifiedDate	  "Fri Apr 13 11:37:43 2018"
+  RTWModifiedTimeStamp	  445520237
+  ModelVersionFormat	  "1.%<AutoIncrement:110>"
   ConfigurationManager	  "none"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
@@ -759,7 +759,7 @@ Model {
 	      Version		      "1.17.0"
 	      Array {
 		Type			"Cell"
-		Dimension		17
+		Dimension		18
 		Cell			"GeneratePreprocessorConditionals"
 		Cell			"IncludeMdlTerminateFcn"
 		Cell			"RemoveResetFunc"
@@ -777,6 +777,7 @@ Model {
 		Cell			"ExistingSharedCode"
 		Cell			"RemoveDisableFunc"
 		Cell			"GRTInterface"
+		Cell			"CombineOutputUpdateFcns"
 		PropName		"DisabledProps"
 	      }
 	      Description	      ""
@@ -1190,9 +1191,9 @@ Model {
     TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
     TiledPageScale	    1
     ShowPageBoundaries	    off
-    ZoomFactor		    "50"
+    ZoomFactor		    "60"
     ReportName		    "simulink-default.rpt"
-    SIDHighWatermark	    "97"
+    SIDHighWatermark	    "104"
     Block {
       BlockType		      Constant
       Name		      "1 - Use simulated motor\n0 - Use real motor"
@@ -1257,6 +1258,14 @@ Model {
       ZOrder		      -4
       BackgroundColor	      "red"
       Value		      "0"
+    }
+    Block {
+      BlockType		      Constant
+      Name		      "Estop\n"
+      SID		      "99"
+      Position		      [610, 540, 640, 570]
+      ZOrder		      51
+      Value		      "5"
     }
     Block {
       BlockType		      Gain
@@ -1355,7 +1364,7 @@ Model {
       SID		      "95"
       Position		      [545, 740, 575, 770]
       ZOrder		      49
-      Value		      "10"
+      Value		      "0"
     }
     Block {
       BlockType		      ManualSwitch
@@ -1388,8 +1397,8 @@ Model {
       BlockType		      SubSystem
       Name		      "Real motor"
       SID		      "8"
-      Ports		      [2, 1]
-      Position		      [740, 490, 950, 565]
+      Ports		      [3, 1]
+      Position		      [740, 492, 950, 568]
       ZOrder		      -11
       BackgroundColor	      "[0.501961, 0.501961, 0.250980]"
       RequestExecContextInheritance off
@@ -1428,10 +1437,19 @@ Model {
 	  IconDisplay		  "Port number"
 	}
 	Block {
+	  BlockType		  Inport
+	  Name			  "E Stop\n"
+	  SID			  "98"
+	  Position		  [80, 263, 110, 277]
+	  ZOrder		  50
+	  Port			  "3"
+	  IconDisplay		  "Port number"
+	}
+	Block {
 	  BlockType		  Reference
 	  Name			  "Channel 0 -Control signal to \nmotor through amplifier "
 	  SID			  "10"
-	  Ports			  [2]
+	  Ports			  [3]
 	  Position		  [325, 41, 430, 99]
 	  ZOrder		  -2
 	  BackgroundColor	  "cyan"
@@ -1440,7 +1458,7 @@ Model {
 	  SourceType		  "quanser_q4_da"
 	  SourceProductName	  "Simulink Real-Time"
 	  SourceProductBaseCode	  "XP"
-	  channel		  "[1 2]"
+	  channel		  "[1 2 4]"
 	  range			  "[-10]"
 	  simul			  off
 	  reset			  "[1]"
@@ -1538,9 +1556,17 @@ Model {
 	  ZOrder		  13
 	  SrcBlock		  "Electromagnet input\n"
 	  SrcPort		  1
-	  Points		  [174, 0; 0, -95]
+	  Points		  [174, 0; 0, -110]
 	  DstBlock		  "Channel 0 -Control signal to \nmotor through amplifier "
 	  DstPort		  2
+	}
+	Line {
+	  ZOrder		  14
+	  SrcBlock		  "E Stop\n"
+	  SrcPort		  1
+	  Points		  [41, 0; 0, -180]
+	  DstBlock		  "Channel 0 -Control signal to \nmotor through amplifier "
+	  DstPort		  3
 	}
 	Annotation {
 	  SID			  "80"
@@ -2465,7 +2491,7 @@ Model {
       ZOrder		      15
       SrcBlock		      "input side switching logic"
       SrcPort		      2
-      Points		      [20, 0; 0, 225]
+      Points		      [20, 0; 0, 220]
       DstBlock		      "Real motor"
       DstPort		      1
     }
@@ -2648,7 +2674,7 @@ Model {
       Points		      [89, 0]
       Branch {
 	ZOrder			53
-	Points			[0, -210]
+	Points			[0, -225]
 	DstBlock		"Real motor"
 	DstPort			2
       }
@@ -2658,6 +2684,13 @@ Model {
 	DstBlock		"Magnet Control Scope"
 	DstPort			1
       }
+    }
+    Line {
+      ZOrder		      60
+      SrcBlock		      "Estop\n"
+      SrcPort		      1
+      DstBlock		      "Real motor"
+      DstPort		      3
     }
     Annotation {
       SID		      "82"
