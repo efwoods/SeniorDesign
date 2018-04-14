@@ -9,11 +9,9 @@ tg.start
 tg.status 
 %%
 [stepper, servo, a] = arduino_setup
-hw = struct %hardware
-hw.stepper= stepper
-hw.servo = servo
-hw.a = a
-hw.tg = tg
+setup = struct
+setup.stepper = stepep
 % disp('%d', tg.getsignal('Q4 AD'))
 pause(1)
-% test(hw)
+test(stepper, servo, tg)
+

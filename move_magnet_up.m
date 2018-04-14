@@ -1,7 +1,7 @@
-function move_magnet_up(servoMotor)
+function move_magnet_up(hw)
 disp('Moving Electromagnet UPWARDS')
 tic
-writePosition(servoMotor, .5)
+writePosition(hw.servo, .5)
 toc
 disp('Electromagnet is in the UP position')
 end

@@ -1,3 +1,3 @@
-function red_off(a)
-    writeDigitalPin(a,'D11',0)
+function red_off(hw)
+    writeDigitalPin(hw.a,'D11',0)
 end

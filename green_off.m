@@ -1,3 +1,3 @@
-function green_off(a)
-    writeDigitalPin(a,'D12',0)
+function green_off(hw)
+    writeDigitalPin(hw.a,'D12',0)
 end
