@@ -33,7 +33,7 @@ else
     disp('1 washer')
 end
 disp(difference)
-disp(tg.getsignal('Q4 AD'))% load cell weighs washer
+disp(hw.tg.getsignal('Q4 AD'))% load cell weighs washer
  pause(1)
  move_magnet_down(hw)
 pause(1)
