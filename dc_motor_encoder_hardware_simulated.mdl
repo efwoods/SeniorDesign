@@ -33,7 +33,7 @@ Model {
       UnitExpr		      "inherit"
     }
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.119"
+    ComputedModelVersion    "1.121"
     NumModelReferences	    0
     NumTestPointedSignals   0
     NumProvidedFunctions    0
@@ -95,8 +95,8 @@ Model {
 	ViewObjType		"SimulinkTopLevel"
 	LoadSaveID		"0"
 	Extents			[913.0, 835.0]
-	ZoomFactor		[0.6]
-	Offset			[174.8147470808434, 97.444198848257884]
+	ZoomFactor		[0.8]
+	Offset			[-145.13393239045752, 155.64549714940063]
       }
       Object {
 	$PropName		"DockComponentsInfo"
@@ -130,9 +130,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "student"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Sat Apr 14 12:10:32 2018"
-  RTWModifiedTimeStamp	  445608629
-  ModelVersionFormat	  "1.%<AutoIncrement:119>"
+  LastModifiedDate	  "Sat Apr 14 15:04:01 2018"
+  RTWModifiedTimeStamp	  445619038
+  ModelVersionFormat	  "1.%<AutoIncrement:121>"
   ConfigurationManager	  "none"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
@@ -1197,7 +1197,7 @@ Model {
     TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
     TiledPageScale	    1
     ShowPageBoundaries	    off
-    ZoomFactor		    "60"
+    ZoomFactor		    "80"
     ReportName		    "simulink-default.rpt"
     SIDHighWatermark	    "109"
     Block {
@@ -1298,7 +1298,7 @@ Model {
       Position		      [375, 310, 430, 360]
       ZOrder		      -7
       BackgroundColor	      "yellow"
-      Gain		      ".011"
+      Gain		      "1.5"
       ParamDataTypeStr	      "Inherit: Inherit via internal rule"
       OutDataTypeStr	      "Inherit: Inherit via internal rule"
       SaturateOnIntegerOverflow	off
@@ -1310,7 +1310,7 @@ Model {
       Position		      [390, 390, 450, 430]
       ZOrder		      -8
       BackgroundColor	      "yellow"
-      Gain		      ".026"
+      Gain		      "0"
       ParamDataTypeStr	      "Inherit: Inherit via internal rule"
       OutDataTypeStr	      "Inherit: Inherit via internal rule"
       SaturateOnIntegerOverflow	off
@@ -1322,7 +1322,7 @@ Model {
       Position		      [360, 236, 415, 274]
       ZOrder		      -9
       BackgroundColor	      "yellow"
-      Gain		      ".5"
+      Gain		      "9"
       ParamDataTypeStr	      "Inherit: Inherit via internal rule"
       OutDataTypeStr	      "Inherit: Inherit via internal rule"
       SaturateOnIntegerOverflow	off
@@ -1423,7 +1423,7 @@ Model {
       SID		      "87"
       Position		      [-105, 290, -75, 320]
       ZOrder		      4
-      Value		      "12"
+      Value		      "0"
     }
     Block {
       BlockType		      Mux

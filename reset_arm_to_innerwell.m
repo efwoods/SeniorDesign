@@ -1,7 +1,7 @@
 function reset_arm_to_innerwell(hw)
 % resets arm from inner well
 
-x = 65
+x = 70
 disp('ARM RESETTING');
 tic
 for i = 1:x
