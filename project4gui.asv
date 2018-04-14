@@ -116,10 +116,6 @@ uiresume();
 
 % --- Executes on selection change in pum_Well10Layer.
 function pum_Well10Layer_Callback(hObject, eventdata, handles)
-wl = cellstr(get(hObject, 'String'));
-wlayer = wl{get(hObject, 'Value')};
-handles.well = wLayerIns(10,wlayer,handles.well);
-guidata(hObject,handles);
 
 
 % --- Executes during object creation, after setting all properties.
@@ -158,10 +154,6 @@ end
 
 % --- Executes on selection change in pum_Well9Layer.
 function pum_Well9Layer_Callback(hObject, eventdata, handles)
-wl = cellstr(get(hObject, 'String'));
-wlayer = wl{get(hObject, 'Value')};
-handles.well = wLayerIns(9,wlayer,handles.well);
-guidata(hObject,handles);
 
 
 % --- Executes during object creation, after setting all properties.
@@ -188,10 +180,6 @@ end
 
 % --- Executes on selection change in pum_Well8Layer.
 function pum_Well8Layer_Callback(hObject, eventdata, handles)
-wl = cellstr(get(hObject, 'String'));
-wlayer = wl{get(hObject, 'Value')};
-handles.well = wLayerIns(8,wlayer,handles.well);
-guidata(hObject,handles);
 
 
 % --- Executes during object creation, after setting all properties.
@@ -217,10 +205,6 @@ end
 
 % --- Executes on selection change in pum_Well7Layer.
 function pum_Well7Layer_Callback(hObject, eventdata, handles)
-wl = cellstr(get(hObject, 'String'));
-wlayer = wl{get(hObject, 'Value')};
-handles.well = wLayerIns(7,wlayer,handles.well);
-guidata(hObject,handles);
 
 
 % --- Executes during object creation, after setting all properties.
@@ -247,10 +231,7 @@ end
 
 % --- Executes on selection change in pum_Well6Layer.
 function pum_Well6Layer_Callback(hObject, eventdata, handles)
-wl = cellstr(get(hObject, 'String'));
-wlayer = wl{get(hObject, 'Value')};
-handles.well = wLayerIns(6,wlayer,handles.well);
-guidata(hObject,handles);
+
 
 % --- Executes during object creation, after setting all properties.
 function pum_Well6Layer_CreateFcn(hObject, eventdata, handles)
@@ -276,10 +257,6 @@ end
 
 % --- Executes on selection change in pum_Well5Layer.
 function pum_Well5Layer_Callback(hObject, eventdata, handles)
-wl = cellstr(get(hObject, 'String'));
-wlayer = wl{get(hObject, 'Value')};
-handles.well = wLayerIns(5,wlayer,handles.well);
-guidata(hObject,handles);
 
 
 % --- Executes during object creation, after setting all properties.
@@ -305,10 +282,6 @@ end
 
 % --- Executes on selection change in pum_Well4Layer.
 function pum_Well4Layer_Callback(hObject, eventdata, handles)
-wl = cellstr(get(hObject, 'String'));
-wlayer = wl{get(hObject, 'Value')};
-handles.well = wLayerIns(4,wlayer,handles.well);
-guidata(hObject,handles);
 
 
 % --- Executes during object creation, after setting all properties.
@@ -335,10 +308,6 @@ end
 
 % --- Executes on selection change in pum_Well3Layer.
 function pum_Well3Layer_Callback(hObject, eventdata, handles)
-wl = cellstr(get(hObject, 'String'));
-wlayer = wl{get(hObject, 'Value')};
-handles.well = wLayerIns(3,wlayer,handles.well);
-guidata(hObject,handles);
 
 
 % --- Executes during object creation, after setting all properties.
@@ -365,10 +334,6 @@ end
 
 % --- Executes on selection change in pum_Well2Layer.
 function pum_Well2Layer_Callback(hObject, eventdata, handles)
-wl = cellstr(get(hObject, 'String'));
-wlayer = wl{get(hObject, 'Value')};
-handles.well = wLayerIns(2,wlayer,handles.well);
-guidata(hObject,handles);
 
 
 % --- Executes during object creation, after setting all properties.
@@ -395,9 +360,9 @@ end
 
 % --- Executes on selection change in pum_Well1Color.
 function pum_Well1Color_Callback(hObject, eventdata, handles)
-wc = cellstr(get(hObject, 'String'));
-wcolor = wc{get(hObject, 'Value')};
-handles.well = wColorIns(1,wcolor,handles.well);
+w1c = cellstr(get(hObject, 'String'));
+w1color = w1c{get(hObject, 'Value')};
+handles.well = wColorIns(1,w1color,handles.well);
 guidata(hObject,handles);
 %disp('xd');
 
@@ -410,9 +375,9 @@ end
 
 % --- Executes on selection change in pum_Well1Layer.
 function pum_Well1Layer_Callback(hObject, eventdata, handles)
-wl = cellstr(get(hObject, 'String'));
-wlayer = wl{get(hObject, 'Value')};
-handles.well = wLayerIns(1,wlayer,handles.well);
+w1 = cellstr(get(hObject, 'String'));
+w1layer = w1l{get(hObject, 'Value')};
+handles.well = wLayerIns(1,w1layer,handles.well);
 guidata(hObject,handles);
 %disp(handles.well(1));
 
