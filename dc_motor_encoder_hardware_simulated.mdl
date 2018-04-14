@@ -33,7 +33,7 @@ Model {
       UnitExpr		      "inherit"
     }
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.121"
+    ComputedModelVersion    "1.122"
     NumModelReferences	    0
     NumTestPointedSignals   0
     NumProvidedFunctions    0
@@ -130,9 +130,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "student"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Sat Apr 14 15:04:01 2018"
-  RTWModifiedTimeStamp	  445619038
-  ModelVersionFormat	  "1.%<AutoIncrement:121>"
+  LastModifiedDate	  "Sat Apr 14 16:07:27 2018"
+  RTWModifiedTimeStamp	  445622818
+  ModelVersionFormat	  "1.%<AutoIncrement:122>"
   ConfigurationManager	  "none"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
@@ -1407,7 +1407,7 @@ Model {
       SID		      "95"
       Position		      [545, 740, 575, 770]
       ZOrder		      49
-      Value		      "0"
+      Value		      "10"
     }
     Block {
       BlockType		      ManualSwitch
