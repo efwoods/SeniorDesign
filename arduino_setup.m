@@ -8,22 +8,21 @@ sm = stepper(shield, 1, 200)
 sm.RPM = 10;%      sm.RPM = 50;
 disp('stepper initialized')
 s = servo(shield, 1)
-disp('servo initialized')
-%  i = 1;
-%  pause(1)
-%  writePosition(s, 0);
-%  pause(1)
-%  writePosition(s, i);
-%  pause(1)
-%  writePosition(s, 0);
-%  pause(1)
-
+disp('servo initialized, testing')
+  writePosition(s, 0);
+%   pause(1)
+  writePosition(s, 1);
+%   pause(1)
+  writePosition(s, 0);
+%   pause(1)
 % Control stepper motor on the shield
+disp('testing stepper motor')
 
-% INNER MOST PENTAGON
-%     sm.RPM = 50;
-%     move(sm, 50);
+for i = 1:10
+     move(sm, 1);
+end
 %     pause(1);
-%     move(sm, -49);
-%    release(sm);
-disp('setup complete')
+for i = 1:10
+     move(sm, -1);
+end
+disp('setup and testing complete')
