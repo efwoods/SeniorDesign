@@ -1,5 +1,5 @@
 function rotate_to_loadcell(hw)
-x = 47
+x = 47;
 disp('Moving to Load Cell')
 tic
 for i = 1:x

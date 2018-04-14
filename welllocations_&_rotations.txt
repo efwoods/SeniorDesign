@@ -1,0 +1,13 @@
+inner well locations
+x = -43.2, 313.2: welllocation: 1 
+x = -329.4, 30.6: location 9
+x = -268.2, 91.8: location 7
+x = -194.4, 165.6: location 5
+x = -118.8, 241.2: location 3
+
+outer well locations
+x = -354.6, 7.2 location: 10
+x = -289.8, 70.2 location: 8
+x = -223.2, 136.8 location: 6
+x = -154.8, 205.2 location: 4
+x = -64.8, 295.2 location: 2

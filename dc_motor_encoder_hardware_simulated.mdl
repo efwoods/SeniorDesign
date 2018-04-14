@@ -33,7 +33,7 @@ Model {
       UnitExpr		      "inherit"
     }
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.118"
+    ComputedModelVersion    "1.119"
     NumModelReferences	    0
     NumTestPointedSignals   0
     NumProvidedFunctions    0
@@ -130,9 +130,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "student"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Sat Apr 14 11:18:57 2018"
-  RTWModifiedTimeStamp	  445605535
-  ModelVersionFormat	  "1.%<AutoIncrement:118>"
+  LastModifiedDate	  "Sat Apr 14 12:10:32 2018"
+  RTWModifiedTimeStamp	  445608629
+  ModelVersionFormat	  "1.%<AutoIncrement:119>"
   ConfigurationManager	  "none"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
@@ -1423,7 +1423,7 @@ Model {
       SID		      "87"
       Position		      [-105, 290, -75, 320]
       ZOrder		      4
-      Value		      "0"
+      Value		      "12"
     }
     Block {
       BlockType		      Mux
