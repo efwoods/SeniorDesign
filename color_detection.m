@@ -6,16 +6,16 @@ function RGB_COLOR = color_detection(maskedRGBImage, stats, radii, i)
  if avR > avG
      if avR > avB
          disp('Red')
-         RGB_COLOR = 1;
+         RGB_COLOR = 'Red';
      else
          disp('Blue')
-         RGB_COLOR = 4;
+         RGB_COLOR = 'Blue';
      end
  elseif avG > avB
      disp('Green')
-     RGB_COLOR = 2;
+     RGB_COLOR = 'Green';
  else
      disp('Blue')
-     RGB_COLOR = 4;
+     RGB_COLOR = 'Blue';
  end
 end
