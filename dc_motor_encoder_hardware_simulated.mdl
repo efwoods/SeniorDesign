@@ -4,7 +4,7 @@ Model {
   SavedCharacterEncoding  "windows-1252"
   GraphicalInterface {
     NumRootInports	    0
-    NumRootOutports	    3
+    NumRootOutports	    4
     Outport {
       Name		      "setpoint_Out"
       BusObject		      ""
@@ -26,8 +26,14 @@ Model {
       SignalName	      "name"
       UnitExpr		      "inherit"
     }
+    Outport {
+      Name		      "Load Cell"
+      BusObject		      ""
+      BusOutputAsStruct	      "off"
+      UnitExpr		      "inherit"
+    }
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.100"
+    ComputedModelVersion    "1.122"
     NumModelReferences	    0
     NumTestPointedSignals   0
     NumProvidedFunctions    0
@@ -89,8 +95,8 @@ Model {
 	ViewObjType		"SimulinkTopLevel"
 	LoadSaveID		"0"
 	Extents			[913.0, 835.0]
-	ZoomFactor		[1.25]
-	Offset			[-139.77425287356357, 30.199999999999932]
+	ZoomFactor		[0.8]
+	Offset			[-145.13393239045752, 155.64549714940063]
       }
       Object {
 	$PropName		"DockComponentsInfo"
@@ -124,9 +130,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "student"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Fri Mar 09 15:14:17 2018"
-  RTWModifiedTimeStamp	  442509251
-  ModelVersionFormat	  "1.%<AutoIncrement:100>"
+  LastModifiedDate	  "Sat Apr 14 16:07:27 2018"
+  RTWModifiedTimeStamp	  445622818
+  ModelVersionFormat	  "1.%<AutoIncrement:122>"
   ConfigurationManager	  "none"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
@@ -1191,9 +1197,9 @@ Model {
     TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
     TiledPageScale	    1
     ShowPageBoundaries	    off
-    ZoomFactor		    "125"
+    ZoomFactor		    "80"
     ReportName		    "simulink-default.rpt"
-    SIDHighWatermark	    "87"
+    SIDHighWatermark	    "109"
     Block {
       BlockType		      Constant
       Name		      "1 - Use simulated motor\n0 - Use real motor"
@@ -1257,7 +1263,15 @@ Model {
       Position		      [-120, 182, -65, 228]
       ZOrder		      -4
       BackgroundColor	      "red"
-      Value		      "337.5"
+      Value		      "0"
+    }
+    Block {
+      BlockType		      Constant
+      Name		      "Estop\n"
+      SID		      "99"
+      Position		      [610, 540, 640, 570]
+      ZOrder		      51
+      Value		      "5"
     }
     Block {
       BlockType		      Gain
@@ -1284,7 +1298,7 @@ Model {
       Position		      [375, 310, 430, 360]
       ZOrder		      -7
       BackgroundColor	      "yellow"
-      Gain		      ".011"
+      Gain		      "1.5"
       ParamDataTypeStr	      "Inherit: Inherit via internal rule"
       OutDataTypeStr	      "Inherit: Inherit via internal rule"
       SaturateOnIntegerOverflow	off
@@ -1296,7 +1310,7 @@ Model {
       Position		      [390, 390, 450, 430]
       ZOrder		      -8
       BackgroundColor	      "yellow"
-      Gain		      ".026"
+      Gain		      "0"
       ParamDataTypeStr	      "Inherit: Inherit via internal rule"
       OutDataTypeStr	      "Inherit: Inherit via internal rule"
       SaturateOnIntegerOverflow	off
@@ -1308,10 +1322,92 @@ Model {
       Position		      [360, 236, 415, 274]
       ZOrder		      -9
       BackgroundColor	      "yellow"
-      Gain		      ".5"
+      Gain		      "9"
       ParamDataTypeStr	      "Inherit: Inherit via internal rule"
       OutDataTypeStr	      "Inherit: Inherit via internal rule"
       SaturateOnIntegerOverflow	off
+    }
+    Block {
+      BlockType		      Reference
+      Name		      "Load Cell Scope\n"
+      SID		      "108"
+      Ports		      [1]
+      Position		      [1095, 803, 1190, 867]
+      ZOrder		      54
+      LibraryVersion	      "1.1871"
+      SourceBlock	      "slrtlib/Displays and\nLogging/Scope "
+      SourceType	      "xpcscopeblock"
+      SourceProductName	      "Simulink Real-Time"
+      SourceProductBaseCode   "XP"
+      ContentPreviewEnabled   off
+      scopeno		      "5"
+      scopetype		      "Target"
+      autostart		      on
+      viewmode		      "Graphical redraw"
+      formatstr		      "'%15.6f'"
+      grid		      on
+      ylimits		      "[0,2]"
+      nosamples		      "200"
+      noprepostsamples	      "0"
+      interleave	      "1"
+      triggermode	      "FreeRun"
+      triggersignal	      "1"
+      trigsignalfromport      off
+      triggerlevel	      "0.0"
+      triggerslope	      "Either"
+      triggerscope	      "1"
+      triggersample	      "0"
+      filename		      "data.dat"
+      mode		      "Lazy"
+      writesize		      "512"
+      autorestart	      off
+      dynamicfilemode	      off
+      maxwritefilesize	      "512*1024^2"
+    }
+    Block {
+      BlockType		      Reference
+      Name		      "Magnet Control Scope"
+      SID		      "94"
+      Ports		      [1]
+      Position		      [755, 758, 850, 822]
+      ZOrder		      50
+      LibraryVersion	      "1.1871"
+      SourceBlock	      "slrtlib/Displays and\nLogging/Scope "
+      SourceType	      "xpcscopeblock"
+      SourceProductName	      "Simulink Real-Time"
+      SourceProductBaseCode   "XP"
+      ContentPreviewEnabled   off
+      scopeno		      "4"
+      scopetype		      "Target"
+      autostart		      on
+      viewmode		      "Graphical redraw"
+      formatstr		      "'%15.6f'"
+      grid		      on
+      ylimits		      "[0,2]"
+      nosamples		      "200"
+      noprepostsamples	      "0"
+      interleave	      "1"
+      triggermode	      "FreeRun"
+      triggersignal	      "1"
+      trigsignalfromport      off
+      triggerlevel	      "0.0"
+      triggerslope	      "Either"
+      triggerscope	      "1"
+      triggersample	      "0"
+      filename		      "data.dat"
+      mode		      "Lazy"
+      writesize		      "512"
+      autorestart	      off
+      dynamicfilemode	      off
+      maxwritefilesize	      "512*1024^2"
+    }
+    Block {
+      BlockType		      Constant
+      Name		      "Magnet_Control"
+      SID		      "95"
+      Position		      [545, 740, 575, 770]
+      ZOrder		      49
+      Value		      "10"
     }
     Block {
       BlockType		      ManualSwitch
@@ -1341,18 +1437,34 @@ Model {
       DisplayOption	      "bar"
     }
     Block {
+      BlockType		      Reference
+      Name		      "Q4 AD"
+      SID		      "105"
+      Ports		      [0, 1]
+      Position		      [840, 682, 940, 738]
+      ZOrder		      52
+      LibraryVersion	      "1.52"
+      SourceBlock	      "xpcquanserlib/A//D/Q4 AD"
+      SourceType	      "quanser_q4_ad"
+      SourceProductName	      "Simulink Real-Time"
+      SourceProductBaseCode   "XP"
+      channel		      "[2]"
+      sampleTime	      "0.001"
+      slot		      "-1"
+    }
+    Block {
       BlockType		      SubSystem
       Name		      "Real motor"
       SID		      "8"
-      Ports		      [1, 1]
-      Position		      [740, 484, 950, 556]
+      Ports		      [3, 1]
+      Position		      [740, 492, 950, 568]
       ZOrder		      -11
       BackgroundColor	      "[0.501961, 0.501961, 0.250980]"
       RequestExecContextInheritance off
       Variant		      off
       System {
 	Name			"Real motor"
-	Location		[-7, -7, 1543, 833]
+	Location		[762, 0, 1543, 840]
 	Open			off
 	PortBlocksUseCompactNotation off
 	ModelBrowserVisibility	off
@@ -1375,11 +1487,29 @@ Model {
 	  IconDisplay		  "Port number"
 	}
 	Block {
+	  BlockType		  Inport
+	  Name			  "Electromagnet input\n"
+	  SID			  "97"
+	  Position		  [65, 173, 95, 187]
+	  ZOrder		  49
+	  Port			  "2"
+	  IconDisplay		  "Port number"
+	}
+	Block {
+	  BlockType		  Inport
+	  Name			  "E Stop\n"
+	  SID			  "98"
+	  Position		  [80, 263, 110, 277]
+	  ZOrder		  50
+	  Port			  "3"
+	  IconDisplay		  "Port number"
+	}
+	Block {
 	  BlockType		  Reference
 	  Name			  "Channel 0 -Control signal to \nmotor through amplifier "
 	  SID			  "10"
-	  Ports			  [1]
-	  Position		  [325, 41, 430, 99]
+	  Ports			  [4]
+	  Position		  [325, 43, 430, 102]
 	  ZOrder		  -2
 	  BackgroundColor	  "cyan"
 	  LibraryVersion	  "1.52"
@@ -1387,7 +1517,7 @@ Model {
 	  SourceType		  "quanser_q4_da"
 	  SourceProductName	  "Simulink Real-Time"
 	  SourceProductBaseCode	  "XP"
-	  channel		  "[1]"
+	  channel		  "[1 2 3 4]"
 	  range			  "[-10]"
 	  simul			  off
 	  reset			  "[1]"
@@ -1418,6 +1548,14 @@ Model {
 	  preserveCounts	  "[0]"
 	  sampleTime		  ".001"
 	  slot			  "-1"
+	}
+	Block {
+	  BlockType		  Constant
+	  Name			  "Power for Load Cell"
+	  SID			  "109"
+	  Position		  [195, 125, 225, 155]
+	  ZOrder		  51
+	  Value			  "5"
 	}
 	Block {
 	  BlockType		  Saturate
@@ -1456,6 +1594,7 @@ Model {
 	  ZOrder		  1
 	  SrcBlock		  "Saturation"
 	  SrcPort		  1
+	  Points		  [80, 0]
 	  DstBlock		  "Channel 0 -Control signal to \nmotor through amplifier "
 	  DstPort		  1
 	}
@@ -1480,6 +1619,30 @@ Model {
 	  DstBlock		  "Saturation"
 	  DstPort		  1
 	}
+	Line {
+	  ZOrder		  13
+	  SrcBlock		  "Electromagnet input\n"
+	  SrcPort		  1
+	  Points		  [174, 0; 0, -115]
+	  DstBlock		  "Channel 0 -Control signal to \nmotor through amplifier "
+	  DstPort		  2
+	}
+	Line {
+	  ZOrder		  15
+	  SrcBlock		  "E Stop\n"
+	  SrcPort		  1
+	  Points		  [41, 0; 0, -46; 154, 0]
+	  DstBlock		  "Channel 0 -Control signal to \nmotor through amplifier "
+	  DstPort		  4
+	}
+	Line {
+	  ZOrder		  16
+	  SrcBlock		  "Power for Load Cell"
+	  SrcPort		  1
+	  Points		  [22, 0; 0, -60]
+	  DstBlock		  "Channel 0 -Control signal to \nmotor through amplifier "
+	  DstPort		  3
+	}
 	Annotation {
 	  SID			  "80"
 	  Name			  "Saturation"
@@ -1496,7 +1659,7 @@ Model {
 	  " and Gain blocks to\nmatch the range of the Desired Trajectory input.\n\nIn this example need to convert the encode"
 	  "r counts to a value between 0 and COUNTS_PER_REV. \nFurther, the count obtained for that revolution needs to be sca"
 	  "led to an angle feedback (between\n0 and 360 degrees), which is the purpose of the Gain block."
-	  Position		  [209, 176, 653, 274]
+	  Position		  [328, 307, 772, 405]
 	  InternalMargins	  [0, 0, 0, 0]
 	  FixedHeight		  off
 	  FixedWidth		  off
@@ -1518,7 +1681,7 @@ Model {
       Variant		      off
       System {
 	Name			"Simulated motor"
-	Location		[43, 52, 936, 491]
+	Location		[-7, -7, 1543, 841]
 	Open			off
 	PortBlocksUseCompactNotation off
 	ModelBrowserVisibility	off
@@ -1894,7 +2057,7 @@ Model {
       Variant		      off
       System {
 	Name			"input side switching logic"
-	Location		[-7, -7, 1543, 833]
+	Location		[-7, -7, 1543, 841]
 	Open			off
 	PortBlocksUseCompactNotation off
 	ModelBrowserVisibility	off
@@ -2126,7 +2289,7 @@ Model {
       }
       System {
 	Name			"switching logic"
-	Location		[-7, -7, 1543, 833]
+	Location		[-7, -7, 1543, 841]
 	Open			off
 	PortBlocksUseCompactNotation off
 	ModelBrowserVisibility	off
@@ -2316,6 +2479,15 @@ Model {
       SignalName	      "name"
       IconDisplay	      "Port number"
     }
+    Block {
+      BlockType		      Outport
+      Name		      "Load Cell"
+      SID		      "106"
+      Position		      [1010, 703, 1040, 717]
+      ZOrder		      53
+      Port		      "4"
+      IconDisplay	      "Port number"
+    }
     Line {
       ZOrder		      1
       SrcBlock		      "Kp"
@@ -2403,7 +2575,7 @@ Model {
       ZOrder		      15
       SrcBlock		      "input side switching logic"
       SrcPort		      2
-      Points		      [20, 0; 0, 235]
+      Points		      [20, 0; 0, 220]
       DstBlock		      "Real motor"
       DstPort		      1
     }
@@ -2419,7 +2591,7 @@ Model {
       ZOrder		      17
       SrcBlock		      "Real motor"
       SrcPort		      1
-      Points		      [50, 0; 0, -40]
+      Points		      [50, 0; 0, -50]
       DstBlock		      "switching logic"
       DstPort		      3
     }
@@ -2578,6 +2750,49 @@ Model {
       Points		      [40, 0; 0, -40]
       DstBlock		      "Manual Switch"
       DstPort		      2
+    }
+    Line {
+      ZOrder		      51
+      SrcBlock		      "Magnet_Control"
+      SrcPort		      1
+      Points		      [89, 0]
+      Branch {
+	ZOrder			53
+	Points			[0, -225]
+	DstBlock		"Real motor"
+	DstPort			2
+      }
+      Branch {
+	ZOrder			52
+	Points			[55, 0; 0, 35]
+	DstBlock		"Magnet Control Scope"
+	DstPort			1
+      }
+    }
+    Line {
+      ZOrder		      60
+      SrcBlock		      "Estop\n"
+      SrcPort		      1
+      DstBlock		      "Real motor"
+      DstPort		      3
+    }
+    Line {
+      ZOrder		      61
+      SrcBlock		      "Q4 AD"
+      SrcPort		      1
+      Points		      [0, 17; 31, 0]
+      Branch {
+	ZOrder			63
+	Points			[0, 108]
+	DstBlock		"Load Cell Scope\n"
+	DstPort			1
+      }
+      Branch {
+	ZOrder			62
+	Points			[19, 0]
+	DstBlock		"Load Cell"
+	DstPort			1
+      }
     }
     Annotation {
       SID		      "82"

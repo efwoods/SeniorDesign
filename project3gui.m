@@ -51,6 +51,7 @@ function project3gui_OpeningFcn(hObject, eventdata, handles, varargin)
 % handles    structure with handles and user data (see GUIDATA)
 % varargin   command line arguments to project3gui (see VARARGIN)
 
+
 handles.cam = webcam('HP USB Webcam');
 defaultImage = snapshot(handles.cam);                                        % read in image
 set(handles.axes_image, 'Units', 'pixels', 'Position', [10, 10, 640, 480]);     % set size of axes in gui
@@ -114,8 +115,12 @@ function pb_red_Callback(hObject, eventdata, handles)
 % % handles    structure with handles and user data (see GUIDATA)
     disp('point_to_colors')   
     point_to_color(1,handles.gameState) % Red
-    x = 0;
-    set_param('dc_motor_encoder_hardware_simulated/Matlab_Input','Value', num2str(x));
+
+   % test_e_stop()
+        x = 0; 
+        set_param('dc_motor_encoder_hardware_simulated/Matlab_Input','Value', num2str(x)); 
+
+
 % redImage = imread('test_red.png');
 % set(handles.axes_image,'Units','pixels');
 % resizePos = get(handles.axes_image,'Position');
