@@ -647,7 +647,7 @@ function [gameState, handles] = color(handles, hObject, img,dilate,stats,radii,w
         % Set background pixels where BW is false to zero.
         maskedRGBImage(repmat(~dilate,[1 1 3])) = 0;
 %        imshow(maskedRGBImage)
-        %HSL and HSV are both cylindrical geometries (fig. 2), with hue, their angular dimension, starting at the red primary at 0°, passing through the green primary at 120° and the blue primary at 240°, and then wrapping back to red at 360°. In each geometry, the central vertical axis comprises the neutral, achromatic, or gray colors, ranging from black at lightness 0 or value 0, the bottom, to white at lightness 1 or value 1, the top.
+        %HSL and HSV are both cylindrical geometries (fig. 2), with hue, their angular dimension, starting at the red primary at 0ï¿½, passing through the green primary at 120ï¿½ and the blue primary at 240ï¿½, and then wrapping back to red at 360ï¿½. In each geometry, the central vertical axis comprises the neutral, achromatic, or gray colors, ranging from black at lightness 0 or value 0, the bottom, to white at lightness 1 or value 1, the top.
          %red
          channelHueMin = 0;
          channelHueMax = 1;

@@ -325,21 +325,6 @@ if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgr
     set(hObject,'BackgroundColor','white');
 end
 
-function [gb,cam,call] = first_call
-cam = initialize_cam;
-% gb = background(cam);
-% restart
-% cam = initialize_cam;
-gb = background(cam);
-
-function gb = restart
-clc;
-close all;
-gb = init_gb;
-
-function cam = initialize_cam
-%% initialize cam
- cam = webcam('HP USB Webcam');
 
 function gb = background(cam)
 preview(cam)
