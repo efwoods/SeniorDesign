@@ -60,6 +60,24 @@ handles.output = hObject;
 % handles.tg=data;
 handles.finalwell = wInit();
 handles.curwell = wInit();
+handles.simulation_name = 'dc_motor_encoder_hardware_simulated';
+guidata(hObject, handles);
+rtwbuild(handles.simulation_name)
+
+handles.tg = xpc;
+guidata(hObject, handles);
+load(handles.tg, handles.simulation_name)
+handles.tg.start
+handles.tg.status
+% handles.tg = tg;
+
+% load_system(handles.simulation_name)
+
+% load(hw.tg,hw.simulation_name);
+% handles.tg.start
+% handles.tg.status
+
+
 %1: xleft xright ytop y bot
 %handles.well_pixels =  [405 488 160 240; 405 486 70 140; 285 355 65 138; 156 230 75 143;
 %                157 231 171 240; 123 192 280 349; 223 290 320 387; 290 356 383 448; 
@@ -75,33 +93,19 @@ handles.cam = webcam('HP USB Webcam');
 % clear,clc,close all;
 % build and start the motor control 
 % hw = struct; %hardware
-% handles.simulation_name = 'dc_motor_encoder_hardware_simulated';
 
 
 % Update handles structure
-guidata(hObject, handles);
+
 % sim(handles.simulation_name)
-% rtwbuild(hw.simulation_name)
+
 
 % pause(1) % start the simulink file
 
-% hw.S = load(hw.tg,hw.simulation_name);
-% hw.tg.start
+
+
 % hw.tg.status
-
-handles.a = arduino('COM5', 'Uno', 'Libraries', 'Adafruit\MotorShieldV2')
-disp('arduino initialized')
-handles.shield = addon(handles.a, 'Adafruit\MotorShieldV2')
-disp('shield initialized')
-% addrs = scanI2CBus(a,0)
-handles.stepper = stepper(handles.shield, 2, 200)
-handles.stepper.RPM = 10;%      sm.RPM = 50;
-disp('stepper initialized')
-handles.servo = servo(handles.shield, 1)
-disp('servo initialized, testing')
-handles.wellLocations = [struct('cw',[-43.2],'ccw',[313.2]);struct('cw',[-64.8],'ccw',[295.2]);struct('cw',[-118.8],'ccw',[241.2]);struct('cw',[-154.8],'ccw',[205.2]);struct('cw',[-194.4],'ccw',[165.6]);struct('cw',[-223.2],'ccw',[136.8]);struct('cw',[-268.2],'ccw',[91.8]);struct('cw',[-289.8],'ccw',[70.2]);struct('cw',[-329.4],'ccw',[30.6]);struct('cw',[-354.6],'ccw',[7.2])];
-guidata(hObject, handles);
-
+setup_arduino(hObject, handles)
 % UIWAIT makes project4gui wait for user response (see UIRESUME)
 uiwait(handles.figure1);
 
@@ -163,8 +167,9 @@ disp('starting');
 disp('testing')
 rotate_from_load_cell_to_outer_well(handles)
 for i = 1:10
-     if (handles.curwell(i).empty == 1)
-         x = handles.wellLocations(i).cw
+     if (handles.curwell(i).empty == 0)
+         x = handles.wellLocations(i).cw;
+         load(handles.tg, handles.simulation_name)
          set_param('dc_motor_encoder_hardware_simulated/Matlab_Input','Value', num2str(x));
          if mod(i,2)==0
 %              rotate_from_INNER_well_to_OUTER_well(hw)
@@ -521,8 +526,9 @@ handles.img = imrotate(handles.img,180);
 imshow(handles.img);
 [handles.components, handles.dilate] = image_processing(handles.gb, handles.img);
 [handles.stats, handles.radii] = color_processing(handles.components);
-[handles.gameState, handles.curwell] = color(handles.img, handles.dilate, handles.stats, handles.radii, handles.curwell, handles.well_pixels);
 guidata(hObject, handles);
+[handles.gameState, handles] = color(handles, hObject, handles.img, handles.dilate, handles.stats, handles.radii, handles.well_pixels);
+% guidata(hObject, handles);
 %update initial configuration table 
 initConfig = cell(10,2); 
 pumColor = cell(get(handles.pum_Well1Color,'String'));
@@ -582,7 +588,7 @@ function [components, dilate] = image_processing(gb, img)
           diameters = mean([stats.MajorAxisLength stats.MinorAxisLength],2);
           radii = diameters/2;
 
- function [gameState,well] = color(img,dilate,stats,radii,well,well_pixels)
+function [gameState, handles] = color(handles, hObject, img,dilate,stats,radii,well_pixels)
 
     gameState.Loc=[0,0,0,0,0,0,0,0,0,0];
     gameState.wellColor = [0,0,0,0,0,0,0,0,0,0]; % color of the stickers in the desired locations
@@ -627,10 +633,6 @@ function [components, dilate] = image_processing(gb, img)
         hold on
         diameters = mean([stats.MajorAxisLength stats.MinorAxisLength],2);
               radii = diameters/2;      
-        % % plot the original image, mask and filtered image all in one figure
-        % subplot(1,3,1);imshow(img);title('Original Image');
-        % subplot(1,3,2);imshow(BW);title('Mask');
-        % subplot(1,3,3);imshow(maskedRGBImage);title('Filtered Image');
     x = -1;
           hold on   
           gameState.numel = numel(stats.Area);
@@ -639,7 +641,8 @@ function [components, dilate] = image_processing(gb, img)
     for i = 1:10 %for all wells
         if check_spot(i,well_pixels(i,:), stats.Centroid(j,:)) == 1
             retcolor = color_detection(maskedRGBImage,stats,radii,j);
-            well(i).color = retcolor;
+            handles.curwell(i).color = retcolor;
+            handles.curwell(i).empty = 0;
             disp(i);
             j = j + 1;
             if j > numel(stats.Area) %escape
@@ -647,6 +650,7 @@ function [components, dilate] = image_processing(gb, img)
             end
         end
     end
+
             
          disp(gameState)
 
@@ -658,7 +662,8 @@ function [components, dilate] = image_processing(gb, img)
 %             set_param('dc_motor_encoder_hardware_simulated/Matlab_Input','Value', num2str(x));
            end
            hold off
-            pause(.05) % for speed 0.05       
+            pause(.05) % for speed 0.05  
+ guidata(hObject, handles);
 
     
     function bool = check_spot(i, pixels, spot);

@@ -1,0 +1,47 @@
+%implements s2_b0_9liof_Terminate "C"
+
+%function Terminate(block, system) Output
+%assign cfgTxt = ""
+%openfile cfgTxt
+%assign localVarDecl = ""
+%assign tlcTerminateFcnOfS2B4 = OpaqueTLCBlockFcn("Terminate", 2, 4, 0, 6)
+%assign tlcTerminateFcnOfS2B12 = OpaqueTLCBlockFcn("Terminate", 2, 12, 0, 6)
+%assign tlcTerminateFcnOfS2B13 = OpaqueTLCBlockFcn("Terminate", 2, 13, 0, 6)
+%assign tlcCleanupRuntimeResourcesFcnOfS2B4 = OpaqueTLCBlockFcn("CleanupRuntimeResources", 2, 4, 0, 6)
+%assign tlcCleanupRuntimeResourcesFcnOfS2B12 = OpaqueTLCBlockFcn("CleanupRuntimeResources", 2, 12, 0, 6)
+%assign tlcCleanupRuntimeResourcesFcnOfS2B13 = OpaqueTLCBlockFcn("CleanupRuntimeResources", 2, 13, 0, 6)
+%if !WHITE_SPACE(tlcTerminateFcnOfS2B4)
+/* Terminate for S-Function (encquanserq8): '<S4>/Channel 0 of  Encoder Inputs ' */
+%<tlcTerminateFcnOfS2B4>\
+%endif
+%if !WHITE_SPACE(tlcTerminateFcnOfS2B12)
+/* Terminate for S-Function (daquanserq8): '<S4>/Channel 0 -Control signal to  motor through amplifier ' */
+%<tlcTerminateFcnOfS2B12>\
+%endif
+%if !WHITE_SPACE(tlcTerminateFcnOfS2B13)
+/* Terminate for S-Function (adquanserq8): '<Root>/Q4 AD' */
+%<tlcTerminateFcnOfS2B13>\
+%endif
+%if !WHITE_SPACE(tlcCleanupRuntimeResourcesFcnOfS2B4)
+/* CleanupRuntimeResources for S-Function (encquanserq8): '<S4>/Channel 0 of  Encoder Inputs ' */
+%<tlcCleanupRuntimeResourcesFcnOfS2B4>\
+%endif
+%if !WHITE_SPACE(tlcCleanupRuntimeResourcesFcnOfS2B12)
+/* CleanupRuntimeResources for S-Function (daquanserq8): '<S4>/Channel 0 -Control signal to  motor through amplifier ' */
+%<tlcCleanupRuntimeResourcesFcnOfS2B12>\
+%endif
+%if !WHITE_SPACE(tlcCleanupRuntimeResourcesFcnOfS2B13)
+/* CleanupRuntimeResources for S-Function (adquanserq8): '<Root>/Q4 AD' */
+%<tlcCleanupRuntimeResourcesFcnOfS2B13>\
+%endif
+%closefile cfgTxt
+%<cfgTxt>
+%endfunction
+%function TerminateFcnProtoType(block, system) Output
+%assign fcnProtoType = ""
+%openfile fcnProtoType
+static void Terminate(\
+%assign comma = ""
+%closefile fcnProtoType
+%<SLibCG_SetFcnProtoType(0, 6, fcnProtoType)>
+%endfunction

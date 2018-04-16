@@ -341,7 +341,7 @@ bio(34).ndims=2;
 bio(34).size=[];
 bio(34).isStruct=false;
 
-bio(35).blkName='switching logic/Sum2';
+bio(35).blkName='0';
 bio(35).sigName='';
 bio(35).portIdx=0;
 bio(35).dim=[1,1];
