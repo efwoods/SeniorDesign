@@ -22,7 +22,7 @@ function varargout = project4gui(varargin)
 
 % Edit the above text to modify the response to help project4gui
 
-% Last Modified by GUIDE v2.5 07-Apr-2018 20:11:35
+% Last Modified by GUIDE v2.5 15-Apr-2018 13:24:47
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -55,8 +55,17 @@ function project4gui_OpeningFcn(hObject, eventdata, handles, varargin)
 % varargin   command line arguments to project4gui (see VARARGIN)
 % Choose default command line output for project4gui
 handles.output = hObject;
-handles.well = wInit();
+handles.finalwell = wInit();
+handles.curwell = wInit();
+%1: xleft xright ytop y bot
+%handles.well_pixels =  [405 488 160 240; 405 486 70 140; 285 355 65 138; 156 230 75 143;
+%                157 231 171 240; 123 192 280 349; 223 290 320 387; 290 356 383 448; 
+ %               348 424 316 384; 448 520 275 346;];
+handles.well_pixels = [170 225 250 300; 170 225 350 400; 300 350 350 400; 430 480 340 400;
+                430 480 250 300; 460 520 240 290; 360 420 100 150; 300 350 38 88; 230 280 110 160;
+                130 190 140 195];
 handles.start = 0;
+handles.cam = webcam('HP USB Webcam');
 % Update handles structure
 guidata(hObject, handles);
 % UIWAIT makes project4gui wait for user response (see UIRESUME)
@@ -83,7 +92,7 @@ function varargout = project4gui_OutputFcn(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 
 % Get default command line output from handles structure
-varargout{1} = handles.well;
+varargout{1} = handles.finalwell;
 disp('outing');
 
 
@@ -97,11 +106,17 @@ function figure1_WindowKeyReleaseFcn(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 
 
-% --- Executes on button press in pb_ReadBoard.
-function pb_ReadBoard_Callback(hObject, eventdata, handles)
-% hObject    handle to pb_ReadBoard (see GCBO)
+% --- Executes on button press in pb_ReadBackground.
+function pb_ReadBackground_Callback(hObject, eventdata, handles)
+% hObject    handle to pb_ReadBackground (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+
+handles.gb = snapshot(handles.cam);
+handles.gb = imrotate(handles.gb,180);
+imwrite(handles.gb, 'background.png');
+imshow(handles.gb);
+guidata(hObject, handles);
 
 
 % --- Executes on button press in pb_Start.
@@ -118,7 +133,7 @@ uiresume();
 function pum_Well10Layer_Callback(hObject, eventdata, handles)
 wl = cellstr(get(hObject, 'String'));
 wlayer = wl{get(hObject, 'Value')};
-handles.well = wLayerIns(10,wlayer,handles.well);
+handles.finalwell = wLayerIns(10,wlayer,handles.finalwell);
 guidata(hObject,handles);
 
 
@@ -139,7 +154,7 @@ end
 function pum_Well10Color_Callback(hObject, eventdata, handles)
 wc = cellstr(get(hObject, 'String'));
 wcolor = wc{get(hObject, 'Value')};
-handles.well = wColorIns(10,wcolor,handles.well);
+handles.finalwell = wColorIns(10,wcolor,handles.finalwell);
 guidata(hObject,handles);
 
 
@@ -160,7 +175,7 @@ end
 function pum_Well9Layer_Callback(hObject, eventdata, handles)
 wl = cellstr(get(hObject, 'String'));
 wlayer = wl{get(hObject, 'Value')};
-handles.well = wLayerIns(9,wlayer,handles.well);
+handles.finalwell = wLayerIns(9,wlayer,handles.finalwell);
 guidata(hObject,handles);
 
 
@@ -175,7 +190,7 @@ end
 function pum_Well9Color_Callback(hObject, eventdata, handles)
 wc = cellstr(get(hObject, 'String'));
 wcolor = wc{get(hObject, 'Value')};
-handles.well = wColorIns(9,wcolor,handles.well);
+handles.finalwell = wColorIns(9,wcolor,handles.finalwell);
 guidata(hObject,handles);
 
 
@@ -190,7 +205,7 @@ end
 function pum_Well8Layer_Callback(hObject, eventdata, handles)
 wl = cellstr(get(hObject, 'String'));
 wlayer = wl{get(hObject, 'Value')};
-handles.well = wLayerIns(8,wlayer,handles.well);
+handles.finalwell = wLayerIns(8,wlayer,handles.finalwell);
 guidata(hObject,handles);
 
 
@@ -205,7 +220,7 @@ end
 function pum_Well8Color_Callback(hObject, eventdata, handles)
 wc = cellstr(get(hObject, 'String'));
 wcolor = wc{get(hObject, 'Value')};
-handles.well = wColorIns(8,wcolor,handles.well);
+handles.finalwell = wColorIns(8,wcolor,handles.finalwell);
 guidata(hObject,handles);
 
 % --- Executes during object creation, after setting all properties.
@@ -219,7 +234,7 @@ end
 function pum_Well7Layer_Callback(hObject, eventdata, handles)
 wl = cellstr(get(hObject, 'String'));
 wlayer = wl{get(hObject, 'Value')};
-handles.well = wLayerIns(7,wlayer,handles.well);
+handles.finalwell = wLayerIns(7,wlayer,handles.finalwell);
 guidata(hObject,handles);
 
 
@@ -234,7 +249,7 @@ end
 function pum_Well7Color_Callback(hObject, eventdata, handles)
 wc = cellstr(get(hObject, 'String'));
 wcolor = wc{get(hObject, 'Value')};
-handles.well = wColorIns(7,wcolor,handles.well);
+handles.finalwell = wColorIns(7,wcolor,handles.finalwell);
 guidata(hObject,handles);
 
 
@@ -249,7 +264,7 @@ end
 function pum_Well6Layer_Callback(hObject, eventdata, handles)
 wl = cellstr(get(hObject, 'String'));
 wlayer = wl{get(hObject, 'Value')};
-handles.well = wLayerIns(6,wlayer,handles.well);
+handles.finalwell = wLayerIns(6,wlayer,handles.finalwell);
 guidata(hObject,handles);
 
 % --- Executes during object creation, after setting all properties.
@@ -263,7 +278,7 @@ end
 function pum_Well6Color_Callback(hObject, eventdata, handles)
 wc = cellstr(get(hObject, 'String'));
 wcolor = wc{get(hObject, 'Value')};
-handles.well = wColorIns(6,wcolor,handles.well);
+handles.finalwell = wColorIns(6,wcolor,handles.finalwell);
 guidata(hObject,handles);
 
 
@@ -278,7 +293,7 @@ end
 function pum_Well5Layer_Callback(hObject, eventdata, handles)
 wl = cellstr(get(hObject, 'String'));
 wlayer = wl{get(hObject, 'Value')};
-handles.well = wLayerIns(5,wlayer,handles.well);
+handles.finalwell = wLayerIns(5,wlayer,handles.finalwell);
 guidata(hObject,handles);
 
 
@@ -293,7 +308,7 @@ end
 function pum_Well5Color_Callback(hObject, eventdata, handles)
 wc = cellstr(get(hObject, 'String'));
 wcolor = wc{get(hObject, 'Value')};
-handles.well = wColorIns(5,wcolor,handles.well);
+handles.finalwell = wColorIns(5,wcolor,handles.finalwell);
 guidata(hObject,handles);
 
 % --- Executes during object creation, after setting all properties.
@@ -307,7 +322,7 @@ end
 function pum_Well4Layer_Callback(hObject, eventdata, handles)
 wl = cellstr(get(hObject, 'String'));
 wlayer = wl{get(hObject, 'Value')};
-handles.well = wLayerIns(4,wlayer,handles.well);
+handles.finalwell = wLayerIns(4,wlayer,handles.finalwell);
 guidata(hObject,handles);
 
 
@@ -322,7 +337,7 @@ end
 function pum_Well4Color_Callback(hObject, eventdata, handles)
 wc = cellstr(get(hObject, 'String'));
 wcolor = wc{get(hObject, 'Value')};
-handles.well = wColorIns(4,wcolor,handles.well);
+handles.finalwell = wColorIns(4,wcolor,handles.finalwell);
 guidata(hObject,handles);
 
 
@@ -337,7 +352,7 @@ end
 function pum_Well3Layer_Callback(hObject, eventdata, handles)
 wl = cellstr(get(hObject, 'String'));
 wlayer = wl{get(hObject, 'Value')};
-handles.well = wLayerIns(3,wlayer,handles.well);
+handles.finalwell = wLayerIns(3,wlayer,handles.finalwell);
 guidata(hObject,handles);
 
 
@@ -352,7 +367,7 @@ end
 function pum_Well3Color_Callback(hObject, eventdata, handles)
 wc = cellstr(get(hObject, 'String'));
 wcolor = wc{get(hObject, 'Value')};
-handles.well = wColorIns(3,wcolor,handles.well);
+handles.finalwell = wColorIns(3,wcolor,handles.finalwell);
 guidata(hObject,handles);
 
 
@@ -367,7 +382,7 @@ end
 function pum_Well2Layer_Callback(hObject, eventdata, handles)
 wl = cellstr(get(hObject, 'String'));
 wlayer = wl{get(hObject, 'Value')};
-handles.well = wLayerIns(2,wlayer,handles.well);
+handles.finalwell = wLayerIns(2,wlayer,handles.finalwell);
 guidata(hObject,handles);
 
 
@@ -382,7 +397,7 @@ end
 function pum_Well2Color_Callback(hObject, eventdata, handles)
 wc = cellstr(get(hObject, 'String'));
 wcolor = wc{get(hObject, 'Value')};
-handles.well = wColorIns(2,wcolor,handles.well);
+handles.finalwell = wColorIns(2,wcolor,handles.finalwell);
 guidata(hObject,handles);
 
 
@@ -397,7 +412,7 @@ end
 function pum_Well1Color_Callback(hObject, eventdata, handles)
 wc = cellstr(get(hObject, 'String'));
 wcolor = wc{get(hObject, 'Value')};
-handles.well = wColorIns(1,wcolor,handles.well);
+handles.finalwell = wColorIns(1,wcolor,handles.finalwell);
 guidata(hObject,handles);
 %disp('xd');
 
@@ -412,15 +427,39 @@ end
 function pum_Well1Layer_Callback(hObject, eventdata, handles)
 wl = cellstr(get(hObject, 'String'));
 wlayer = wl{get(hObject, 'Value')};
-handles.well = wLayerIns(1,wlayer,handles.well);
+handles.finalwell = wLayerIns(1,wlayer,handles.finalwell);
 guidata(hObject,handles);
-%disp(handles.well(1));
+%disp(handles.finalwell(1));
 
 % --- Executes during object creation, after setting all properties.
 function pum_Well1Layer_CreateFcn(hObject, eventdata, handle)
 if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
     set(hObject,'BackgroundColor','white');
 end
+
+% --- Executes on button press in pb_ReadForeground.
+function pb_ReadForeground_Callback(hObject, eventdata, handles)
+% hObject    handle to pb_ReadForeground (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+handles.img = snapshot(handles.cam);
+handles.img = imrotate(handles.img,180);
+imshow(handles.img);
+[handles.components, handles.dilate] = image_processing(handles.gb, handles.img);
+[handles.stats, handles.radii] = color_processing(handles.components);
+[handles.gameState, handles.curwell] = color(handles.img, handles.dilate, handles.stats, handles.radii, handles.curwell, handles.well_pixels);
+guidata(hObject, handles);
+%update initial configuration table 
+initConfig = cell(10,2); 
+pumColor = cell(get(handles.pum_Well1Color,'String'));
+for i = 1:10     
+    initConfig(i,1) = cellstr(strcat('Well ',num2str(i)));     
+    initConfig(i,2) = cellstr(handles.curwell(i).color); 
+end
+% ---- Delete this segment if code above works correctly % initConfig(1,2) = cellstr(pumColor{get(handles.pum_Well1Color,'Value')}); % initConfig(2,2) = cellstr(pumColor{get(handles.pum_Well2Color,'Value')}); % initConfig(3,2) = cellstr(pumColor{get(handles.pum_Well3Color,'Value')}); % initConfig(4,2) = cellstr(pumColor{get(handles.pum_Well4Color,'Value')}); % initConfig(5,2) = cellstr(pumColor{get(handles.pum_Well5Color,'Value')}); % initConfig(6,2) = cellstr(pumColor{get(handles.pum_Well6Color,'Value')}); % initConfig(7,2) = cellstr(pumColor{get(handles.pum_Well7Color,'Value')}); % initConfig(8,2) = cellstr(pumColor{get(handles.pum_Well8Color,'Value')}); % initConfig(9,2) = cellstr(pumColor{get(handles.pum_Well9Color,'Value')}); % initConfig(10,2) = cellstr(pumColor{get(handles.pum_Well10Color,'Value')}); % for i = 1:10 %    if strcmp(initConfig(i,2),'None') %        initConfig(i,2) = cellstr('n/a'); %    end % end % ---- Delete code above if preceding code works correctly  % write initial configuration to table_InitialConfiguration 
+set(handles.table_InitialConfiguration,'Data',initConfig);
+set(handles.table_InitialConfiguration,'ColumnName',{'Location';'Color'})
+guidata(hObject, handles);
 
 function well = wInit()
     for i = 1:10
@@ -442,5 +481,118 @@ function struct = wColorIns(num,colorin,struct)
         struct(num).empty = 0;
     end
     
+function [components, dilate] = image_processing(gb, img)
+    histgb = rgb2gray(gb);
+    histimg = rgb2gray(img);
+    foreground = imsubtract(histgb, histimg);
+
+    level = 0.02;
+    thresh = im2bw(foreground, level);
+
+    se_setting_0 = 4;
+    se_erode = strel('disk', se_setting_0);
+    erode = imerode(thresh, se_erode);
+    postfill = imfill(erode, 'holes');
+
+    se_setting_1 = 4;
+    se_dilate = strel('disk', se_setting_1);
+    dilate = imdilate(postfill, se_dilate);
+    imshowpair(img, dilate, 'montage');
+    components = bwconncomp(dilate);
+
+    function [stats, radii] = color_processing(components)
+        stats = regionprops('table',components,'Centroid', ...
+                             'MajorAxisLength','MinorAxisLength','BoundingBox', 'Area');
+          % Get centers and radii of the circles
+          centers = stats.Centroid;
+          diameters = mean([stats.MajorAxisLength stats.MinorAxisLength],2);
+          radii = diameters/2;
+
+ function [gameState,well] = color(img,dilate,stats,radii,well,well_pixels)
+
+    gameState.Loc=[0,0,0,0,0,0,0,0,0,0];
+    gameState.wellColor = [0,0,0,0,0,0,0,0,0,0]; % color of the stickers in the desired locations
+    gameState.key={'0', 'Empty';'1', 'Red'; '2', 'Green'; '3', 'Yellow'; '4', 'Blue'}; %key
+    gameState.used = [0,0,0,0,0,0,0,0,0,0];
+    %%c define the angle arrays
+    gameState.currentAngle = 0;
+    gameState.stats = stats;
+    gameState.dilate = dilate;
+    gameState.radii = radii;
+    gameState.testing_img = img;
+    
+        maskedRGBImage = img;
+
+        % Set background pixels where BW is false to zero.
+        maskedRGBImage(repmat(~dilate,[1 1 3])) = 0;
+%        imshow(maskedRGBImage)
+        %HSL and HSV are both cylindrical geometries (fig. 2), with hue, their angular dimension, starting at the red primary at 0°, passing through the green primary at 120° and the blue primary at 240°, and then wrapping back to red at 360°. In each geometry, the central vertical axis comprises the neutral, achromatic, or gray colors, ranging from black at lightness 0 or value 0, the bottom, to white at lightness 1 or value 1, the top.
+         %red
+         channelHueMin = 0;
+         channelHueMax = 1;
+
+         % % Define thresholds for 'Saturation'
+         channelSaturationMin = 0.2;%%255;
+         channelSaturationMax = 1;%0;
+
+         % Define thresholds for 'Value'
+         channelValueMin = 0;%255;
+         channelValueMax = 0.7;%0;
+
+        I = rgb2hsv(img);
+        % Create mask based on chosen histogram thresholds
+        BW = ((I(:,:,1) >= channelHueMin) | (I(:,:,1) <= channelHueMax) ) & ...
+            (I(:,:,2) >= channelSaturationMin ) & (I(:,:,2) <= channelSaturationMax) & ...
+            (I(:,:,3) >= channelValueMin ) & (I(:,:,3) <= channelValueMax);
+
+        % Set background pixels where BW is false to zero.
+        maskedRGBImage(repmat(~BW,[1 1 3])) = 0;
+        dstats = regionprops('table',dilate,'Centroid', ...
+                                 'MajorAxisLength','MinorAxisLength','BoundingBox', 'Area');
+        imshow(maskedRGBImage)        
+        hold on
+        diameters = mean([stats.MajorAxisLength stats.MinorAxisLength],2);
+              radii = diameters/2;      
+        % % plot the original image, mask and filtered image all in one figure
+        % subplot(1,3,1);imshow(img);title('Original Image');
+        % subplot(1,3,2);imshow(BW);title('Mask');
+        % subplot(1,3,3);imshow(maskedRGBImage);title('Filtered Image');
+    x = -1;
+          hold on   
+          gameState.numel = numel(stats.Area);
+          
+    j = 1;
+    for i = 1:10 %for all wells
+        if check_spot(i,well_pixels(i,:), stats.Centroid(j,:)) == 1
+            retcolor = color_detection(maskedRGBImage,stats,radii,j);
+            well(i).color = retcolor;
+            disp(i);
+            j = j + 1;
+            if j > numel(stats.Area) %escape
+                break;
+            end
+        end
+    end
+            
+         disp(gameState)
+
+           if x ~= -1
+               
+            text(stats.Centroid(i,1), stats.Centroid(i,2), sprintf('%d', i), ...
+        'HorizontalAlignment', 'center', ...
+        'VerticalAlignment', 'middle');
+%             set_param('dc_motor_encoder_hardware_simulated/Matlab_Input','Value', num2str(x));
+           end
+           hold off
+            pause(.05) % for speed 0.05       
+
+    
+    function bool = check_spot(i, pixels, spot);
+        if spot(1) > pixels(1) && spot(1) < pixels(2) && spot(2) > pixels(3) && spot(2) < pixels(4)
+            bool = 1;
+        else
+            bool = 0;
+        end
+
 
 
