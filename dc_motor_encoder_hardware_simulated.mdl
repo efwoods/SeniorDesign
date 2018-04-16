@@ -33,7 +33,7 @@ Model {
       UnitExpr		      "inherit"
     }
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.123"
+    ComputedModelVersion    "1.124"
     NumModelReferences	    0
     NumTestPointedSignals   0
     NumProvidedFunctions    0
@@ -130,9 +130,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "student"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Sun Apr 15 21:14:18 2018"
-  RTWModifiedTimeStamp	  445727655
-  ModelVersionFormat	  "1.%<AutoIncrement:123>"
+  LastModifiedDate	  "Sun Apr 15 21:58:45 2018"
+  RTWModifiedTimeStamp	  445730324
+  ModelVersionFormat	  "1.%<AutoIncrement:124>"
   ConfigurationManager	  "none"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off

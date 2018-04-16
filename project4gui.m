@@ -62,13 +62,13 @@ handles.finalwell = wInit();
 handles.curwell = wInit();
 handles.simulation_name = 'dc_motor_encoder_hardware_simulated';
 guidata(hObject, handles);
-rtwbuild(handles.simulation_name)
+% rtwbuild(handles.simulation_name)
 
 handles.tg = xpc;
 guidata(hObject, handles);
-load(handles.tg, handles.simulation_name)
-handles.tg.start
-handles.tg.status
+% load(handles.tg, handles.simulation_name)
+% handles.tg.start
+% handles.tg.status
 % handles.tg = tg;
 
 % load_system(handles.simulation_name)
@@ -166,10 +166,11 @@ disp('starting');
 % testing case only
 disp('testing')
 rotate_from_load_cell_to_outer_well(handles)
+handles.checkedwashers = handles.totalwashers;
 for i = 1:10
      if (handles.curwell(i).empty == 0)
          x = handles.wellLocations(i).cw;
-         load(handles.tg, handles.simulation_name)
+%           load(handles.tg, handles.simulation_name)
          set_param('dc_motor_encoder_hardware_simulated/Matlab_Input','Value', num2str(x));
          if mod(i,2)==0
 %              rotate_from_INNER_well_to_OUTER_well(hw)
@@ -184,7 +185,10 @@ for i = 1:10
              emag_off
              pause(.3)
              rotate_from_OUTER_well_to_INNER_well(handles) % temporary
-             
+             handles.checkedwashers = handles.checkedwashers - 1;
+             if (handles.checkedwashers == 0)
+                 rotate_from_outer_well_to_load_cell(handles)
+             end
           else
 %              rotate_from_loadcell_to_innerwell(handles)
 %              rotate_from_OUTER_well_to_INNER_well(hw)
@@ -199,9 +203,15 @@ for i = 1:10
              emag_off
              pause(.3)
              rotate_from_INNER_well_to_OUTER_well(handles) % temporary
+             handles.checkedwashers = handles.checkedwashers - 1;
+             if handles.checkedwashers == 0
+                 rotate_to_loadcell(handles)
+             end
           end
      end
 end
+x = 0;
+set_param('dc_motor_encoder_hardware_simulated/Matlab_Input','Value', num2str(x));
       
 
 uiresume();
@@ -638,8 +648,10 @@ function [gameState, handles] = color(handles, hObject, img,dilate,stats,radii,w
           gameState.numel = numel(stats.Area);
           
     j = 1;
+    handles.totalwashers = 0;
     for i = 1:10 %for all wells
         if check_spot(i,well_pixels(i,:), stats.Centroid(j,:)) == 1
+            handles.totalwashers = handles.totalwashers + 1;
             retcolor = color_detection(maskedRGBImage,stats,radii,j);
             handles.curwell(i).color = retcolor;
             handles.curwell(i).empty = 0;
