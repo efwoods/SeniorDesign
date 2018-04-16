@@ -61,6 +61,8 @@ handles.output = hObject;
 handles.finalwell = wInit();
 handles.curwell = wInit();
 handles.simulation_name = 'dc_motor_encoder_hardware_simulated';
+handles.magnet = 'dc_motor_encoder_hardware_simulated/Magnet_Control';
+
 guidata(hObject, handles);
 % rtwbuild(handles.simulation_name)
 
@@ -165,55 +167,84 @@ function pb_Start_Callback(hObject, eventdata, handles)
 disp('starting');
 % testing case only
 disp('testing')
-rotate_from_load_cell_to_outer_well(handles)
+% rotate_from_load_cell_to_outer_well(handles)
 handles.checkedwashers = handles.totalwashers;
+handles.armposition = 0; 
+% 0 indicates @ loadcell 
+% 1 indicates @ innerwell
+% 2 indicates @ outerwell
+
 for i = 1:10
      if (handles.curwell(i).empty == 0)
          x = handles.wellLocations(i).cw;
 %           load(handles.tg, handles.simulation_name)
          set_param('dc_motor_encoder_hardware_simulated/Matlab_Input','Value', num2str(x));
          if mod(i,2)==0
-%              rotate_from_INNER_well_to_OUTER_well(hw)
+             if(handles.armposition == 0)
+                 rotate_from_load_cell_to_outer_well(handles)
+                 handles.armposition = 2
+             elseif(handles.armposition == 2)
+                 disp('at position')
+             else
+                 rotate_from_INNER_well_to_OUTER_well(handles)
+                 handles.armposition = 2
+             end             
              pick_up_washer(handles)
              rotate_from_outer_well_to_load_cell(handles)
              pause(.3)
-             emag_off
+             
+             set_param('dc_motor_encoder_hardware_simulated/Magnet_Control','Value','0');
              pause(.3)
              pick_up_washer(handles)
              rotate_from_load_cell_to_outer_well(handles)
              pause(.3)
-             emag_off
+             set_param('dc_motor_encoder_hardware_simulated/Magnet_Control','Value','0');
              pause(.3)
-             rotate_from_OUTER_well_to_INNER_well(handles) % temporary
              handles.checkedwashers = handles.checkedwashers - 1;
-             if (handles.checkedwashers == 0)
-                 rotate_from_outer_well_to_load_cell(handles)
-             end
-          else
-%              rotate_from_loadcell_to_innerwell(handles)
+         else
+              if(handles.armposition == 0)
+                 rotate_from_loadcell_to_innerwell(handles)
+                 handles.armposition = 1
+             elseif(handles.armposition == 1)
+                 disp('at position')
+             else
+                 rotate_from_OUTER_well_to_INNER_well(handles)
+                 handles.armposition = 1
+             end 
+             
 %              rotate_from_OUTER_well_to_INNER_well(hw)
              pick_up_washer(handles)
              rotate_to_loadcell(handles)
              pause(.3)
-             emag_off
+             set_param('dc_motor_encoder_hardware_simulated/Magnet_Control','Value','0');
              pause(.3)
              pick_up_washer(handles)
              rotate_from_loadcell_to_innerwell(handles)
              pause(.3)
              emag_off
-             pause(.3)
-             rotate_from_INNER_well_to_OUTER_well(handles) % temporary
+%              set_param('dc_motor_encoder_hardware_simulated/Magnet_Control','Value','0');
+             pause(.3)        
              handles.checkedwashers = handles.checkedwashers - 1;
-             if handles.checkedwashers == 0
+         end
+         if (handles.checkedwashers == 0)
+             
+              if(handles.armposition == 1)
                  rotate_to_loadcell(handles)
-             end
-          end
+                 handles.armposition = 0;
+             elseif(handles.armposition == 0)
+                 disp('at position')
+             else
+                 rotate_from_outer_well_to_load_cell(handles)
+                 handles.armposition = 0;
+             end 
+
+         end
      end
 end
 x = 0;
 set_param('dc_motor_encoder_hardware_simulated/Matlab_Input','Value', num2str(x));
       
-
+guidata(hObject, handles);
 uiresume();
 
 
