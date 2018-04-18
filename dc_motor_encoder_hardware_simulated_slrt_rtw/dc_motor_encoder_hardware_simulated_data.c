@@ -8,9 +8,9 @@
  *
  * Code generation for model "dc_motor_encoder_hardware_simulated".
  *
- * Model version              : 1.124
+ * Model version              : 1.129
  * Simulink Coder version : 8.12 (R2017a) 16-Feb-2017
- * C source code generated on : Tue Apr 17 20:37:36 2018
+ * C source code generated on : Wed Apr 18 13:24:27 2018
  *
  * Target selection: slrt.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -139,9 +139,6 @@ P_dc_motor_encoder_hardware_simulated_T dc_motor_encoder_hardware_simulated_P =
   -0.225,                              /* Expression: -360/1600
                                         * Referenced by: '<S4>/angular_position =  [relative_count//COUNTS_PER_REV] *360 degrees'
                                         */
-  5.0,                                 /* Expression: 5
-                                        * Referenced by: '<Root>/Estop '
-                                        */
   1.0,                                 /* Expression: 1
                                         * Referenced by: '<Root>/Gain'
                                         */
@@ -166,8 +163,11 @@ P_dc_motor_encoder_hardware_simulated_T dc_motor_encoder_hardware_simulated_P =
   -10.0,                               /* Expression: -10
                                         * Referenced by: '<S4>/Saturation'
                                         */
-  5.0,                                 /* Expression: 5
+  8.0,                                 /* Expression: 8
                                         * Referenced by: '<S4>/Power for Load Cell'
+                                        */
+  5.0,                                 /* Expression: 5
+                                        * Referenced by: '<S4>/Power for E Stop'
                                         */
 
   /*  Computed Parameter: Channel0Controlsignaltomotorthr
@@ -285,18 +285,22 @@ P_dc_motor_encoder_hardware_simulated_T dc_motor_encoder_hardware_simulated_P =
   /*  Computed Parameter: Q4AD_P2_Size
    * Referenced by: '<Root>/Q4 AD'
    */
-  { 1.0, 1.0 },
-  2.0,                                 /* Expression: channel
-                                        * Referenced by: '<Root>/Q4 AD'
-                                        */
+  { 1.0, 2.0 },
+
+  /*  Expression: channel
+   * Referenced by: '<Root>/Q4 AD'
+   */
+  { 2.0, 4.0 },
 
   /*  Computed Parameter: Q4AD_P3_Size
    * Referenced by: '<Root>/Q4 AD'
    */
-  { 1.0, 1.0 },
-  0.0,                                 /* Expression: index03
-                                        * Referenced by: '<Root>/Q4 AD'
-                                        */
+  { 1.0, 2.0 },
+
+  /*  Expression: index03
+   * Referenced by: '<Root>/Q4 AD'
+   */
+  { 0.0, 1.0 },
 
   /*  Computed Parameter: Q4AD_P4_Size
    * Referenced by: '<Root>/Q4 AD'
@@ -307,7 +311,7 @@ P_dc_motor_encoder_hardware_simulated_T dc_motor_encoder_hardware_simulated_P =
    * Referenced by: '<Root>/Q4 AD'
    */
   { 1.0, 1.0 },
-  0.001,                               /* Expression: sampleTime
+  -1.0,                                /* Expression: sampleTime
                                         * Referenced by: '<Root>/Q4 AD'
                                         */
 
@@ -325,6 +329,9 @@ P_dc_motor_encoder_hardware_simulated_T dc_motor_encoder_hardware_simulated_P =
   { 1.0, 1.0 },
   -1.0,                                /* Expression: pciSlot
                                         * Referenced by: '<Root>/Q4 AD'
+                                        */
+  1.0,                                 /* Expression: 1
+                                        * Referenced by: '<Root>/Constant'
                                         */
   0U                                   /* Computed Parameter: ManualSwitch_CurrentSetting
                                         * Referenced by: '<Root>/Manual Switch'

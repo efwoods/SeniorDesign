@@ -124,6 +124,12 @@ set(handles.table_InitialConfiguration,'Data',cell(initialConfigRow,initialConfi
 set(handles.table_FinalConfiguration,'Data',cell(finalConfigRow,finalConfigCol))
 ti = handles.table_InitialConfiguration;
 tf = handles.table_FinalConfiguration;
+
+% populate reference image
+reference = imread('WasherMoverReference.png');
+axes(handles.axes_reference);
+imshow(reference);
+
 guidata(hObject, handles);
 
 
@@ -159,12 +165,33 @@ function pb_ReadBackground_Callback(hObject, eventdata, handles)
 handles.gb = snapshot(handles.cam);
 handles.gb = imrotate(handles.gb,180);
 imwrite(handles.gb, 'background.png');
+axes(handles.axes_image);
 imshow(handles.gb);
 guidata(hObject, handles);
 
 
 % --- Executes on button press in pb_Start.
 function pb_Start_Callback(hObject, eventdata, handles)
+
+
+% if error_all_selected(handles) == 1
+%     ed = errordlg('Make sure all selections have layer and color selected', 'Error');
+%     set(ed, 'WindowStyle', 'modal');
+%     return;
+% end
+
+if error_color_check(handles) == 1
+    ed = errordlg('Colors read from image do not match colors input in gui', 'Error');
+    set(ed, 'WindowStyle', 'modal');
+    return;
+end
+
+if error_empty_gui(handles) == 1
+    ed = errordlg('Nothing set in the gui', 'Error');
+    set(ed, 'WindowStyle', 'modal');
+    return;
+end
+    
 % hObject    handle to pb_Start (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
@@ -273,7 +300,7 @@ for i = 1:10                   %% for each well on the gameboard
 %             handles.loadcell.layers = handles.curwell(i).layers;
             handles.loadcell.empty = handles.curwell(i).empty;
             handles.curwell(i).color = 'None';
-            handles.curwell(i).layers = 0;
+            handles.curwell(i).layers = 0; %added char '
             handles.curwell(i).empty = 1;
             
             % for each well in desired final position matrix that is NOT finalized
@@ -381,8 +408,20 @@ if (handles.armposition == 1)
                 rotate_from_outer_well_to_load_cell(handles);
             else
                 disp('at loadcell');
-    end
-    handles.armposition = 0;
+end
+
+finalConfig = cell(10,3);
+for i=1:10
+    finalConfig(i,1) = cellstr(strcat('Well ',num2str(i)));     % Well
+    finalConfig(i,2) = cellstr(handles.curwell(i).color);       % Color
+    finalConfig(i,3) = cellstr(num2str(handles.curwell(i).layers));      % Layer
+end
+
+% update final configuration table
+set(handles.table_FinalConfiguration,'Data',finalConfig);
+set(handles.table_FinalConfiguration,'ColumnName',{'Location';'Color';'Layers'});
+
+handles.armposition = 0;
 x = 0;
 set_param('dc_motor_encoder_hardware_simulated/Matlab_Input','Value', num2str(x));
 stop_toc = toc(start_tic);
@@ -749,14 +788,28 @@ function well = wInit()
     end
     
 function struct = wLayerIns(num,layer,struct)
+    %layer = str2num(layer);
+    disp(layer);
+    if strcmp(layer,'--Select Layers--') == 1
+        layer = '0';
+    end
     struct(num).layers = layer;
-    if (struct(num).empty == 1)
+    
+    if layer == 0
+        struct(num).empty = 1;
+    elseif (struct(num).empty == 1)
         struct(num).empty = 0;
     end
     
 function struct = wColorIns(num,colorin,struct)
+    
+    if strcmp(colorin,'Blue') == 0 && strcmp(colorin,'Red') == 0 && strcmp(colorin,'Green') == 0
+        colorin = 'None';
+    end
     struct(num).color = colorin;
-    if (struct(num).empty == 1)
+    if strcmp(colorin,'None') == 1
+        struct(num).empty = 1;
+    elseif (struct(num).empty == 1)
         struct(num).empty = 0;
     end
     
@@ -765,7 +818,7 @@ function [components, dilate] = image_processing(gb, img)
     histimg = rgb2gray(img);
     foreground = imsubtract(histgb, histimg);
 
-    level = 0.07; % 0.04 and 0.02 acceptable
+    level = 0.1; % 0.04 and 0.02 acceptable
     thresh = im2bw(foreground, level);
 
     se_setting_0 = 4;
@@ -884,3 +937,5 @@ function pb_Reset_Callback(hObject, eventdata, handles)
 % hObject    handle to pb_Reset (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+handles = resetGUI(handles);
+guidata(hObject, handles);

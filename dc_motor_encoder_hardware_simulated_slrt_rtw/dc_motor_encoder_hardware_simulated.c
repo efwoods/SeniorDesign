@@ -8,9 +8,9 @@
  *
  * Code generation for model "dc_motor_encoder_hardware_simulated".
  *
- * Model version              : 1.124
+ * Model version              : 1.129
  * Simulink Coder version : 8.12 (R2017a) 16-Feb-2017
- * C source code generated on : Tue Apr 17 20:37:36 2018
+ * C source code generated on : Wed Apr 18 13:24:27 2018
  *
  * Target selection: slrt.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -284,22 +284,6 @@ void dc_motor_encoder_hardware_simulated_output(void)
   }
 
   /* End of Derivative: '<Root>/Derivative1' */
-  if (rtmIsMajorTimeStep(dc_motor_encoder_hardware_simulated_M)) {
-    /* Constant: '<Root>/Estop ' */
-    dc_motor_encoder_hardware_simulated_B.Estop =
-      dc_motor_encoder_hardware_simulated_P.Estop_Value;
-
-    /* Constant: '<Root>/Magnet_Control' */
-    dc_motor_encoder_hardware_simulated_B.Magnet_Control =
-      dc_motor_encoder_hardware_simulated_P.Magnet_Control_Value;
-
-    /* Logic: '<S7>/complement the input' incorporates:
-     *  Constant: '<Root>/1 - Use simulated motor 0 - Use real motor'
-     */
-    dc_motor_encoder_hardware_simulated_B.complementtheinput =
-      !(dc_motor_encoder_hardware_simulated_P.uUsesimulatedmotor0Userealmotor !=
-        0.0);
-  }
 
   /* Gain: '<Root>/Gain' */
   dc_motor_encoder_hardware_simulated_B.Gain[0] =
@@ -330,6 +314,18 @@ void dc_motor_encoder_hardware_simulated_output(void)
   dc_motor_encoder_hardware_simulated_B.Kp =
     dc_motor_encoder_hardware_simulated_P.Kp_Gain *
     dc_motor_encoder_hardware_simulated_B.ErrorSignal;
+  if (rtmIsMajorTimeStep(dc_motor_encoder_hardware_simulated_M)) {
+    /* Constant: '<Root>/Magnet_Control' */
+    dc_motor_encoder_hardware_simulated_B.Magnet_Control =
+      dc_motor_encoder_hardware_simulated_P.Magnet_Control_Value;
+
+    /* Logic: '<S7>/complement the input' incorporates:
+     *  Constant: '<Root>/1 - Use simulated motor 0 - Use real motor'
+     */
+    dc_motor_encoder_hardware_simulated_B.complementtheinput =
+      !(dc_motor_encoder_hardware_simulated_P.uUsesimulatedmotor0Userealmotor !=
+        0.0);
+  }
 
   /* Sum: '<Root>/Sum4' */
   dc_motor_encoder_hardware_simulated_B.Sum4 =
@@ -359,6 +355,10 @@ void dc_motor_encoder_hardware_simulated_output(void)
     /* Constant: '<S4>/Power for Load Cell' */
     dc_motor_encoder_hardware_simulated_B.PowerforLoadCell =
       dc_motor_encoder_hardware_simulated_P.PowerforLoadCell_Value;
+
+    /* Constant: '<S4>/Power for E Stop' */
+    dc_motor_encoder_hardware_simulated_B.PowerforEStop =
+      dc_motor_encoder_hardware_simulated_P.PowerforEStop_Value;
 
     /* S-Function (daquanserq8): '<S4>/Channel 0 -Control signal to  motor through amplifier ' */
 
@@ -435,11 +435,25 @@ void dc_motor_encoder_hardware_simulated_output(void)
 
     /* Outport: '<Root>/Load Cell' */
     dc_motor_encoder_hardware_simulated_Y.LoadCell =
-      dc_motor_encoder_hardware_simulated_B.Q4AD;
+      dc_motor_encoder_hardware_simulated_B.loadcell;
 
     /* S-Function (scblock): '<S2>/S-Function' */
     /* ok to acquire for <S2>/S-Function */
     dc_motor_encoder_hardware_simulated_DW.SFunction_IWORK_g.AcquireOK = 1;
+
+    /* RelationalOperator: '<Root>/Relational Operator' incorporates:
+     *  Constant: '<Root>/Constant'
+     */
+    dc_motor_encoder_hardware_simulated_B.RelationalOperator =
+      (dc_motor_encoder_hardware_simulated_B.estop >=
+       dc_motor_encoder_hardware_simulated_P.Constant_Value);
+
+    /* Stop: '<Root>/Stop Simulation' */
+    if (dc_motor_encoder_hardware_simulated_B.RelationalOperator) {
+      rtmSetStopRequested(dc_motor_encoder_hardware_simulated_M, 1);
+    }
+
+    /* End of Stop: '<Root>/Stop Simulation' */
   }
 }
 
@@ -711,10 +725,6 @@ void dc_motor_encoder_hardware_simulated_initialize(void)
     }
   }
 
-  /* Start for Constant: '<Root>/Estop ' */
-  dc_motor_encoder_hardware_simulated_B.Estop =
-    dc_motor_encoder_hardware_simulated_P.Estop_Value;
-
   /* Start for Constant: '<Root>/Magnet_Control' */
   dc_motor_encoder_hardware_simulated_B.Magnet_Control =
     dc_motor_encoder_hardware_simulated_P.Magnet_Control_Value;
@@ -722,6 +732,10 @@ void dc_motor_encoder_hardware_simulated_initialize(void)
   /* Start for Constant: '<S4>/Power for Load Cell' */
   dc_motor_encoder_hardware_simulated_B.PowerforLoadCell =
     dc_motor_encoder_hardware_simulated_P.PowerforLoadCell_Value;
+
+  /* Start for Constant: '<S4>/Power for E Stop' */
+  dc_motor_encoder_hardware_simulated_B.PowerforEStop =
+    dc_motor_encoder_hardware_simulated_P.PowerforEStop_Value;
 
   /* Start for S-Function (daquanserq8): '<S4>/Channel 0 -Control signal to  motor through amplifier ' */
   /* Level2 S-Function Block: '<S4>/Channel 0 -Control signal to  motor through amplifier ' (daquanserq8) */
@@ -750,12 +764,12 @@ void dc_motor_encoder_hardware_simulated_initialize(void)
       if ((i = rl32eDefScope(5,2)) != 0) {
         printf("Error creating scope 5\n");
       } else {
-        rl32eAddSignal(5, rl32eGetSignalNo("Q4 AD"));
+        rl32eAddSignal(5, rl32eGetSignalNo("Q4 AD/p1"));
         rl32eSetScope(5, 4, 200);
         rl32eSetScope(5, 5, 0);
         rl32eSetScope(5, 6, 1);
         rl32eSetScope(5, 0, 0);
-        rl32eSetScope(5, 3, rl32eGetSignalNo("Q4 AD"));
+        rl32eSetScope(5, 3, rl32eGetSignalNo("Q4 AD/p1"));
         rl32eSetScope(5, 1, 0.0);
         rl32eSetScope(5, 2, 0);
         rl32eSetScope(5, 9, 0);
@@ -1075,7 +1089,7 @@ RT_MODEL_dc_motor_encoder_hardware_simulated_T
         "Setpoint",
         "Error Signal",
         "name",
-        "" };
+        "loadcell" };
 
       static const char_T *rt_LoggedOutputBlockNames[] = {
         "dc_motor_encoder_hardware_simulated/setpoint_Out",
@@ -1490,7 +1504,7 @@ RT_MODEL_dc_motor_encoder_hardware_simulated_T
         {
           real_T const **sfcnUPtrs = (real_T const **)
             &dc_motor_encoder_hardware_simulated_M->NonInlinedSFcns.Sfcn1.UPtrs3;
-          sfcnUPtrs[0] = &dc_motor_encoder_hardware_simulated_B.Estop;
+          sfcnUPtrs[0] = &dc_motor_encoder_hardware_simulated_B.PowerforEStop;
           ssSetInputPortSignalPtrs(rts, 3, (InputPtrsType)&sfcnUPtrs[0]);
           _ssSetInputPortNumDimensions(rts, 3, 1);
           ssSetInputPortWidth(rts, 3, 1);
@@ -1655,14 +1669,22 @@ RT_MODEL_dc_motor_encoder_hardware_simulated_T
         ssSetPortInfoForOutputs(rts,
           &dc_motor_encoder_hardware_simulated_M->NonInlinedSFcns.Sfcn2.outputPortInfo
           [0]);
-        _ssSetNumOutputPorts(rts, 1);
+        _ssSetNumOutputPorts(rts, 2);
 
         /* port 0 */
         {
           _ssSetOutputPortNumDimensions(rts, 0, 1);
           ssSetOutputPortWidth(rts, 0, 1);
           ssSetOutputPortSignal(rts, 0, ((real_T *)
-            &dc_motor_encoder_hardware_simulated_B.Q4AD));
+            &dc_motor_encoder_hardware_simulated_B.loadcell));
+        }
+
+        /* port 1 */
+        {
+          _ssSetOutputPortNumDimensions(rts, 1, 1);
+          ssSetOutputPortWidth(rts, 1, 1);
+          ssSetOutputPortSignal(rts, 1, ((real_T *)
+            &dc_motor_encoder_hardware_simulated_B.estop));
         }
       }
 
@@ -1731,7 +1753,9 @@ RT_MODEL_dc_motor_encoder_hardware_simulated_T
 
       /* Update connectivity flags for each port */
       _ssSetOutputPortConnected(rts, 0, 1);
+      _ssSetOutputPortConnected(rts, 1, 1);
       _ssSetOutputPortBeingMerged(rts, 0, 0);
+      _ssSetOutputPortBeingMerged(rts, 1, 0);
 
       /* Update the BufferDstPort flags for each input port */
     }
@@ -1744,9 +1768,9 @@ RT_MODEL_dc_motor_encoder_hardware_simulated_T
   dc_motor_encoder_hardware_simulated_M->Sizes.numU = (0);/* Number of model inputs */
   dc_motor_encoder_hardware_simulated_M->Sizes.sysDirFeedThru = (0);/* The model is not direct feedthrough */
   dc_motor_encoder_hardware_simulated_M->Sizes.numSampTimes = (2);/* Number of sample times */
-  dc_motor_encoder_hardware_simulated_M->Sizes.numBlocks = (51);/* Number of blocks */
-  dc_motor_encoder_hardware_simulated_M->Sizes.numBlockIO = (35);/* Number of block outputs */
-  dc_motor_encoder_hardware_simulated_M->Sizes.numBlockPrms = (120);/* Sum of parameter "widths" */
+  dc_motor_encoder_hardware_simulated_M->Sizes.numBlocks = (54);/* Number of blocks */
+  dc_motor_encoder_hardware_simulated_M->Sizes.numBlockIO = (37);/* Number of block outputs */
+  dc_motor_encoder_hardware_simulated_M->Sizes.numBlockPrms = (123);/* Sum of parameter "widths" */
   return dc_motor_encoder_hardware_simulated_M;
 }
 

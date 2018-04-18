@@ -8,9 +8,9 @@
  *
  * Code generation for model "dc_motor_encoder_hardware_simulated".
  *
- * Model version              : 1.124
+ * Model version              : 1.129
  * Simulink Coder version : 8.12 (R2017a) 16-Feb-2017
- * C source code generated on : Tue Apr 17 20:37:36 2018
+ * C source code generated on : Wed Apr 18 13:24:27 2018
  *
  * Target selection: slrt.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -837,7 +837,6 @@ typedef struct {
   real_T Sum2;                         /* '<S10>/Sum2' */
   real_T ErrorSignal;                  /* '<Root>/Sum1' */
   real_T Derivative1;                  /* '<Root>/Derivative1' */
-  real_T Estop;                        /* '<Root>/Estop ' */
   real_T Gain[3];                      /* '<Root>/Gain' */
   real_T Integrator1;                  /* '<Root>/Integrator1' */
   real_T Kd;                           /* '<Root>/Kd' */
@@ -848,6 +847,7 @@ typedef struct {
   real_T Product1;                     /* '<S7>/Product1' */
   real_T Saturation;                   /* '<S4>/Saturation' */
   real_T PowerforLoadCell;             /* '<S4>/Power for Load Cell' */
+  real_T PowerforEStop;                /* '<S4>/Power for E Stop' */
   real_T Integrator5;                  /* '<S5>/Integrator5' */
   real_T BackemfKe1;                   /* '<S5>/Back emf Ke1' */
   real_T Dampingb1;                    /* '<S5>/Damping b1' */
@@ -859,9 +859,11 @@ typedef struct {
   real_T ResistanceR1;                 /* '<S5>/Resistance R1' */
   real_T Sum1;                         /* '<S5>/Sum1' */
   real_T Inductance;                   /* '<S5>/Inductance' */
-  real_T Q4AD;                         /* '<Root>/Q4 AD' */
+  real_T loadcell;                     /* '<Root>/Q4 AD' */
+  real_T estop;                        /* '<Root>/Q4 AD' */
   boolean_T complementtheinput1;       /* '<S10>/complement the input1' */
   boolean_T complementtheinput;        /* '<S7>/complement the input' */
+  boolean_T RelationalOperator;        /* '<Root>/Relational Operator' */
 } B_dc_motor_encoder_hardware_simulated_T;
 
 /* Block states (auto storage) for system '<Root>' */
@@ -1050,9 +1052,6 @@ struct P_dc_motor_encoder_hardware_simulated_T_ {
   real_T angular_positionrelative_countC;/* Expression: -360/1600
                                           * Referenced by: '<S4>/angular_position =  [relative_count//COUNTS_PER_REV] *360 degrees'
                                           */
-  real_T Estop_Value;                  /* Expression: 5
-                                        * Referenced by: '<Root>/Estop '
-                                        */
   real_T Gain_Gain;                    /* Expression: 1
                                         * Referenced by: '<Root>/Gain'
                                         */
@@ -1077,8 +1076,11 @@ struct P_dc_motor_encoder_hardware_simulated_T_ {
   real_T Saturation_LowerSat;          /* Expression: -10
                                         * Referenced by: '<S4>/Saturation'
                                         */
-  real_T PowerforLoadCell_Value;       /* Expression: 5
+  real_T PowerforLoadCell_Value;       /* Expression: 8
                                         * Referenced by: '<S4>/Power for Load Cell'
+                                        */
+  real_T PowerforEStop_Value;          /* Expression: 5
+                                        * Referenced by: '<S4>/Power for E Stop'
                                         */
   real_T Channel0Controlsignaltomotorthr[2];/* Computed Parameter: Channel0Controlsignaltomotorthr
                                              * Referenced by: '<S4>/Channel 0 -Control signal to  motor through amplifier '
@@ -1167,13 +1169,13 @@ struct P_dc_motor_encoder_hardware_simulated_T_ {
   real_T Q4AD_P2_Size[2];              /* Computed Parameter: Q4AD_P2_Size
                                         * Referenced by: '<Root>/Q4 AD'
                                         */
-  real_T Q4AD_P2;                      /* Expression: channel
+  real_T Q4AD_P2[2];                   /* Expression: channel
                                         * Referenced by: '<Root>/Q4 AD'
                                         */
   real_T Q4AD_P3_Size[2];              /* Computed Parameter: Q4AD_P3_Size
                                         * Referenced by: '<Root>/Q4 AD'
                                         */
-  real_T Q4AD_P3;                      /* Expression: index03
+  real_T Q4AD_P3[2];                   /* Expression: index03
                                         * Referenced by: '<Root>/Q4 AD'
                                         */
   real_T Q4AD_P4_Size[2];              /* Computed Parameter: Q4AD_P4_Size
@@ -1196,6 +1198,9 @@ struct P_dc_motor_encoder_hardware_simulated_T_ {
                                         */
   real_T Q4AD_P7;                      /* Expression: pciSlot
                                         * Referenced by: '<Root>/Q4 AD'
+                                        */
+  real_T Constant_Value;               /* Expression: 1
+                                        * Referenced by: '<Root>/Constant'
                                         */
   uint8_T ManualSwitch_CurrentSetting; /* Computed Parameter: ManualSwitch_CurrentSetting
                                         * Referenced by: '<Root>/Manual Switch'
@@ -1261,7 +1266,7 @@ struct tag_RTM_dc_motor_encoder_hardware_simulated_T {
       time_T sfcnPeriod[1];
       time_T sfcnOffset[1];
       int_T sfcnTsMap[1];
-      struct _ssPortOutputs outputPortInfo[1];
+      struct _ssPortOutputs outputPortInfo[2];
       uint_T attribs[7];
       mxArray *params[7];
       struct _ssDWorkRecord dWork[1];

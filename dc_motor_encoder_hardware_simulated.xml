@@ -27,6 +27,17 @@
 		
 		
             <block>
+            <blkName>Power for E Stop</blkName>
+            <xpcblkName>Real motor/Power for E Stop</xpcblkName>
+            <SLblockPath>dc_motor_encoder_hardware_simulated/Real motor/Power for E Stop</SLblockPath>
+            <isSrc>[1 0 1]</isSrc>
+          <parameter>
+          <paramName>Value</paramName>
+          <dim>[1, 1]</dim>  
+		  <SubSystemName>dc_motor_encoder_hardware_simulated/Real motor</SubSystemName>
+          </parameter>
+          </block>
+            <block>
             <blkName>Power for Load Cell</blkName>
             <xpcblkName>Real motor/Power for Load Cell</xpcblkName>
             <SLblockPath>dc_motor_encoder_hardware_simulated/Real motor/Power for Load Cell</SLblockPath>
@@ -184,6 +195,16 @@ Encoder Inputs </blkName>
 		  <SubSystemName>dc_motor_encoder_hardware_simulated/Real motor</SubSystemName>
           </parameter>
           </block>
+			  
+			  
+              <signal>
+              <sigName>Power for E Stop</sigName>
+              <xpcsigName>Real motor/Power for E Stop</xpcsigName>
+              <sigWidth>1</sigWidth>
+              <sigDim>[1, 1]</sigDim>
+			  <SubSystemName>dc_motor_encoder_hardware_simulated/Real motor</SubSystemName>
+			  <sigTestPoint>false</sigTestPoint>
+            </signal>
 			  
 			  
               <signal>
@@ -566,10 +587,9 @@ input1</sigName>
           </parameter>
           </block>
             <block>
-            <blkName>Desired position 
-in degrees</blkName>
-            <xpcblkName>Desired position  in degrees</xpcblkName>
-            <SLblockPath>dc_motor_encoder_hardware_simulated/Desired position  in degrees</SLblockPath>
+            <blkName>Constant</blkName>
+            <xpcblkName>Constant</xpcblkName>
+            <SLblockPath>dc_motor_encoder_hardware_simulated/Constant</SLblockPath>
             <isSrc>[1 0 1]</isSrc>
           <parameter>
           <paramName>Value</paramName>
@@ -578,10 +598,10 @@ in degrees</blkName>
           </parameter>
           </block>
             <block>
-            <blkName>Estop
-</blkName>
-            <xpcblkName>Estop </xpcblkName>
-            <SLblockPath>dc_motor_encoder_hardware_simulated/Estop </SLblockPath>
+            <blkName>Desired position 
+in degrees</blkName>
+            <xpcblkName>Desired position  in degrees</xpcblkName>
+            <SLblockPath>dc_motor_encoder_hardware_simulated/Desired position  in degrees</SLblockPath>
             <isSrc>[1 0 1]</isSrc>
           <parameter>
           <paramName>Value</paramName>
@@ -681,7 +701,7 @@ in degrees</blkName>
             <blkName>Q4 AD</blkName>
             <xpcblkName>Q4 AD</xpcblkName>
             <SLblockPath>dc_motor_encoder_hardware_simulated/Q4 AD</SLblockPath>
-            <isSrc>[1 0 1]</isSrc>
+            <isSrc>[1 0 2]</isSrc>
           <parameter>
           <paramName>P1</paramName>
           <dim>[1, 1]</dim>  
@@ -689,12 +709,12 @@ in degrees</blkName>
           </parameter>
           <parameter>
           <paramName>P2</paramName>
-          <dim>[1, 1]</dim>  
+          <dim>[1, 2]</dim>  
 		  <SubSystemName>dc_motor_encoder_hardware_simulated</SubSystemName>
           </parameter>
           <parameter>
           <paramName>P3</paramName>
-          <dim>[1, 1]</dim>  
+          <dim>[1, 2]</dim>  
 		  <SubSystemName>dc_motor_encoder_hardware_simulated</SubSystemName>
           </parameter>
           <parameter>
@@ -724,17 +744,6 @@ in degrees</blkName>
 		  <SubSystemName>dc_motor_encoder_hardware_simulated</SubSystemName>
           </parameter>
           </block>
-			  
-			  
-              <signal>
-              <sigName>Estop
-</sigName>
-              <xpcsigName>Estop </xpcsigName>
-              <sigWidth>1</sigWidth>
-              <sigDim>[1, 1]</sigDim>
-			  <SubSystemName>dc_motor_encoder_hardware_simulated</SubSystemName>
-			  <sigTestPoint>false</sigTestPoint>
-            </signal>
 			  
 			  
               <signal>
@@ -819,11 +828,34 @@ in degrees</blkName>
 			  
 			  
               <signal>
-              <sigName>Q4 AD</sigName>
-              <xpcsigName>Q4 AD</xpcsigName>
+              <sigName>Relational
+Operator</sigName>
+              <xpcsigName>Relational Operator</xpcsigName>
               <sigWidth>1</sigWidth>
               <sigDim>[1, 1]</sigDim>
 			  <SubSystemName>dc_motor_encoder_hardware_simulated</SubSystemName>
+			  <sigTestPoint>false</sigTestPoint>
+            </signal>
+			  
+			  
+              <signal>
+              <sigName>Q4 AD/p1</sigName>
+              <xpcsigName>Q4 AD/p1</xpcsigName>
+              <sigWidth>1</sigWidth>
+              <sigDim>[1, 1]</sigDim>
+			  <SubSystemName>dc_motor_encoder_hardware_simulated</SubSystemName>
+                <sigLabel>loadcell</sigLabel>
+			  <sigTestPoint>false</sigTestPoint>
+            </signal>
+			  
+			  
+              <signal>
+              <sigName>Q4 AD/p2</sigName>
+              <xpcsigName>Q4 AD/p2</xpcsigName>
+              <sigWidth>1</sigWidth>
+              <sigDim>[1, 1]</sigDim>
+			  <SubSystemName>dc_motor_encoder_hardware_simulated</SubSystemName>
+                <sigLabel>estop</sigLabel>
 			  <sigTestPoint>false</sigTestPoint>
             </signal>
 			  
