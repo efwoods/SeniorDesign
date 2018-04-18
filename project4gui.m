@@ -178,13 +178,15 @@ handles.armposition = 0;
 % 2 indicates @ outerwell
 
 %%
-
+red_on(handles)
+green_off(handles)
+tic;
 found = 1;      % indicating if prior match has been made. Initialize to 1 so that we may entire while loop
 for i = 1:10                   %% for each well on the gameboard
 	found = 1;
     while(found == 1)          %% while still finding matches, continue checking current well
 		found = 0;             %% match has yet to be found
-		if (handles.finalwell(i).correct == 0 && handles.curwell(i).empty == 0)        %% well has not been finalized and contains a washer
+		if (handles.curwell(i).correct == 0 && handles.curwell(i).empty == 0)        %% well has not been finalized and contains a washer
 			x = handles.wellLocations(i).cw;
             %load(handles.tg,handles.simulation_name)
             set_param('dc_motor_encoder_hardware_simulated/Matlab_Input','Value',num2str(x));
@@ -236,7 +238,7 @@ for i = 1:10                   %% for each well on the gameboard
             
             % for each well in desired final position matrix that is NOT finalized
             for j = 1:10
-                if ((found == 0) && (handles.finalwell(j).correct ==0))     % match has yet to be found in final matrix and final matrix is not finalized
+                if ((found == 0) && (handles.curwell(j).correct ==0))     % match has yet to be found in final matrix and final matrix is not finalized
                 	if (strcmp(handles.finalwell(j).color,handles.loadcell.color) && (str2num(handles.finalwell(j).layers) == handles.loadcell.layers))
                         found = 1;  % match is found, previous match has not been made
                         if (handles.curwell(j).empty == 0)    % well is not empty; move contents in the well out
@@ -258,7 +260,6 @@ for i = 1:10                   %% for each well on the gameboard
                             
                             % rotate to current well position
                             x = handles.wellLocations(i).cw;
-                            disp(x)
                             set_param('dc_motor_encoder_hardware_simulated/Matlab_Input','Value',num2str(x));
                             
                             % move arm to current well position; drop washer
@@ -275,13 +276,14 @@ for i = 1:10                   %% for each well on the gameboard
                             pause(.3)
                                 
                             % move washer info from final well position to current well position
-                            handles.curwell(i).color = handles.finalwell(j).color;
-                            handles.curwell(i).layers = handles.finalwell(j).layers;
-                            handles.curwell(i).empty = handles.finalwell(j).empty;
+                            handles.curwell(i).color = handles.curwell(j).color;
+                            handles.curwell(i).layers = handles.curwell(j).layers;
+                            handles.curwell(i).empty = handles.curwell(j).empty;
                             
                             % move arm to load cell
                             if (mod(i,2) == 0)  % arm is at outer well
                                 rotate_from_outer_well_to_load_cell(handles);
+                                
                             else                % arm is at inner well
                                 rotate_to_loadcell(handles);
                             end
@@ -299,9 +301,15 @@ for i = 1:10                   %% for each well on the gameboard
                             rotate_from_load_cell_to_outer_well(handles);
                             handles.armposition = 2;
                         else                    % final position at inner well
-                            roate_from_loadcell_to_inner_well(handles);
+                            rotate_from_loadcell_to_innerwell(handles);
                             handles.armposition = 1;
                         end
+                        
+                        x = handles.wellLocations(i).cw;
+                        
+                        set_param('dc_motor_encoder_hardware_simulated/Matlab_Input','Value',num2str(x)); 
+%                         drive by
+                        pause(.2)
                         emag_off;
                         
                         % move washer info from load cell to final well position
@@ -314,94 +322,28 @@ for i = 1:10                   %% for each well on the gameboard
                          handles.curwell(j).layers = handles.loadcell.layers;
                          handles.curwell(j).empty = handles.loadcell.empty;
                          handles.curwell(j).correct = 1;
-
-                        x = handles.wellLocations(i).cw;
-                        set_param('dc_motor_encoder_hardware_simulated/Matlab_Input','Value',num2str(x));                        
+                       
                     end
                 end
             end
         end
     end
 end
+if (handles.armposition == 1) 
+                rotate_to_loadcell(handles);
+            elseif (handles.armposition == 2)
+                rotate_from_outer_well_to_load_cell(handles);
+            else
+                disp('at loadcell');
+    end
+    handles.armposition = 0;
 x = 0;
 set_param('dc_motor_encoder_hardware_simulated/Matlab_Input','Value', num2str(x));
+set(handles.text_SolveTimeValue,'String',toc);
+red_off(handles);
+green_on(handles);
 
 
-
-
-%%
-% found = 1;
-% for i = 1:10
-%      if (handles.curwell(i).correct == 0 && handles.curwell(i).empty == 0)
-%          x = handles.wellLocations(i).cw;
-% %           load(handles.tg, handles.simulation_name)
-%          set_param('dc_motor_encoder_hardware_simulated/Matlab_Input','Value', num2str(x));
-%          if mod(i,2)==0     % if outer well, move to outer well position
-%              if(handles.armposition == 0)
-%                  rotate_from_load_cell_to_outer_well(handles)
-%                  handles.armposition = 2
-%              elseif(handles.armposition == 2)
-%                  disp('at position')
-%              else
-%                  rotate_from_INNER_well_to_OUTER_well(handles)
-%                  handles.armposition = 2
-%              end             
-%              pick_up_washer(handles)
-%              rotate_from_outer_well_to_load_cell(handles)
-%              pause(.3)
-%              
-%              handles = loadcell(handles);
-%                            pause(.3)
-% %              pick_up_washer(handles)
-%              rotate_from_load_cell_to_outer_well(handles)
-%              pause(.3)
-%              set_param('dc_motor_encoder_hardware_simulated/Magnet_Control','Value','0');
-%              pause(.3)
-%              handles.checkedwashers = handles.checkedwashers - 1;
-%          else   % inner well, move to inner well position
-%               if(handles.armposition == 0)
-%                  rotate_from_loadcell_to_innerwell(handles)
-%                  handles.armposition = 1
-%              elseif(handles.armposition == 1)
-%                  disp('at position')
-%              else
-%                  rotate_from_OUTER_well_to_INNER_well(handles)
-%                  handles.armposition = 1
-%              end 
-%              
-% %              rotate_from_OUTER_well_to_INNER_well(hw)
-%              pick_up_washer(handles)
-%              rotate_to_loadcell(handles)
-%              pause(.3)
-%              handles = loadcell(handles);
-%              pause(.3)
-% %              pick_up_washer(handles)
-%              rotate_from_loadcell_to_innerwell(handles)
-%              pause(.3)
-%              emag_off
-% %              set_param('dc_motor_encoder_hardware_simulated/Magnet_Control','Value','0');
-%              pause(.3)        
-%              handles.checkedwashers = handles.checkedwashers - 1;
-%          end
-%          if (handles.checkedwashers == 0)
-%              
-%               if(handles.armposition == 1)
-%                  rotate_to_loadcell(handles)
-%                  handles.armposition = 0;
-%              elseif(handles.armposition == 0)
-%                  disp('at position')
-%              else
-%                  rotate_from_outer_well_to_load_cell(handles)
-%                  handles.armposition = 0;
-%              end 
-% 
-%          end
-%      end
-% end
-% x = 0;
-% set_param('dc_motor_encoder_hardware_simulated/Matlab_Input','Value', num2str(x));
-
-            
 
 guidata(hObject, handles);
 %uiresume();
