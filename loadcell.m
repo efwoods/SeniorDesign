@@ -17,12 +17,15 @@ while(hw.loadcell.difference < 0)
     hw.loadcell.loadReading = hw.tg.getsignal('Q4 AD'); % load cell weighs washer
     hw.loadcell.difference = hw.loadcell.loadReading - hw.loadcell.initialReading;
 end
-if(hw.loadcell.difference >= 0.09)
+if(hw.loadcell.difference >= 0.082)
     disp('3 washer')
     hw.loadcell.layers = 3;
-elseif((hw.loadcell.difference < 0.09) && (hw.loadcell.difference >= 0.05))
+elseif((hw.loadcell.difference < 0.082) && (hw.loadcell.difference >= 0.05))
     disp('2 washer')
     hw.loadcell.layers = 2;
+elseif(hw.loadcell.difference < 0.01)
+    disp('no washer')
+    hw.loadcell.layers = 0;
 else
     disp('1 washer')
     hw.loadcell.layers = 1;
