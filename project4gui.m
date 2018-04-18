@@ -62,6 +62,9 @@ handles.finalwell = wInit();
 handles.curwell = wInit();
 handles.simulation_name = 'dc_motor_encoder_hardware_simulated';
 handles.magnet = 'dc_motor_encoder_hardware_simulated/Magnet_Control';
+handles.loadcell.color = 'None';
+handles.loadcell.layers = 0;
+handles.loadcell.empty = 1;
 
 guidata(hObject, handles);
 % rtwbuild(handles.simulation_name)
@@ -85,7 +88,7 @@ guidata(hObject, handles);
 %                157 231 171 240; 123 192 280 349; 223 290 320 387; 290 356 383 448; 
  %               348 424 316 384; 448 520 275 346;];
 handles.well_pixels = [170 225 250 300; 170 225 350 400; 300 350 350 400; 430 480 340 400;
-                430 480 250 300; 460 520 240 290; 360 420 100 150; 300 350 38 88; 230 280 110 160;
+                430 480 250 300; 460 520 140 190; 360 420 100 150; 300 350 38 88; 230 280 110 160;
                 130 190 140 195];
 handles.start = 0;
 handles.cam = webcam('HP USB Webcam');
@@ -107,9 +110,9 @@ handles.cam = webcam('HP USB Webcam');
 
 
 % hw.tg.status
-setup_arduino(hObject, handles)
+[hObject, handles] = setup_arduino(hObject, handles);
 % UIWAIT makes project4gui wait for user response (see UIRESUME)
-uiwait(handles.figure1);
+%uiwait(handles.figure1);
 
 % Force configuration tables to display 10 rows
 initialConfigCol = 2;
@@ -174,78 +177,234 @@ handles.armposition = 0;
 % 1 indicates @ innerwell
 % 2 indicates @ outerwell
 
-for i = 1:10
-     if (handles.curwell(i).empty == 0)
-         x = handles.wellLocations(i).cw;
-%           load(handles.tg, handles.simulation_name)
-         set_param('dc_motor_encoder_hardware_simulated/Matlab_Input','Value', num2str(x));
-         if mod(i,2)==0
-             if(handles.armposition == 0)
-                 rotate_from_load_cell_to_outer_well(handles)
-                 handles.armposition = 2
-             elseif(handles.armposition == 2)
-                 disp('at position')
-             else
-                 rotate_from_INNER_well_to_OUTER_well(handles)
-                 handles.armposition = 2
-             end             
-             pick_up_washer(handles)
-             rotate_from_outer_well_to_load_cell(handles)
-             pause(.3)
-             
-             set_param('dc_motor_encoder_hardware_simulated/Magnet_Control','Value','0');
-             pause(.3)
-             pick_up_washer(handles)
-             rotate_from_load_cell_to_outer_well(handles)
-             pause(.3)
-             set_param('dc_motor_encoder_hardware_simulated/Magnet_Control','Value','0');
-             pause(.3)
-             handles.checkedwashers = handles.checkedwashers - 1;
-         else
-              if(handles.armposition == 0)
-                 rotate_from_loadcell_to_innerwell(handles)
-                 handles.armposition = 1
-             elseif(handles.armposition == 1)
-                 disp('at position')
-             else
-                 rotate_from_OUTER_well_to_INNER_well(handles)
-                 handles.armposition = 1
-             end 
-             
-%              rotate_from_OUTER_well_to_INNER_well(hw)
-             pick_up_washer(handles)
-             rotate_to_loadcell(handles)
-             pause(.3)
-             set_param('dc_motor_encoder_hardware_simulated/Magnet_Control','Value','0');
-             pause(.3)
-             pick_up_washer(handles)
-             rotate_from_loadcell_to_innerwell(handles)
-             pause(.3)
-             emag_off
-%              set_param('dc_motor_encoder_hardware_simulated/Magnet_Control','Value','0');
-             pause(.3)        
-             handles.checkedwashers = handles.checkedwashers - 1;
-         end
-         if (handles.checkedwashers == 0)
-             
-              if(handles.armposition == 1)
-                 rotate_to_loadcell(handles)
-                 handles.armposition = 0;
-             elseif(handles.armposition == 0)
-                 disp('at position')
-             else
-                 rotate_from_outer_well_to_load_cell(handles)
-                 handles.armposition = 0;
-             end 
+%%
 
-         end
-     end
+found = 1;      % indicating if prior match has been made. Initialize to 1 so that we may entire while loop
+for i = 1:10                   %% for each well on the gameboard
+	found = 1;
+    while(found == 1)          %% while still finding matches, continue checking current well
+		found = 0;             %% match has yet to be found
+		if (handles.finalwell(i).correct == 0 && handles.curwell(i).empty == 0)        %% well has not been finalized and contains a washer
+			x = handles.wellLocations(i).cw;
+            %load(handles.tg,handles.simulation_name)
+            set_param('dc_motor_encoder_hardware_simulated/Matlab_Input','Value',num2str(x));
+            
+            % move arm to desired well location
+            if (mod(i,2) == 0)      %% desired well is at outer well, move arm to outer well position
+                if (handles.armposition == 0)       %% arm at loadcell
+                    rotate_from_load_cell_to_outer_well(handles);
+                elseif (handles.armposition == 2)   %% arm already at outer well
+                    disp('at position');
+                else                                %% arm at inner well
+                    rotate_from_INNER_well_to_OUTER_well(handles);
+                end
+                handles.armposition = 2;
+            else                    %% desired well is at inner well, move arm to inner well position
+                if (handles.armposition == 0)       %% arm at loadcell
+                    rotate_from_loadcell_to_innerwell(handles);
+                elseif (handles.armposition == 1)   %% arm already at inner well
+                    disp('at position');
+                else                                %% arm at outer well
+                    rotate_from_OUTER_well_to_INNER_well(handles);
+                end
+                handles.armposition = 1;
+            end
+        
+            % pick up washer, move to load cell
+            pick_up_washer(handles)
+            if (handles.armposition == 1) 
+                rotate_to_loadcell(handles);
+            elseif (handles.armposition == 2)
+                rotate_from_OUTER_well_to_INNER_well(handles);
+            else
+                disp('at loadcell');
+            end
+            handles.armposition = 0;
+            pause(0.3);
+            
+            % weigh washer, leave washer at load cell.
+            handles = loadcell(handles);
+            pause(0.3);
+            
+            % move washer info from current well to loadcell well
+            handles.loadcell.color = handles.curwell(i).color;
+%             handles.loadcell.layers = handles.curwell(i).layers;
+            handles.loadcell.empty = handles.curwell(i).empty;
+            handles.curwell(i).color = 'None';
+            handles.curwell(i).layers = 0;
+            handles.curwell(i).empty = 1;
+            
+            % for each well in desired final position matrix that is NOT finalized
+            for j = 1:10
+                if ((found == 0) && (handles.finalwell(j).correct ==0))     % match has yet to be found in final matrix and final matrix is not finalized
+                	if (strcmp(handles.finalwell(j).color,handles.loadcell.color) && (str2num(handles.finalwell(j).layers) == handles.loadcell.layers))
+                        found = 1;  % match is found, previous match has not been made
+                        if (handles.finalwell(j).empty == 0)    % well is not empty; move contents in the well out
+                            
+                            % move washer from final well position to current well position
+                            % rotate to final well position
+                            x = handles.wellLocations(j).cw;
+                            set_param('dc_motor_encoder_hardware_simulated/Matlab_Input','Value',num2str(x));
+                            
+                            % move arm to final well position; pick up washer
+                            if (mod(j,2) == 0)  % final well is an outer well
+                                rotate_from_load_cell_to_outer_well(handles);
+                                handles.armposition = 2;
+                            else                % final well is an inner well
+                                rotate_from_loadcell_to_inner_well(handles);
+                                handles.armposition = 1;
+                            end
+                            pick_up_washer(handles);
+                            
+                            % rotate to current well position
+                            x = handles.wellLocations(i).cw;
+                            disp(x)
+                            set_param('dc_motor_encoder_hardware_simulated/Matlab_Input','Value',num2str(x));
+                            
+                            % move arm to current well position; drop washer
+                            if ((mod(j,2) == 0) && mod(i,2) == 0)  % arm is at correct inner/outer well position
+                                disp('at correct well position');
+                            elseif ((mod(j,2) == 0) && (mod(i,2) == 1)) % arm must move from outer to inner
+                                rotate_from_OUTER_well_to_INNER_well(handles);
+                                handles.armposition = 1;
+                            else    % arm must move from inner to outer
+                                rotate_from_INNER_well_to_OUTER_well(handles);
+                                handles.armposition = 2;
+                            end
+                            emag_off;
+                            pause(.3)
+                                
+                            % move washer info from final well position to current well position
+                            handles.curwell(i).color = handles.finalwell(j).color;
+                            handles.curwell(i).layers = handles.finalwell(j).layers;
+                            handles.curwell(i).empty = handles.finalwell(j).empty;
+                            
+                            % move arm to load cell
+                            if (mod(i,2) == 0)  % arm is at outer well
+                                rotate_from_outer_well_to_load_cell(handles);
+                            else                % arm is at inner well
+                                rotate_to_loadcell(handles);
+                            end
+                            handles.armposition = 0;
+                        end
+                        
+                        % move washer from loadcell to final well
+                        % rotate to final position
+                        x = handles.wellLocations(j).cw;
+                        set_param('dc_motor_encoder_hardware_simulated/Matlab_Input','Value',num2str(x));
+                        
+                        % pick up washer, move to final position
+                        pick_up_washer(handles);
+                        if (mod(j,2) == 0)      % final position at outer well
+                            rotate_from_load_cell_to_outer_well(handles);
+                            handles.armposition = 2;
+                        else                    % final position at inner well
+                            roate_from_loadcell_to_inner_well(handles);
+                            handles.armposition = 1;
+                        end
+                        emag_off;
+                        
+                        % move washer info from load cell to final well position
+%%                        curwell needs to be updated not final well
+%                         handles.finalwell(j).color = handles.loadcell.color;
+%                         handles.finalwell(j).layers = handles.loadcell.layers;
+%                         handles.finalwell(j).empty = handles.loadcell.empty;
+%                         handles.finalwell(j).correct = 1;
+                         handles.curwell(j).color = handles.loadcell.color;
+                         handles.curwell(j).layers = handles.loadcell.layers;
+                         handles.curwell(j).empty = handles.loadcell.empty;
+                         handles.curwell(j).correct = 1;
+
+                        x = handles.wellLocations(i).cw;
+                        set_param('dc_motor_encoder_hardware_simulated/Matlab_Input','Value',num2str(x));                        
+                    end
+                end
+            end
+        end
+    end
 end
 x = 0;
 set_param('dc_motor_encoder_hardware_simulated/Matlab_Input','Value', num2str(x));
-      
+
+
+
+
+%%
+% found = 1;
+% for i = 1:10
+%      if (handles.curwell(i).correct == 0 && handles.curwell(i).empty == 0)
+%          x = handles.wellLocations(i).cw;
+% %           load(handles.tg, handles.simulation_name)
+%          set_param('dc_motor_encoder_hardware_simulated/Matlab_Input','Value', num2str(x));
+%          if mod(i,2)==0     % if outer well, move to outer well position
+%              if(handles.armposition == 0)
+%                  rotate_from_load_cell_to_outer_well(handles)
+%                  handles.armposition = 2
+%              elseif(handles.armposition == 2)
+%                  disp('at position')
+%              else
+%                  rotate_from_INNER_well_to_OUTER_well(handles)
+%                  handles.armposition = 2
+%              end             
+%              pick_up_washer(handles)
+%              rotate_from_outer_well_to_load_cell(handles)
+%              pause(.3)
+%              
+%              handles = loadcell(handles);
+%                            pause(.3)
+% %              pick_up_washer(handles)
+%              rotate_from_load_cell_to_outer_well(handles)
+%              pause(.3)
+%              set_param('dc_motor_encoder_hardware_simulated/Magnet_Control','Value','0');
+%              pause(.3)
+%              handles.checkedwashers = handles.checkedwashers - 1;
+%          else   % inner well, move to inner well position
+%               if(handles.armposition == 0)
+%                  rotate_from_loadcell_to_innerwell(handles)
+%                  handles.armposition = 1
+%              elseif(handles.armposition == 1)
+%                  disp('at position')
+%              else
+%                  rotate_from_OUTER_well_to_INNER_well(handles)
+%                  handles.armposition = 1
+%              end 
+%              
+% %              rotate_from_OUTER_well_to_INNER_well(hw)
+%              pick_up_washer(handles)
+%              rotate_to_loadcell(handles)
+%              pause(.3)
+%              handles = loadcell(handles);
+%              pause(.3)
+% %              pick_up_washer(handles)
+%              rotate_from_loadcell_to_innerwell(handles)
+%              pause(.3)
+%              emag_off
+% %              set_param('dc_motor_encoder_hardware_simulated/Magnet_Control','Value','0');
+%              pause(.3)        
+%              handles.checkedwashers = handles.checkedwashers - 1;
+%          end
+%          if (handles.checkedwashers == 0)
+%              
+%               if(handles.armposition == 1)
+%                  rotate_to_loadcell(handles)
+%                  handles.armposition = 0;
+%              elseif(handles.armposition == 0)
+%                  disp('at position')
+%              else
+%                  rotate_from_outer_well_to_load_cell(handles)
+%                  handles.armposition = 0;
+%              end 
+% 
+%          end
+%      end
+% end
+% x = 0;
+% set_param('dc_motor_encoder_hardware_simulated/Matlab_Input','Value', num2str(x));
+
+            
+
 guidata(hObject, handles);
-uiresume();
+%uiresume();
 
 
 
@@ -562,8 +721,18 @@ function pb_ReadForeground_Callback(hObject, eventdata, handles)
 % hObject    handle to pb_ReadForeground (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+%init
+initConfig = cell(10,2); 
+pumColor = cell(get(handles.pum_Well1Color,'String'));
+for i=1:10
+    initConfig(i,1) = cellstr(strcat('Well ',num2str(i)));     
+    initConfig(i,2) = cellstr('None'); 
+end
+handles.curwell = wInit();
+%handles.finalwell = wInit();
 handles.img = snapshot(handles.cam);
 handles.img = imrotate(handles.img,180);
+imwrite(handles.img,'foreground.png');
 imshow(handles.img);
 [handles.components, handles.dilate] = image_processing(handles.gb, handles.img);
 [handles.stats, handles.radii] = color_processing(handles.components);
@@ -571,7 +740,7 @@ guidata(hObject, handles);
 [handles.gameState, handles] = color(handles, hObject, handles.img, handles.dilate, handles.stats, handles.radii, handles.well_pixels);
 % guidata(hObject, handles);
 %update initial configuration table 
-initConfig = cell(10,2); 
+
 pumColor = cell(get(handles.pum_Well1Color,'String'));
 for i = 1:10     
     initConfig(i,1) = cellstr(strcat('Well ',num2str(i)));     
@@ -592,13 +761,13 @@ function well = wInit()
     
 function struct = wLayerIns(num,layer,struct)
     struct(num).layers = layer;
-    if struct(num).empty == 1;
+    if (struct(num).empty == 1)
         struct(num).empty = 0;
     end
     
 function struct = wColorIns(num,colorin,struct)
     struct(num).color = colorin;
-    if struct(num).empty == 1;
+    if (struct(num).empty == 1)
         struct(num).empty = 0;
     end
     
@@ -607,7 +776,7 @@ function [components, dilate] = image_processing(gb, img)
     histimg = rgb2gray(img);
     foreground = imsubtract(histgb, histimg);
 
-    level = 0.02;
+    level = 0.07; % 0.04 and 0.02 acceptable
     thresh = im2bw(foreground, level);
 
     se_setting_0 = 4;
@@ -677,20 +846,21 @@ function [gameState, handles] = color(handles, hObject, img,dilate,stats,radii,w
     x = -1;
           hold on   
           gameState.numel = numel(stats.Area);
+    
           
     j = 1;
     handles.totalwashers = 0;
     for i = 1:10 %for all wells
-        if check_spot(i,well_pixels(i,:), stats.Centroid(j,:)) == 1
+        for k = 1:numel(stats.Area)
+        if check_spot(i,well_pixels(i,:), stats.Centroid(k,:)) == 1
             handles.totalwashers = handles.totalwashers + 1;
-            retcolor = color_detection(maskedRGBImage,stats,radii,j);
+            retcolor = color_detection(maskedRGBImage,stats,radii,k);
             handles.curwell(i).color = retcolor;
             handles.curwell(i).empty = 0;
             disp(i);
             j = j + 1;
-            if j > numel(stats.Area) %escape
                 break;
-            end
+        end
         end
     end
 

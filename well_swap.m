@@ -1,5 +1,5 @@
 %well_swap(handles.curwell(7), handles.loadcell)
-function handles = well_swap(cur, dest)
+function handles = well_swap(cur, dest, handles)
     dest.color = cur.color;
     dest.layers = cur.layers;
     dest.empty = 0;

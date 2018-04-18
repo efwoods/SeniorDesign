@@ -1,4 +1,4 @@
-function setup_arduino(hObject, handles)
+function [hObject, handles] = setup_arduino(hObject, handles)
 handles.a = arduino('COM5', 'Uno', 'Libraries', 'Adafruit\MotorShieldV2')
 disp('arduino initialized')
 handles.shield = addon(handles.a, 'Adafruit\MotorShieldV2')

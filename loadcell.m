@@ -1,8 +1,8 @@
-function [initialReading, loadReading] = loadcell(hw)
+function [hw] = loadcell(hw)
 % floor_threshold_weight = 5; %% measured in grams
 % ceiling_threshold_weight = 20;   %% measured in grams
 
-initialReading = hw.tg.getsignal('Q4 AD') %% initial value has been random
+hw.loadcell.initialReading = hw.tg.getsignal('Q4 AD'); %% initial value has been random
 %     max_voltage = 6.70; %% predetermined
 %     scaling_factor = (max_voltage - initialReading)*100/ 35 %% maximum voltage is reached at approximately 35 grams
     disp('Load Cell: NO LOAD')
@@ -15,33 +15,26 @@ pause(2)
 % move_magnet_up(servo)
 % pause(1)
 disp('Load Cell: LOAD')
-loadReading = hw.tg.getsignal('Q4 AD')% load cell weighs washer
+hw.loadcell.loadReading = hw.tg.getsignal('Q4 AD')% load cell weighs washer
 % weight = abs(loadReading - initialReading) * (scaling_factor) %% weight is measured in grams
 % disp(loadReading)
 
-difference = loadReading - initialReading
+hw.loadcell.difference = hw.loadcell.loadReading - hw.loadcell.initialReading;
 
-while(difference < 0)
-    loadReading = hw.tg.getsignal('Q4 AD')% load cell weighs washer
-    difference = loadReading - initialReading
+while(hw.loadcell.difference < 0)
+    hw.loadcell.loadReading = hw.tg.getsignal('Q4 AD'); % load cell weighs washer
+    hw.loadcell.difference = hw.loadcell.loadReading - hw.loadcell.initialReading;
 end
-if(difference >= 0.09)
+if(hw.loadcell.difference >= 0.09)
     disp('3 washer')
-elseif((difference < 0.09) && (difference >= 0.04))
+    hw.loadcell.layers = 3;
+elseif((hw.loadcell.difference < 0.09) && (hw.loadcell.difference >= 0.04))
     disp('2 washer')
+    hw.loadcell.layers = 2;
 else
     disp('1 washer')
+    hw.loadcell.layers = 1;
 end
-disp(difference)
-disp(hw.tg.getsignal('Q4 AD'))% load cell weighs washer
- pause(1)
- move_magnet_down(hw)
-pause(1)
-emag_on
-pause(1)
-move_magnet_up(hw)
-pause(1)
-disp('Load Cell: NO LOAD')
-disp(hw.tg.getsignal('Q4 AD'))
-pause(1)
+disp(hw.loadcell.difference)
+% disp(hw.tg.getsignal('Q4 AD'))% load cell weighs washer
 end
