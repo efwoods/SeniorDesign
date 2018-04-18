@@ -239,7 +239,7 @@ for i = 1:10                   %% for each well on the gameboard
                 if ((found == 0) && (handles.finalwell(j).correct ==0))     % match has yet to be found in final matrix and final matrix is not finalized
                 	if (strcmp(handles.finalwell(j).color,handles.loadcell.color) && (str2num(handles.finalwell(j).layers) == handles.loadcell.layers))
                         found = 1;  % match is found, previous match has not been made
-                        if (handles.finalwell(j).empty == 0)    % well is not empty; move contents in the well out
+                        if (handles.curwell(j).empty == 0)    % well is not empty; move contents in the well out
                             
                             % move washer from final well position to current well position
                             % rotate to final well position
